@@ -1,0 +1,97 @@
+{
+    "name": "tim/vhosting",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/",
+            "SymfonyStandard\\": "app/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.7.*",
+        "symfony/assetic-bundle": "2.*",
+        "symfony/swiftmailer-bundle": "2.*",
+        "symfony/monolog-bundle": "2.*",
+
+        "twig/twig": "1.*",
+
+        "doctrine/orm": "2.*@dev",
+        "doctrine/dbal": "2.*@dev",
+        "doctrine/doctrine-bundle": "1.*@dev",
+        "doctrine/doctrine-fixtures-bundle": "2.*",
+
+        "sensio/distribution-bundle": "4.*@dev",
+        "sensio/framework-extra-bundle": "3.*@dev",
+        "sensio/generator-bundle": "2.*@dev",
+
+        "jms/serializer-bundle": "1.*",
+        "friendsofsymfony/rest-bundle": "1.*@dev",
+        "friendsofsymfony/user-bundle": "1.*@dev",
+        "incenteev/composer-parameter-handler": "2.*@dev",
+        "liip/functional-test-bundle": "1.*",
+        "escapestudios/wsse-authentication-bundle": "2.*",
+        "antimattr/google-bundle": "2.*",
+        "suncat/mobile-detect-bundle": "0.*",
+        "tfox/mpdf-port-bundle": "1.*",
+        "hwi/oauth-bundle": "0.*",
+        "cboden/ratchet": "0.*",
+        "gregwar/captcha-bundle": "1.*",
+
+        "sonata-project/admin-bundle": "2.*@dev",
+        "sonata-project/block-bundle": "2.*@dev",
+        "sonata-project/user-bundle": "2.3.*@dev",
+        "sonata-project/core-bundle": "2.*@dev",
+        "sonata-project/datagrid-bundle": "2.2.*@dev",
+        "sonata-project/formatter-bundle": "2.3.*@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "2.*@dev",
+
+        "dropbox/dropbox-sdk": "1.*",
+        "google/apiclient": "1.*",
+        "dizda/cloud-backup-bundle": "3.*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.*",
+        "phpmd/phpmd": "2.*",
+        "sebastian/phpcpd": "2.*",
+        "pdepend/pdepend": "2.*",
+        "phploc/phploc": "2.*",
+        "phpunit/phpunit": "4.*",
+        "theseer/phpdox": "0.*"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        }
+    }
+}
