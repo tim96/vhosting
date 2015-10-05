@@ -1,0 +1,95 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    role_hierarchy:
+        ROLE_USER:         []
+        ROLE_API:          []
+        ROLE_SONATA_ADMIN: [ROLE_USER]
+        ROLE_ADMIN:        [ROLE_USER, ROLE_SONATA_ADMIN]
+        ROLE_SUPER_ADMIN:  [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        admin:
+            pattern:            /admin(.*)
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                default_target_path: /admin/dashboard
+                failure_path:   null
+                require_previous_session: false
+                always_use_default_target_path: true
+            logout:
+                path:           /admin/logout
+            anonymous:          true
+
+        secured_area:
+            pattern:            .*
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /user/login
+                use_forward:    false
+                check_path:     /user/login_check
+                failure_path:   null
+                require_previous_session: false
+                always_use_default_target_path: true
+                default_target_path: /
+            logout:
+                path:           /user/logout
+                target:         /
+            anonymous:          true
+
+            #oauth:
+            #    failure_path: /user/login
+            #    login_path: /user/login
+            #    provider: fos_userbundle
+            #    use_forward: false
+            #    resource_owners:
+            #        google: "/user/login/check-google"
+            #        google: "/user/login/check-github"
+            #    oauth_user_provider:
+            #        service: hwi_oauth.user.provider.fosub_bridge
+
+        #wsse_secured:
+        #    pattern:   ^/api/.*
+        #    wsse:
+        #        realm: "Secured with WSSE" #identifies the set of resources to which the authentication information will apply (WWW-Authenticate)
+        #        profile: "UsernameToken" #WSSE profile (WWW-Authenticate)
+
+        default:
+            anonymous: ~
+
+    access_control:
+
+        # Admin login page needs to be access without credential
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/api, role: [ROLE_API] }
+        - { path: ^/api/login, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/api/logout, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+
+        - { path: ^/user/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Change these rules to adapt them to your needs
+        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+
