@@ -1,0 +1,4 @@
+tim_vhosting:
+    resource: "@TimVhostingBundle/Resources/config/routing.yml"
+    prefix:   /
+

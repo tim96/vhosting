@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new TimVhostingBundle\TimVhostingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

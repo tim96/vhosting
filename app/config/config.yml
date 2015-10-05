@@ -58,8 +58,8 @@ sensio_framework_extra:
 
 monolog:
     handlers:
-        applog:
-            type: service
-            level: debug
-            id: logger_database
+    #    applog:
+    #        type: service
+    #        level: debug
+    #        id: logger_database
     # channels: ["info", "warning", "error", "crit", "alert", "users"]
