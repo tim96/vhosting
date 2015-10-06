@@ -1,3 +1,58 @@
-tim_vhosting_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: TimVhostingBundle:Default:index }
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /user/connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /user/connect
+
+hwi_google_login:
+    pattern: /user/login/check-google
+
+hwi_github_login:
+    pattern: /user/login/check-github
+
+sonata_user_profile_show:
+    pattern:  /
+    defaults:
+       _controller: FrameworkBundle:Redirect:redirect
+       route: sonata_admin_dashboard
+       permanent: true
+
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix:   /admin
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix:   /admin
+
+admin_login:
+    resource: '@ApplicationSonataUserBundle/Controller/AdminSecurityController.php'
+    type:     annotation
+    prefix:   /admin
+
+_sonata_admin:
+    resource: .
+    type:     sonata_admin
+    prefix:   /admin
+
+sonata_user_security:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
+    prefix: /user
+
+sonata_user_resetting:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
+    prefix: /user/resetting
+
+sonata_user_profile:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
+    prefix: /user/profile
+
+sonata_user_register:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
+    prefix: /user/register
+
+sonata_user_change_password:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+    prefix: /user/profile
