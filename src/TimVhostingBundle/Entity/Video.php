@@ -2,6 +2,7 @@
 
 namespace TimVhostingBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,6 +40,18 @@ class Video extends BaseEntity
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VideoRate", mappedBy="video")
+     */
+    private $videoRate;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->videoRate = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -106,5 +119,39 @@ class Video extends BaseEntity
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add videoRate
+     *
+     * @param \TimVhostingBundle\Entity\VideoRate $videoRate
+     *
+     * @return Video
+     */
+    public function addVideoRate(\TimVhostingBundle\Entity\VideoRate $videoRate)
+    {
+        $this->videoRate[] = $videoRate;
+    
+        return $this;
+    }
+
+    /**
+     * Remove videoRate
+     *
+     * @param \TimVhostingBundle\Entity\VideoRate $videoRate
+     */
+    public function removeVideoRate(\TimVhostingBundle\Entity\VideoRate $videoRate)
+    {
+        $this->videoRate->removeElement($videoRate);
+    }
+
+    /**
+     * Get videoRate
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVideoRate()
+    {
+        return $this->videoRate;
     }
 }
