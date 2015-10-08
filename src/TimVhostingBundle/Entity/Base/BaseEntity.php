@@ -19,13 +19,9 @@ abstract class BaseEntity
 {
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      **/
-    private $createdBy;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
-     **/
-    private $updatedBy;
+    private $author;
 
     /**
      * @ORM\Column(name="updated_at", type="datetime")
@@ -134,50 +130,26 @@ abstract class BaseEntity
     }
 
     /**
-     * Set createdBy
+     * Set author
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $createdBy
+     * @param \Application\Sonata\UserBundle\Entity\User $author
      *
      * @return BaseEntity
      */
-    public function setCreatedBy(\Application\Sonata\UserBundle\Entity\User $createdBy = null)
+    public function setAuthor(\Application\Sonata\UserBundle\Entity\User $author = null)
     {
-        $this->createdBy = $createdBy;
+        $this->author = $author;
     
         return $this;
     }
 
     /**
-     * Get createdBy
+     * Get author
      *
      * @return \Application\Sonata\UserBundle\Entity\User
      */
-    public function getCreatedBy()
+    public function getAuthor()
     {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param \Application\Sonata\UserBundle\Entity\User $updatedBy
-     *
-     * @return BaseEntity
-     */
-    public function setUpdatedBy(\Application\Sonata\UserBundle\Entity\User $updatedBy = null)
-    {
-        $this->updatedBy = $updatedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return \Application\Sonata\UserBundle\Entity\User
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
+        return $this->author;
     }
 }

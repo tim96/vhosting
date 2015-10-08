@@ -54,6 +54,7 @@ class VideoRate
     {
         $this->feedback = null;
         $this->createdAt = new \DateTime();
+        $this->rating = 0;
     }
 
     /**
