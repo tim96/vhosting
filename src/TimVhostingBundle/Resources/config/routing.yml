@@ -1,3 +1,8 @@
+tim_cheat_sheet_default:
+    resource: "@TimVhostingBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
+
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /user/connect
@@ -11,13 +16,6 @@ hwi_google_login:
 
 hwi_github_login:
     pattern: /user/login/check-github
-
-sonata_user_profile_show:
-    pattern:  /
-    defaults:
-       _controller: FrameworkBundle:Redirect:redirect
-       route: sonata_admin_dashboard
-       permanent: true
 
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
