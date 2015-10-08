@@ -22,6 +22,8 @@ sonata_block:
         sonata.user.block.account: # used to display menu option (login option)
 
 sonata_admin:
+    templates:
+        layout: 'TimVhostingBundle:Admin:standard_layout.html.twig'
     security:
         handler: sonata.admin.security.handler.role
         information:
