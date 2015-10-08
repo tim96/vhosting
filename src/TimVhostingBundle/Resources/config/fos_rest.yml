@@ -10,7 +10,7 @@ fos_rest:
             html: true
     format_listener:
         rules:
-            - { path: ^/api, priorities: [ html, json, xml ], fallback_format: ~, prefer_extension: true }
+            - { path: ^/apiRest, priorities: [ html, json, xml ], fallback_format: ~, prefer_extension: true }
             - { path: '^/', stop: true }
     exception:
         codes:
