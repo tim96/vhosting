@@ -2,3 +2,8 @@ services:
 #    tim_vhosting.example:
 #        class: TimVhostingBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    tim_vhosting.admin.tags:
+        class: TimVhostingBundle\Admin\TagsAdmin
+        arguments: [~, TimVhostingBundle\Entity\Tags, TimVhostingBundle:TagsAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Tags }
