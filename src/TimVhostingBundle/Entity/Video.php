@@ -42,6 +42,13 @@ class Video extends BaseEntity
     protected $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="meta", type="text", nullable=true)
+     */
+    protected $meta;
+
+    /**
      * @ORM\OneToMany(targetEntity="VideoRate", mappedBy="video")
      */
     private $videoRate;
@@ -153,5 +160,29 @@ class Video extends BaseEntity
     public function getVideoRate()
     {
         return $this->videoRate;
+    }
+
+    /**
+     * Set meta
+     *
+     * @param string $meta
+     *
+     * @return Video
+     */
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
+    
+        return $this;
+    }
+
+    /**
+     * Get meta
+     *
+     * @return string
+     */
+    public function getMeta()
+    {
+        return $this->meta;
     }
 }
