@@ -37,6 +37,16 @@ class Video extends BaseEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(name="link", type="string", length=255)
+     */
+    protected $link;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
@@ -184,5 +194,29 @@ class Video extends BaseEntity
     public function getMeta()
     {
         return $this->meta;
+    }
+
+    /**
+     * Set link
+     *
+     * @param string $link
+     *
+     * @return Video
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    
+        return $this;
+    }
+
+    /**
+     * Get link
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
     }
 }
