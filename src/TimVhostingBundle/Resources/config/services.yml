@@ -7,3 +7,9 @@ services:
         arguments: [~, TimVhostingBundle\Entity\Tags, TimVhostingBundle:TagsAdmin, @service_container]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Tags }
+
+    tim_vhosting.admin.video_rate:
+        class: TimVhostingBundle\Admin\VideoRateAdmin
+        arguments: [~, TimVhostingBundle\Entity\VideoRate, TimVhostingBundle:VideoRateAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: VideoRate }
