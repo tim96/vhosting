@@ -17,11 +17,11 @@ class TagsAdmin extends BaseAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('updatedAt')
-            ->add('createdAt')
-            ->add('isDeleted')
+            // ->add('isDeleted')
             ->add('id')
             ->add('name')
+            ->add('updatedAt')
+            ->add('createdAt')
         ;
 
         parent::configureDatagridFilters($datagridMapper);
@@ -32,12 +32,9 @@ class TagsAdmin extends BaseAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        parent::configureListFields($listMapper);
+
         $listMapper
-            ->add('updatedAt')
-            ->add('createdAt')
-            ->add('isDeleted')
-            ->add('id')
-            ->add('name')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -45,6 +42,11 @@ class TagsAdmin extends BaseAdmin
                     'delete' => array(),
                 )
             ))
+            ->add('id')
+            ->add('name')
+            ->add('updatedAt')
+            ->add('createdAt')
+            // ->add('isDeleted')
         ;
     }
 
@@ -54,11 +56,11 @@ class TagsAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('updatedAt')
-            ->add('createdAt')
-            ->add('isDeleted')
-            ->add('id')
+            // ->add('updatedAt')
+            // ->add('createdAt')
+            // ->add('id')
             ->add('name')
+            // ->add('isDeleted')
         ;
     }
 
@@ -68,11 +70,11 @@ class TagsAdmin extends BaseAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('updatedAt')
-            ->add('createdAt')
-            ->add('isDeleted')
             ->add('id')
             ->add('name')
+            ->add('updatedAt')
+            ->add('createdAt')
+            // ->add('isDeleted')
         ;
     }
 }

@@ -2,9 +2,9 @@
 
 namespace TimVhostingBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController;
+use TimVhostingBundle\Controller\Base\BaseCrudController;
 
-class TagsAdminController extends CRUDController
+class TagsAdminController extends BaseCrudController
 {
 
 }
