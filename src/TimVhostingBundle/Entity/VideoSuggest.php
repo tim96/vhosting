@@ -38,6 +38,16 @@ class VideoSuggest
      * @Assert\NotBlank()
      * @Assert\NotNull()
      *
+     * @ORM\Column(name="user_name", type="string", length=255)
+     */
+    protected $userName;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\NotNull()
+     *
      * @ORM\Column(name="email", type="string", length=255)
      */
     protected $email;
@@ -63,6 +73,13 @@ class VideoSuggest
      * @ORM\Column(name="created_at", type="datetime")
      **/
     private $createdAt;
+
+    /**
+     * @var Tags
+     *
+     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="videoSuggests")
+     */
+    protected $tags;
 
     public function __construct()
     {
@@ -205,5 +222,63 @@ class VideoSuggest
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set userName
+     *
+     * @param string $userName
+     *
+     * @return VideoSuggest
+     */
+    public function setUserName($userName)
+    {
+        $this->userName = $userName;
+    
+        return $this;
+    }
+
+    /**
+     * Get userName
+     *
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \TimVhostingBundle\Entity\Tags $tag
+     *
+     * @return VideoSuggest
+     */
+    public function addTag(\TimVhostingBundle\Entity\Tags $tag)
+    {
+        $this->tags[] = $tag;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \TimVhostingBundle\Entity\Tags $tag
+     */
+    public function removeTag(\TimVhostingBundle\Entity\Tags $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
