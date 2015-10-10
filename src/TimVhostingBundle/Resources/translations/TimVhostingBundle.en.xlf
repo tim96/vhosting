@@ -2,9 +2,37 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="1">
+            <trans-unit id="main_page.title">
                 <source>main_page.title</source>
                 <target>Video hosting</target>
+            </trans-unit>
+            <trans-unit id="main_page.logo_name">
+                <source>main_page.logo_name</source>
+                <target>Video hosting</target>
+            </trans-unit>
+            <trans-unit id="header.home">
+                <source>header.home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="header.contribute">
+                <source>header.contribute</source>
+                <target>Contribute</target>
+            </trans-unit>
+            <trans-unit id="header.about">
+                <source>header.about</source>
+                <target>About</target>
+            </trans-unit>
+            <trans-unit id="header.contact">
+                <source>header.contact</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="header.language">
+                <source>header.language</source>
+                <target>Language</target>
+            </trans-unit>
+            <trans-unit id="header.search">
+                <source>header.search</source>
+                <target>Search</target>
             </trans-unit>
         </body>
     </file>
