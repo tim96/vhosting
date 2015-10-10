@@ -63,6 +63,13 @@ class Video extends BaseEntity
      */
     private $videoRate;
 
+    /**
+     * @var Tags
+     *
+     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="videos")
+     */
+    protected $tags;
+
     public function __construct()
     {
         parent::__construct();
@@ -218,5 +225,39 @@ class Video extends BaseEntity
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \TimVhostingBundle\Entity\Tags $tag
+     *
+     * @return Video
+     */
+    public function addTag(\TimVhostingBundle\Entity\Tags $tag)
+    {
+        $this->tags[] = $tag;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \TimVhostingBundle\Entity\Tags $tag
+     */
+    public function removeTag(\TimVhostingBundle\Entity\Tags $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
