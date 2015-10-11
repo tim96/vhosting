@@ -60,16 +60,16 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">{{ 'header.home'|trans({}, 'TimVhostingBundle') }}</a></li>
-                            <li><a href="#">{{ 'header.contribute'|trans({}, 'TimVhostingBundle') }}</a></li>
-                            <li><a href="#">{{ 'header.about'|trans({}, 'TimVhostingBundle') }}</a></li>
-                            <li><a href="#">{{ 'header.contact'|trans({}, 'TimVhostingBundle') }}</a></li>
+                            <li><a href="{{ path('Home') }}">{{ 'header.home'|trans({}, 'TimVhostingBundle') }}</a></li>
+                            <li><a href="{{ path('Contribute') }}">{{ 'header.contribute'|trans({}, 'TimVhostingBundle') }}</a></li>
+                            <li><a href="{{ path('About') }}">{{ 'header.about'|trans({}, 'TimVhostingBundle') }}</a></li>
+                            <li><a href="{{ path('Contact') }}">{{ 'header.contact'|trans({}, 'TimVhostingBundle') }}</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'header.language'|trans({}, 'TimVhostingBundle') }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">En (English)</a></li>
-                                    <li><a href="#">Fr (Français)</a></li>
-                                    <li><a href="#">Ru (Русский)</a></li>
+                                    <li><a href="{{ path('ChangeLanguage', { 'name' : 'en'}) }}">En (English)</a></li>
+                                    <li><a href="{{ path('ChangeLanguage', { 'name' : 'fr'}) }}">Fr (Français)</a></li>
+                                    <li><a href="{{ path('ChangeLanguage', { 'name' : 'ru'}) }}">Ru (Русский)</a></li>
                                 </ul>
                             </li>
                         </ul>
