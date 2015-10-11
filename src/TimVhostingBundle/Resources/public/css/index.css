@@ -92,3 +92,8 @@ body {
     width: 17px;
     height: 17px;
 }
+
+
+.header-page {
+    border-bottom: 1px solid #adb08a;
+}
