@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use TimVhostingBundle\Entity\Feedback;
+use TimVhostingBundle\Form\FeedbackType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
@@ -43,10 +46,22 @@ class DefaultController extends Controller
 
     /**
      * @Route("/contact", name="Contact")
+     * @Template()
      */
-    public function contactAction()
+    public function contactAction(Request $request)
     {
-        return $this->render('TimVhostingBundle:Default:contact.html.twig', array());
+        $feedback = new Feedback();
+        $form = $this->createForm(new FeedbackType(), $feedback);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // todo: add form save
+        }
+
+        return array(
+            'form' => $form->createView()
+        );
     }
 
     /**
