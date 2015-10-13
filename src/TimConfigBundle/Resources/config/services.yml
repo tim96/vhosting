@@ -7,3 +7,8 @@ services:
         arguments: ["%kernel.default_locale%"]
         tags:
             - { name: kernel.event_subscriber }
+
+parameters:
+    # example to override authentication listeners
+    security.authentication.success_handler.class: TimConfigBundle\Handler\Auth\AuthenticationSuccessHandler
+    security.authentication.failure_handler.class: TimConfigBundle\Handler\Auth\AuthenticationFailureHandler
