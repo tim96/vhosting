@@ -34,6 +34,10 @@
                 <source>header.search</source>
                 <target>Search</target>
             </trans-unit>
+            <trans-unit id="footer.back_to_top">
+                <source>footer.back_to_top</source>
+                <target>Back to top</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
