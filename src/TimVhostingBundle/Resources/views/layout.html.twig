@@ -93,8 +93,9 @@
 {% block footer %}
     <footer class="footer">
         <div class="container">
-            <p class="pull-right"><a href="#">{{ 'footer.back_to_top'|trans({}, 'TimVhostingBundle') }}</a></p>
+            {% block footer_container %}
             <p class="pull-center"><a href="#">Copyright © My Website 2015</a></p>
+            {% endblock footer_container %}
         </div>
     </footer>
 {% endblock %}
