@@ -38,6 +38,22 @@
                 <source>footer.back_to_top</source>
                 <target>Back to top</target>
             </trans-unit>
+            <trans-unit id="contact.title.label">
+                <source>contact.title.label</source>
+                <target>Contact page</target>
+            </trans-unit>
+            <trans-unit id="contact.header.label">
+                <source>contact.header.label</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="contact.message.label">
+                <source>contact.message.label</source>
+                <target>You can write feedback, questions or comments</target>
+            </trans-unit>
+            <trans-unit id="contact.submit.button.label">
+                <source>contact.submit.button.label</source>
+                <target>Submit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
