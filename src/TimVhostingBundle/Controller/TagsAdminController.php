@@ -2,7 +2,7 @@
 
 namespace TimVhostingBundle\Controller;
 
-use TimVhostingBundle\Controller\Base\BaseCrudController;
+use TimConfigBundle\Controller\Base\BaseCrudController;
 
 class TagsAdminController extends BaseCrudController
 {
