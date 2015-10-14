@@ -10,6 +10,25 @@ services:
 
     tim_vhosting.admin.video_rate:
         class: TimVhostingBundle\Admin\VideoRateAdmin
-        arguments: [~, TimVhostingBundle\Entity\VideoRate, TimVhostingBundle:VideoRateAdmin]
+        arguments: [~, TimVhostingBundle\Entity\VideoRate, TimVhostingBundle:VideoRateAdmin, @service_container]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: VideoRate }
+
+    tim_vhosting.admin.feedback:
+        class: TimVhostingBundle\Admin\FeedbackAdmin
+        arguments: [~, TimVhostingBundle\Entity\Feedback, TimVhostingBundle:FeedbackAdmin, @service_container]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Feedback }
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
+#handler
+    tim_vhosting.feedback.handler:
+        class: %tim_vhosting.feedback.handler.class%
+        arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.feedback.class%]
+
+parameters:
+    tim_vhosting.feedback.handler.class: TimVhostingBundle\Handler\FeedbackHandler
+
+    tim_vhosting.feedback.class: TimVhostingBundle\Entity\Feedback
+

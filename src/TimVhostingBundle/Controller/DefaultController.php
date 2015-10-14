@@ -56,7 +56,18 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // todo: add form save
+            try {
+                $record = $this->container->get('tim_vhosting.feedback.handler')
+                    ->create($form->getData());
+
+                $this->addFlash('notice', 'Thank you, for your feedback!');
+            }
+            catch(\Exception $ex)
+            {
+                $this->addFlash('error', 'Sorry, something wrong');
+            }
+
+            return $this->redirectToRoute('Contact');
         }
 
         return array(
