@@ -19,21 +19,22 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     {% endblock %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">#}
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        {# {% stylesheets '@TimVhostingBundle/Resources/public/css/index.min.css' filter='cssrewrite' %} #}
+        {% stylesheets '@TimVhostingBundle/Resources/public/css/index.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock stylesheets %}
+
     <title>{% block title %}{{ 'main_page.title'|trans({}, 'TimVhostingBundle') }}{% endblock %}</title>
 </head>
 <body>
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">#}
-
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    {# {% stylesheets '@TimVhostingBundle/Resources/public/css/index.min.css' filter='cssrewrite' %} #}
-    {% stylesheets '@TimVhostingBundle/Resources/public/css/index.css' filter='cssrewrite' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock stylesheets %}
 
 {% block header %}
     <div class="navbar-wrapper">
