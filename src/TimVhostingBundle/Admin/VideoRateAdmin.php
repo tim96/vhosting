@@ -2,13 +2,14 @@
 
 namespace TimVhostingBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+// use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use TimConfigBundle\Admin\Base\BaseAdmin;
 
-class VideoRateAdmin extends Admin
+class VideoRateAdmin extends BaseAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -21,6 +22,8 @@ class VideoRateAdmin extends Admin
             ->add('createdAt')
             ->add('rating')
         ;
+
+        parent::configureDatagridFilters($datagridMapper);
     }
 
     /**

@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use TimVhostingBundle\Admin\Base\BaseAdmin;
+use TimConfigBundle\Admin\Base\BaseAdmin;
 
 class TagsAdmin extends BaseAdmin
 {
