@@ -97,3 +97,7 @@ body {
 .header-page {
     border-bottom: 1px solid #adb08a;
 }
+
+.required:after {
+    content: "*";
+}
