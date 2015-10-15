@@ -10,6 +10,7 @@ namespace TimVhostingBundle\Handler;
 
 use TimConfigBundle\Handler\Base\BaseEntityHandler;
 use TimVhostingBundle\Entity\Feedback;
+use TimVhostingBundle\EventListener\FeedbackEvent;
 
 class FeedbackHandler extends BaseEntityHandler
 {
@@ -27,6 +28,12 @@ class FeedbackHandler extends BaseEntityHandler
     {
         $this->om->persist($data);
         $this->om->flush();
+
+        $event = new FeedbackEvent();
+        $event->createFeedback($data);
+
+        $dispatcher = $this->container->get('event_dispatcher');
+        $dispatcher->dispatch('tim_vhosting.feedback.create', $event);
 
         return $data;
     }
