@@ -54,6 +54,18 @@
                 <source>contact.submit.button.label</source>
                 <target>Submit</target>
             </trans-unit>
+            <trans-unit id="contribute.header.label">
+                <source>contribute.header.label</source>
+                <target>Contribution</target>
+            </trans-unit>
+            <trans-unit id="contribute.title.label">
+                <source>contribute.title.label</source>
+                <target>Contribute Page</target>
+            </trans-unit>
+            <trans-unit id="contribute.message.label">
+                <source>contribute.message.label</source>
+                <target>All you need to do is find a video or audio recording that you enjoyed and think others could learn from, complete the form below and we'll take it from there.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
