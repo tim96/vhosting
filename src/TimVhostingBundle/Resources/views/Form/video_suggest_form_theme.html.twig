@@ -1,0 +1,24 @@
+{% extends "bootstrap_3_layout.html.twig" %}
+
+{% block form_label -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('col-sm-2 control-label') ~ ' control-label')|trim}) -%}
+    {{- parent() -}}
+{%- endblock form_label %}
+
+{% block form_row -%}
+    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        <div class="col-sm-6">
+        {{- form_widget(form) -}}
+        </div>
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{% block button_row -%}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            {{- form_widget(form) -}}
+        </div>
+    </div>
+{%- endblock button_row %}

@@ -10,7 +10,7 @@
         <h1 class="header-page">{{ 'contact.header.label'|trans({}, 'TimVhostingBundle') }}</h1>
 
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
                 <p class="bg-success">
                     {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="flash-notice">
@@ -30,13 +30,15 @@
 
         {{ form_start(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
                 <h4>{{ 'contact.message.label'|trans({}, 'TimVhostingBundle') }}</h4>
             </div>
         </div>
+
         <p class="text-danger">
             {{ form_errors(form) }}
         </p>
+
         <div class="form-group">
             {{ form_label(form.name, form.name, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
             <div class="col-sm-6">

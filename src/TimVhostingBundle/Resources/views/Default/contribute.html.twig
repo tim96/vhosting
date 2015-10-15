@@ -1,17 +1,44 @@
 {% extends '@TimVhosting/layout.html.twig' %}
+{% form_theme form '@TimVhosting/Form/video_suggest_form_theme.html.twig' %}
+
+{% block title %}
+    {{ 'contribute.title.label'|trans({}, 'TimVhostingBundle') }}
+{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2 class="header-page">Contribution</h2>
+        <h1 class="header-page">{{ 'contribute.header.label'|trans({}, 'TimVhostingBundle') }}</h1>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-6">
+                <p class="bg-success">
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-notice">
+                    {{ flashMessage }}
+                </div>
+                {% endfor %}
+                </p>
+                <p class="bg-error">
+                    {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="flash-error">
+                    {{ flashMessage }}
+                </div>
+                {% endfor %}
+                </p>
+            </div>
+        </div>
+
         <div class="row">
-            <div class="col-md-12">
-                <p>Contribution Text</p>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <h4>{{ 'contribute.message.label'|trans({}, 'TimVhostingBundle') }}</h4>
+                </div>
             </div>
         </div>
-        <div class="ros">
-            <div class="col-md-12">
-                <p>Contribution Form</p>
-            </div>
-        </div>
+
+        <br/>
+
+        {{ form(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
+
     </div>
 {% endblock %}
