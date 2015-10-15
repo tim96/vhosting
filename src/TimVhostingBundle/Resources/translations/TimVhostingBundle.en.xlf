@@ -66,6 +66,10 @@
                 <source>contribute.message.label</source>
                 <target>All you need to do is find a video or audio recording that you enjoyed and think others could learn from, complete the form below and we'll take it from there.</target>
             </trans-unit>
+            <trans-unit id="about.message.label">
+                <source>about.message.label</source>
+                <target>Vhosting aims to be a community resource and, as such, we will depend on you to contribute content. Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we'll do the rest.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
