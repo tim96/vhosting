@@ -22,13 +22,25 @@ services:
         calls:
             - [ setTranslationDomain, [ TimVhostingBundle ] ]
 
+    tim_vhosting.admin.video_suggest:
+        class: TimVhostingBundle\Admin\VideoSuggestAdmin
+        arguments: [~, TimVhostingBundle\Entity\VideoSuggest, TimVhostingBundle:VideoSuggestAdmin, @service_container]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: VideoSuggest }
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
 #handler
     tim_vhosting.feedback.handler:
         class: %tim_vhosting.feedback.handler.class%
         arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.feedback.class%]
+    tim_vhosting.video_suggest.handler:
+        class: %tim_vhosting.video_suggest.handler.class%
+        arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.video_suggest.class%]
 
 parameters:
     tim_vhosting.feedback.handler.class: TimVhostingBundle\Handler\FeedbackHandler
+    tim_vhosting.video_suggest.handler.class: TimVhostingBundle\Handler\VideoSuggestHandler
 
     tim_vhosting.feedback.class: TimVhostingBundle\Entity\Feedback
-
+    tim_vhosting.video_suggest.class: TimVhostingBundle\Entity\VideoSuggest

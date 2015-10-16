@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: tim
- * Date: 31.07.2015
- * Time: 23:21
+ * Date: 10/16/2015
+ * Time: 10:39 PM
  */
 
 namespace TimVhostingBundle\Handler;
 
 use TimConfigBundle\Handler\Base\BaseEntityHandler;
-use TimVhostingBundle\EventListener\FeedbackEvent;
+use TimVhostingBundle\EventListener\VideoSuggestEvent;
 
-class FeedbackHandler extends BaseEntityHandler
+class VideoSuggestHandler extends BaseEntityHandler
 {
     public function get($id)
     {
@@ -28,11 +28,11 @@ class FeedbackHandler extends BaseEntityHandler
         $this->om->persist($data);
         $this->om->flush();
 
-        $event = new FeedbackEvent();
-        $event->createFeedback($data);
+        $event = new VideoSuggestEvent();
+        $event->createVideoSuggest($data);
 
         $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch('tim_vhosting.feedback.create', $event);
+        $dispatcher->dispatch('tim_vhosting.video_suggest.create', $event);
 
         return $data;
     }
