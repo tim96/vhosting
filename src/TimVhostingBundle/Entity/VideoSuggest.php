@@ -2,6 +2,7 @@
 
 namespace TimVhostingBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -77,13 +78,15 @@ class VideoSuggest
     /**
      * @var Tags
      *
-     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="videoSuggests")
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="videoSuggests", cascade={"persist"})
+     * @ORM\JoinTable(name="video_suggest_tag")
      */
     protected $tags;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -91,7 +94,7 @@ class VideoSuggest
      */
     public function __toString()
     {
-        return $this->id ? $this->title : null;
+        return $this->id ? $this->title : "";
     }
 
     /**
@@ -257,6 +260,7 @@ class VideoSuggest
      */
     public function addTag(\TimVhostingBundle\Entity\Tags $tag)
     {
+        // $tag->addVideoSuggest($this);
         $this->tags[] = $tag;
     
         return $this;

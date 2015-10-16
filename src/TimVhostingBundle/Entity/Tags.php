@@ -37,14 +37,14 @@ class Tags extends BaseEntity
     /**
      * @var Video
      *
-     * @ORM\ManyToMany(targetEntity="Video", mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Video", mappedBy="tags", cascade={"persist"})
      */
     protected $videos;
 
     /**
      * @var VideoSuggest
      *
-     * @ORM\ManyToMany(targetEntity="VideoSuggest", mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity="VideoSuggest", mappedBy="tags", cascade={"persist"})
      */
     protected $videoSuggests;
 
@@ -73,7 +73,7 @@ class Tags extends BaseEntity
      */
     public function __toString()
     {
-        return $this->id ? (string)$this->name : null;
+        return $this->id ? (string)$this->name : "";
     }
 
     /**

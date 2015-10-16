@@ -66,7 +66,8 @@ class Video extends BaseEntity
     /**
      * @var Tags
      *
-     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="videos")
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="videos", cascade={"persist"})
+     * @ORM\JoinTable(name="video_tag")
      */
     protected $tags;
 
