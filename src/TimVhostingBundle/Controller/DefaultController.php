@@ -2,14 +2,14 @@
 
 namespace TimVhostingBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use TimVhostingBundle\Entity\Feedback;
 use TimVhostingBundle\Entity\VideoSuggest;
 use TimVhostingBundle\Form\FeedbackType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use TimVhostingBundle\Form\VideoSuggestType;
 
 class DefaultController extends Controller
@@ -52,6 +52,16 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            try {
+                $record = $this->container->get('tim_vhosting.video_suggest.handler')
+                    ->create($form->getData());
+
+                $this->addFlash('notice', 'Thank you, for your contribution!');
+            }
+            catch(\Exception $ex)
+            {
+                $this->addFlash('error', 'Sorry, something wrong');
+            }
 
             return $this->redirectToRoute('Contribute');
         }
