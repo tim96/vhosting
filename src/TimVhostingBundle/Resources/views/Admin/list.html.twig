@@ -1,0 +1,16 @@
+{% extends 'SonataAdminBundle:CRUD:list.html.twig' %}
+
+{% block batch_actions %}
+    <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
+        <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
+        {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
+        ({{ admin.datagrid.pager.nbresults }})
+    </label>
+
+    <select name="action" style="width: auto; height: auto" class="form-control">
+        <option value="" selected="selected">{{ 'make_a_choice'|trans({}, 'TimVhostingBundle') }}</option>
+        {% for action, options in batchactions %}
+            <option value="{{ action }}">{{ options.label }}</option>
+        {% endfor %}
+    </select>
+{% endblock batch_actions %}

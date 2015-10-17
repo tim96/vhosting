@@ -24,6 +24,7 @@ sonata_block:
 sonata_admin:
     templates:
         layout: 'TimVhostingBundle:Admin:standard_layout.html.twig'
+        list:   'TimVhostingBundle:Admin:list.html.twig'
     security:
         handler: sonata.admin.security.handler.role
         information:

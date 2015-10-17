@@ -70,6 +70,10 @@
                 <source>about.message.label</source>
                 <target>Vhosting aims to be a community resource and, as such, we will depend on you to contribute content. Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we'll do the rest.</target>
             </trans-unit>
+            <trans-unit id="make_a_choice">
+                <source>make_a_choice</source>
+                <target>Make a choice</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
