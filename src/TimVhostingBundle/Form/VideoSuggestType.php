@@ -15,16 +15,18 @@ class VideoSuggestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, array('attr' => array(
-                'class' => 'form-horizontal'
+            ->add('title', null, array('attr' =>
+                array('label' => 'Title', 'class' => 'form-horizontal',
+                    /*'placeholder' => 'Title' // placeholder example*/
             ), 'required' => true))
             ->add('userName', null, array('label' => 'Username',
                 'required' => true))
             ->add('email')
             ->add('link')
             ->add('description')
-            // ->add('createdAt')
-            ->add('tags')
+            ->add('tags', null, array(
+                // 'placeholder' => 'No tag selected'
+            ))
             ->add('save', 'submit', array('label' => 'Send'))
         ;
     }
