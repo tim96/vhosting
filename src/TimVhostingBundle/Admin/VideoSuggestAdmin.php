@@ -83,7 +83,8 @@ class VideoSuggestAdmin extends BaseAdmin
             ->add('title', null, array('label' => 'Title'))
             ->add('userName', null, array('label' => 'Username'))
             ->add('email', null, array('label' => 'Email'))
-            ->add('link', null, array('label' => 'Link'))
+            ->add('link', null, array('label' => 'Link',
+                'template' => 'TimVhostingBundle:VideoSuggest:link_show.html.twig'))
             ->add('description', null, array('label' => 'Description'))
             ->add('tags', null, array('label' => 'Tags'))
             ->add('createdAt', null, array('label' => 'Created'))
