@@ -83,10 +83,22 @@ class VideoSuggest
      */
     protected $tags;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    const STATUS_HOLD = 0;
+    const STATUS_REJECT = 1;
+    const STATUS_APPROVE = 2;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->tags = new ArrayCollection();
+        $this->status = self::STATUS_HOLD;
     }
 
     /**
@@ -284,5 +296,29 @@ class VideoSuggest
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set status
+     *
+     * @param int $status
+     *
+     * @return VideoSuggest
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
