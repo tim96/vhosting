@@ -2,7 +2,6 @@
 
 namespace TimVhostingBundle\Admin;
 
-// use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,13 +17,13 @@ class VideoSuggestAdmin extends BaseAdmin
     {
         $datagridMapper
             ->add('id')
-            ->add('title')
-            ->add('tags')
-            ->add('userName')
-            ->add('email')
-            ->add('link')
-            ->add('description')
-            ->add('createdAt')
+            ->add('title', null, array('label' => 'Title'))
+            ->add('tags', null, array('label' => 'Tags'))
+            ->add('userName', null, array('label' => 'Username'))
+            ->add('email', null, array('label' => 'Email'))
+            ->add('link', null, array('label' => 'Link'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('createdAt', null, array('label' => 'Created'))
         ;
 
         parent::configureDatagridFilters($datagridMapper);
@@ -45,14 +44,14 @@ class VideoSuggestAdmin extends BaseAdmin
                     'delete' => array(),
                 )
             ))
-            ->add('id')
-            ->add('title')
-            ->add('tags')
-            ->add('userName')
-            ->add('email')
-            ->add('link')
-            ->add('description')
-            ->add('createdAt')
+            ->addIdentifier('id')
+            ->add('title', null, array('label' => 'Title'))
+            ->add('tags', null, array('label' => 'Tags'))
+            ->add('userName', null, array('label' => 'Username'))
+            ->add('email', null, array('label' => 'Email'))
+            ->add('link', null, array('label' => 'Link'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('createdAt', null, array('label' => 'Created'))
         ;
     }
 
@@ -62,14 +61,15 @@ class VideoSuggestAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            // ->add('id')
-            ->add('title')
-            ->add('userName')
-            ->add('email')
-            ->add('link')
-            ->add('description')
-            ->add('tags', null, array('multiple' => true))
-            // ->add('createdAt')
+            ->add('title', null, array('label' => 'Title'))
+            ->add('userName', null, array('label' => 'Username'))
+            ->add('email', null, array('label' => 'Email'))
+            ->add('link', null, array('label' => 'Link'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('tags', 'sonata_type_model', array(
+                'by_reference' => false, 'multiple' => true, 'required' => true,
+                'label' => 'Tags')
+            )
         ;
     }
 
@@ -80,13 +80,13 @@ class VideoSuggestAdmin extends BaseAdmin
     {
         $showMapper
             ->add('id')
-            ->add('title')
-            ->add('userName')
-            ->add('email')
-            ->add('link')
-            ->add('description')
-            ->add('tags')
-            ->add('createdAt')
+            ->add('title', null, array('label' => 'Title'))
+            ->add('userName', null, array('label' => 'Username'))
+            ->add('email', null, array('label' => 'Email'))
+            ->add('link', null, array('label' => 'Link'))
+            ->add('description', null, array('label' => 'Description'))
+            ->add('tags', null, array('label' => 'Tags'))
+            ->add('createdAt', null, array('label' => 'Created'))
         ;
     }
 }
