@@ -40,5 +40,26 @@
 
         {{ form(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
 
+        <script type="text/javascript">
+            /*
+            * Jquery solution
+            $(document).ready(function() {
+            });*/
+            document.addEventListener("DOMContentLoaded", function(event) {
+                $("#timvhostingbundle_videosuggest_tags").select2({
+                    maximumSelectionLength: 5
+                });
+            });
+        </script>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+{% endblock stylesheets %}
