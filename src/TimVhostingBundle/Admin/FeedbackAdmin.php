@@ -2,7 +2,6 @@
 
 namespace TimVhostingBundle\Admin;
 
-// use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,12 +17,11 @@ class FeedbackAdmin extends BaseAdmin
     {
         $datagridMapper
             ->add('id')
-            ->add('email')
-            ->add('name')
-            ->add('message')
-            ->add('createdAt')
-            ->add('isAnswered')
-            // ->add('isDeleted')
+            ->add('email', null, array('label' => 'Email'))
+            ->add('name', null, array('label' => 'Username'))
+            ->add('message', null, array('label' => 'Message'))
+            ->add('createdAt', null, array('label' => 'Created'))
+            ->add('isAnswered', null, array('label' => 'Is Answer?'))
         ;
 
         parent::configureDatagridFilters($datagridMapper);
@@ -44,13 +42,12 @@ class FeedbackAdmin extends BaseAdmin
                     'delete' => array(),
                 )
             ))
-            ->add('id')
-            ->add('email')
-            ->add('name')
-            ->add('message')
-            ->add('createdAt')
-            ->add('isAnswered')
-            // ->add('isDeleted')
+            ->addIdentifier('id')
+            ->add('email', null, array('label' => 'Email'))
+            ->add('name', null, array('label' => 'Username'))
+            ->add('message', null, array('label' => 'Message'))
+            ->add('createdAt', null, array('label' => 'Created'))
+            ->add('isAnswered', null, array('label' => 'Is Answer?'))
         ;
     }
 
@@ -60,13 +57,10 @@ class FeedbackAdmin extends BaseAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            // ->add('id')
-            ->add('email')
-            ->add('name')
-            ->add('message')
-            // ->add('createdAt')
-            ->add('isAnswered')
-            // ->add('isDeleted')
+            ->add('email', null, array('label' => 'Email'))
+            ->add('name', null, array('label' => 'Username'))
+            ->add('message', null, array('label' => 'Message'))
+            ->add('isAnswered', null, array('label' => 'Is Answer?'))
         ;
     }
 
@@ -77,12 +71,11 @@ class FeedbackAdmin extends BaseAdmin
     {
         $showMapper
             ->add('id')
-            ->add('email')
-            ->add('name')
-            ->add('message')
-            ->add('createdAt')
-            ->add('isAnswered')
-            ->add('isDeleted')
+            ->add('email', null, array('label' => 'Email'))
+            ->add('name', null, array('label' => 'Username'))
+            ->add('message', null, array('label' => 'Message'))
+            ->add('createdAt', null, array('label' => 'Created'))
+            ->add('isAnswered', null, array('label' => 'Is Answer?'))
         ;
     }
 }
