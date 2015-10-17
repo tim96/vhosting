@@ -81,6 +81,11 @@ class Feedback
         $this->name = null;
     }
 
+    public function __toString()
+    {
+        return $this->id ? (string)$this->id : '';
+    }
+
     /**
      * Get id
      *
