@@ -36,6 +36,9 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             // new Sonata\FormatterBundle\SonataFormatterBundle(),
 
+            // nice doctrine features
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
