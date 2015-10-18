@@ -47,6 +47,8 @@
         "sonata-project/formatter-bundle": "2.3.*@dev",
         "sonata-project/doctrine-orm-admin-bundle": "2.*@dev",
 
+        "stof/doctrine-extensions-bundle": "1.*",
+
         "dropbox/dropbox-sdk": "1.*",
         "google/apiclient": "1.*",
         "dizda/cloud-backup-bundle": "3.*"
