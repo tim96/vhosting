@@ -28,8 +28,10 @@ class AdminSecurityController extends BaseAdminSecurityController
 {
     /**
      * @Route("/login", name="login")
+     * @param Request $request
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction()
+    public function loginAction(Request $request = null)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
 
