@@ -46,10 +46,7 @@ class VideoSuggest
     /**
      * @var string
      *
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     protected $email;
 
@@ -99,6 +96,7 @@ class VideoSuggest
         $this->createdAt = new \DateTime();
         $this->tags = new ArrayCollection();
         $this->status = self::STATUS_HOLD;
+        $this->email = null;
     }
 
     /**

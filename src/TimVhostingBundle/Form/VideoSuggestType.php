@@ -21,7 +21,7 @@ class VideoSuggestType extends AbstractType
             ), 'required' => true))
             ->add('userName', null, array('label' => 'Username',
                 'required' => true))
-            ->add('email')
+            ->add('email', null, array('required' => false))
             ->add('link')
             ->add('description')
             ->add('tags', null, array(
