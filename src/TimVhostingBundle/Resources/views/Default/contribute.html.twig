@@ -13,17 +13,18 @@
             <div class="col-sm-offset-2 col-sm-6">
                 <p class="bg-success">
                     {% for flashMessage in app.session.flashbag.get('notice') %}
-                <div class="flash-notice">
-                    {{ flashMessage }}
-                </div>
-                {% endfor %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
                 </p>
+
                 <p class="bg-error">
                     {% for flashMessage in app.session.flashbag.get('error') %}
-                <div class="flash-error">
-                    {{ flashMessage }}
-                </div>
-                {% endfor %}
+                        <div class="flash-error">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
                 </p>
             </div>
         </div>
@@ -45,8 +46,9 @@
             * Jquery solution
             $(document).ready(function() {
             });*/
+            var id = '{{ form.tags.vars.id }}';
             document.addEventListener("DOMContentLoaded", function(event) {
-                $("#timvhostingbundle_videosuggest_tags").select2({
+                $('#' + id).select2({
                     maximumSelectionLength: 5
                 });
             });

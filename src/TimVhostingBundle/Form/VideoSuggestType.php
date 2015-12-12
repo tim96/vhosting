@@ -4,7 +4,8 @@ namespace TimVhostingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+//use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class VideoSuggestType extends AbstractType
 {
@@ -15,37 +16,46 @@ class VideoSuggestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, array('attr' =>
-                array('label' => 'Title', 'class' => 'form-horizontal',
+            ->add('title', null, array('label' => 'title.label', 'attr' =>
+                array('label' => 'title.label', 'class' => 'form-horizontal',
                     /*'placeholder' => 'Title' // placeholder example*/
             ), 'required' => true))
-            ->add('userName', null, array('label' => 'Username',
+            ->add('userName', null, array('label' => 'username.label',
                 'required' => true))
-            ->add('email', null, array('required' => false))
-            ->add('link')
-            ->add('description')
-            ->add('tags', null, array(
+            ->add('email', null, array('required' => false, 'label' => 'email.label'))
+            ->add('link', null, array('required' => true, 'label' => 'link.label'))
+            ->add('description', null, array('label' => 'description.label'))
+            ->add('tags', null, array('label' => 'tags.label'
                 // 'placeholder' => 'No tag selected'
             ))
-            ->add('save', 'submit', array('label' => 'Send'))
+            ->add('save', 'submit', array('label' => 'save.button.label'))
         ;
     }
     
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /*public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TimVhostingBundle\Entity\VideoSuggest'
+            'data_class' => 'TimVhostingBundle\Entity\VideoSuggest',
+            'translation_domain' => 'TimVhostingBundle'
+        ));
+    }*/
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'TimVhostingBundle\Entity\VideoSuggest',
+            'translation_domain' => 'TimVhostingBundle'
         ));
     }
 
     /**
      * @return string
      */
-    public function getName()
+    /*public function getName()
     {
         return 'timvhostingbundle_videosuggest';
-    }
+    }*/
 }

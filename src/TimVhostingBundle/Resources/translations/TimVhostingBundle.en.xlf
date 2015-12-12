@@ -82,6 +82,34 @@
                 <source>frontend.video_tags</source>
                 <target>Tags</target>
             </trans-unit>
+            <trans-unit id="username.label">
+                <source>username.label</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="title.label">
+                <source>title.label</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="email.label">
+                <source>email.label</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="link.label">
+                <source>link.label</source>
+                <target>Video link</target>
+            </trans-unit>
+            <trans-unit id="description.label">
+                <source>description.label</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="tags.label">
+                <source>tags.label</source>
+                <target>Tags</target>
+            </trans-unit>
+            <trans-unit id="save.button.label">
+                <source>save.button.label</source>
+                <target>Send</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
