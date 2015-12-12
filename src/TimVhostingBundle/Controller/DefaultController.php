@@ -28,7 +28,11 @@ class DefaultController extends Controller
      */
     public function frontendAction()
     {
-        return $this->render('TimVhostingBundle:Default:frontend.html.twig', array());
+        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
+        $tags = $serviceTags->getList(array('isDeleted' => false));
+        $videos = null;
+
+        return $this->render('TimVhostingBundle:Default:frontend.html.twig', array('tags' => $tags, 'videos' => $videos));
     }
 
     /**
@@ -118,5 +122,21 @@ class DefaultController extends Controller
 
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
+    }
+
+    /**
+     * @Route("/tags/{tag}", name="ShowVideoByTag")
+     */
+    public function showVideoByTagAction($tag, Request $request)
+    {
+        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
+        $tags = $serviceTags->getList(array('isDeleted' => false));
+
+        $tag = $serviceTags->getOneByName($tag);
+        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
+        $videos = $serviceVideo->getList();
+
+        return $this->render('TimVhostingBundle:Default:frontend.html.twig', array('tags' => $tags, 'selectedTag' => $tag,
+            'videos' => $videos));
     }
 }
