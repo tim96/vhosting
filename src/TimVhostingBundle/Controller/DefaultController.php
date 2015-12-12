@@ -5,6 +5,7 @@ namespace TimVhostingBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use TimVhostingBundle\Entity\Feedback;
@@ -48,6 +49,7 @@ class DefaultController extends Controller
     {
         $videoSuggest = new VideoSuggest();
         $form = $this->createForm(new VideoSuggestType(), $videoSuggest);
+        $form->add('save', SubmitType::class, array('label' => 'save.button.label'));
 
         $form->handleRequest($request);
 
@@ -81,6 +83,7 @@ class DefaultController extends Controller
     {
         $feedback = new Feedback();
         $form = $this->createForm(new FeedbackType(), $feedback);
+        $form->add('save', SubmitType::class, array('label' => 'submit.button.label'));
 
         $form->handleRequest($request);
 

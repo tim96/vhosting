@@ -4,7 +4,8 @@ namespace TimVhostingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+// use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class FeedbackType extends AbstractType
 {
@@ -15,9 +16,10 @@ class FeedbackType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'Name'))
-            ->add('email', null, array('label' => 'Email'))
-            ->add('message', null, array('label' => 'Your message'))
+            ->add('name', null, array('label' => 'feedback.name.label'))
+            ->add('email', 'email', array('label' => 'feedback.email.label'))
+            ->add('message', null, array('label' => 'feedback.message.label'))
+            ->add('captcha', 'captcha', array('label' => 'captcha.label', 'charset' => '0123456789'))
             // ->add('createdAt')
             // ->add('isAnswered')
             // ->add('isDeleted')
@@ -27,18 +29,19 @@ class FeedbackType extends AbstractType
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /*public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TimVhostingBundle\Entity\Feedback'
+            'data_class' => 'TimVhostingBundle\Entity\Feedback',
+            'translation_domain' => 'TimVhostingBundle'
         ));
-    }
+    }*/
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'timvhostingbundle_feedback';
+        $resolver->setDefaults(array(
+            'data_class' => 'TimVhostingBundle\Entity\Feedback',
+            'translation_domain' => 'TimVhostingBundle'
+        ));
     }
 }

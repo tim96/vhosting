@@ -114,6 +114,22 @@
                 <source>captcha.label</source>
                 <target>Captcha</target>
             </trans-unit>
+            <trans-unit id="feedback.name.label">
+                <source>feedback.name.label</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="feedback.email.label">
+                <source>feedback.email.label</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="feedback.message.label">
+                <source>feedback.message.label</source>
+                <target>Your message</target>
+            </trans-unit>
+            <trans-unit id="submit.button.label">
+                <source>submit.button.label</source>
+                <target>Submit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -10,22 +10,22 @@
         <h1 class="header-page">{{ 'contribute.header.label'|trans({}, 'TimVhostingBundle') }}</h1>
 
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-6">
-                <p class="bg-success">
+            <div class="col-sm-8">
+                <div class="flash-notice">
                     {% for flashMessage in app.session.flashbag.get('notice') %}
-                        <div class="flash-notice">
+                        <p class="bg-success" style="padding: 15px;">
                             {{ flashMessage }}
-                        </div>
+                        </p>
                     {% endfor %}
-                </p>
+                </div>
 
-                <p class="bg-error">
+                <div class="flash-error">
                     {% for flashMessage in app.session.flashbag.get('error') %}
-                        <div class="flash-error">
+                        <p class="bg-error" style="padding: 15px;">
                             {{ flashMessage }}
-                        </div>
+                        </p>
                     {% endfor %}
-                </p>
+                </div>
             </div>
         </div>
 

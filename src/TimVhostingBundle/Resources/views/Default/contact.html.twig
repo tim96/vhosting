@@ -1,4 +1,5 @@
 {% extends '@TimVhosting/layout.html.twig' %}
+{% form_theme form '@TimVhosting/Form/video_suggest_form_theme.html.twig' %}
 
 {% block title %}
     {{ 'contact.title.label'|trans({}, 'TimVhostingBundle') }}
@@ -10,58 +11,34 @@
         <h1 class="header-page">{{ 'contact.header.label'|trans({}, 'TimVhostingBundle') }}</h1>
 
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-6">
-                <p class="bg-success">
-                    {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="col-sm-8">
                 <div class="flash-notice">
-                    {{ flashMessage }}
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <p class="bg-success" style="padding: 15px;">
+                            {{ flashMessage }}
+                        </p>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-                </p>
-                <p class="bg-error">
-                    {% for flashMessage in app.session.flashbag.get('error') %}
+
                 <div class="flash-error">
-                    {{ flashMessage }}
+                    {% for flashMessage in app.session.flashbag.get('error') %}
+                         <p class="bg-error" style="padding: 15px;">
+                            {{ flashMessage }}
+                        </p>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-                </p>
             </div>
         </div>
 
-        {{ form_start(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-6">
-                <h4>{{ 'contact.message.label'|trans({}, 'TimVhostingBundle') }}</h4>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-6">
+                    <h4>{{ 'contact.message.label'|trans({}, 'TimVhostingBundle') }}</h4>
+                </div>
             </div>
         </div>
 
-        <p class="text-danger">
-            {{ form_errors(form) }}
-        </p>
+        {{ form(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
 
-        <div class="form-group">
-            {{ form_label(form.name, form.name, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            <div class="col-sm-6">
-                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.email, form.email, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            <div class="col-sm-6">
-                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.message, form.message, {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            <div class="col-sm-6">
-                {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-default">{{ 'contact.submit.button.label'|trans({}, 'TimVhostingBundle') }}</button>
-            </div>
-        </div>
-        {{ form_end(form) }}
     </div>
 {% endblock %}

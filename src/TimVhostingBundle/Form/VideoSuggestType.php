@@ -30,7 +30,7 @@ class VideoSuggestType extends AbstractType
                 // 'placeholder' => 'No tag selected'
             ))
             ->add('captcha', 'captcha', array('label' => 'captcha.label', 'charset' => '0123456789'))
-            ->add('save', 'submit', array('label' => 'save.button.label'))
+            // ->add('save', 'submit', array('label' => 'save.button.label'))
         ;
     }
     
