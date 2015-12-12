@@ -10,17 +10,17 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.8.*",
-        "symfony/assetic-bundle": "2.*",
-        "symfony/swiftmailer-bundle": "2.*",
-        "symfony/monolog-bundle": "2.*",
+        "symfony/symfony": "2.8.*@dev",
+        "symfony/assetic-bundle": "2.*@dev",
+        "symfony/swiftmailer-bundle": "2.*@dev",
+        "symfony/monolog-bundle": "2.*@dev",
 
-        "twig/twig": "1.*",
+        "twig/twig": "1.*@dev",
 
         "doctrine/orm": "2.*@dev",
         "doctrine/dbal": "2.*@dev",
         "doctrine/doctrine-bundle": "1.*@dev",
-        "doctrine/doctrine-fixtures-bundle": "2.*",
+        "doctrine/doctrine-fixtures-bundle": "2.*@dev",
 
         "sensio/distribution-bundle": "4.*@dev",
         "sensio/framework-extra-bundle": "3.*@dev",
