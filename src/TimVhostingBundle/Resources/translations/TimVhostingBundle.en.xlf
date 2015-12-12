@@ -110,6 +110,10 @@
                 <source>save.button.label</source>
                 <target>Send</target>
             </trans-unit>
+            <trans-unit id="captcha.label">
+                <source>captcha.label</source>
+                <target>Captcha</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

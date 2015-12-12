@@ -22,12 +22,14 @@ class VideoSuggestType extends AbstractType
             ), 'required' => true))
             ->add('userName', null, array('label' => 'username.label',
                 'required' => true))
-            ->add('email', null, array('required' => false, 'label' => 'email.label'))
-            ->add('link', null, array('required' => true, 'label' => 'link.label'))
+            ->add('email', 'email', array('required' => false, 'label' => 'email.label',
+                'attr' => array('type' => 'email')))
+            ->add('link', 'url', array('required' => true, 'label' => 'link.label'))
             ->add('description', null, array('label' => 'description.label'))
             ->add('tags', null, array('label' => 'tags.label'
                 // 'placeholder' => 'No tag selected'
             ))
+            ->add('captcha', 'captcha', array('label' => 'captcha.label', 'charset' => '0123456789'))
             ->add('save', 'submit', array('label' => 'save.button.label'))
         ;
     }
