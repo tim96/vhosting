@@ -74,6 +74,14 @@
                 <source>make_a_choice</source>
                 <target>Make a choice</target>
             </trans-unit>
+            <trans-unit id="frontend.video_list">
+                <source>frontend.video_list</source>
+                <target>Video List</target>
+            </trans-unit>
+            <trans-unit id="frontend.video_tags">
+                <source>frontend.video_tags</source>
+                <target>Tags</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
