@@ -5,6 +5,7 @@ namespace TimVhostingBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use TimConfigBundle\Admin\Base\BaseAdmin;
 
@@ -40,11 +41,15 @@ class VideoSuggestAdmin extends BaseAdmin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
+                    'approve' => array(
+                        'template' => 'TimVhostingBundle:VideoSuggest:list__action_approve.html.twig'
+                    ),
                     'edit' => array(),
                     'delete' => array(),
                 )
             ))
             ->addIdentifier('id')
+            ->add('status', null, array('label' => 'Status'))
             ->add('title', null, array('label' => 'Title'))
             ->add('tags', null, array('label' => 'Tags'))
             ->add('userName', null, array('label' => 'Username'))
@@ -89,5 +94,12 @@ class VideoSuggestAdmin extends BaseAdmin
             ->add('tags', null, array('label' => 'Tags'))
             ->add('createdAt', null, array('label' => 'Created'))
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+
+        $collection->add('approve', $this->getRouterIdParameter().'/approve');
     }
 }
