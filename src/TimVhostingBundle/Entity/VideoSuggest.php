@@ -319,4 +319,19 @@ class VideoSuggest
     {
         return $this->status;
     }
+
+    public function isApproved()
+    {
+        return $this->status == self::STATUS_APPROVE;
+    }
+
+    public function isRejected()
+    {
+        return $this->status == self::STATUS_REJECT;
+    }
+
+    public function isHold()
+    {
+        return $this->status == self::STATUS_HOLD;
+    }
 }

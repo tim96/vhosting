@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 
-{% if admin.isGranted('EDIT', object) and admin.hasRoute('approve') %}
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('approve') and object.isHold %}
     <a href="{{ admin.generateObjectUrl('approve', object) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_approve'|trans({}, 'TimVhostingBundle') }}">
         <i class="fa fa-check"></i>
         {{ 'action_approve'|trans({}, 'TimVhostingBundle') }}
