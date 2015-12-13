@@ -30,6 +30,14 @@ services:
         calls:
             - [ setTranslationDomain, [ TimVhostingBundle ] ]
 
+    tim_vhosting.admin.video:
+        class: TimVhostingBundle\Admin\VideoAdmin
+        arguments: [~, TimVhostingBundle\Entity\Video, TimVhostingBundle:VideoAdmin, @service_container]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Video }
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
 #handler
     tim_vhosting.feedback.handler:
         class: %tim_vhosting.feedback.handler.class%
@@ -54,3 +62,4 @@ parameters:
     tim_vhosting.video_suggest.class: TimVhostingBundle\Entity\VideoSuggest
     tim_vhosting.tags.class: TimVhostingBundle\Entity\Tags
     tim_vhosting.video.class: TimVhostingBundle\Entity\Video
+

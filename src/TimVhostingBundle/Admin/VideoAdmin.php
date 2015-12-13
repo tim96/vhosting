@@ -2,14 +2,14 @@
 
 namespace TimVhostingBundle\Admin;
 
-// use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use TimConfigBundle\Admin\Base\BaseAdmin;
 
-class TagsAdmin extends BaseAdmin
+class VideoAdmin extends BaseAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -20,6 +20,9 @@ class TagsAdmin extends BaseAdmin
             // ->add('isDeleted')
             ->add('id')
             ->add('name')
+            ->add('link')
+            ->add('description')
+            ->add('meta')
             ->add('updatedAt')
             ->add('createdAt')
         ;
@@ -42,11 +45,21 @@ class TagsAdmin extends BaseAdmin
                     'delete' => array(),
                 )
             ))
+            // ->add('isDeleted')
             ->addIdentifier('id')
             ->add('name')
+            // ->add('VideoSuggest.title')
+            // ->add('VideoSuggest', 'many_to_one')
+            // ->add('VideoSuggest.title', null, array('route' => array( 'name' => 'edit')))
+            ->add('videoSuggest')
+            // ->add('videoRate')
+            ->add('tags')
+            ->add('link')
+            ->add('description')
+            ->add('meta')
+            ->add('author')
             ->add('updatedAt')
             ->add('createdAt')
-            // ->add('isDeleted')
         ;
     }
 
@@ -58,9 +71,14 @@ class TagsAdmin extends BaseAdmin
         $formMapper
             // ->add('updatedAt')
             // ->add('createdAt')
+            // ->add('isDeleted')
             // ->add('id')
             ->add('name')
-            // ->add('isDeleted')
+            ->add('tags')
+            // ->add('videoSuggest')
+            ->add('link')
+            ->add('description')
+            ->add('meta')
         ;
     }
 
@@ -70,11 +88,32 @@ class TagsAdmin extends BaseAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
+            // ->add('isDeleted')
             ->add('id')
             ->add('name')
+            ->add('link')
+            ->add('tags')
+            ->add('videoSuggest')
+            ->add('videoRate')
+            ->add('description')
+            ->add('meta')
             ->add('updatedAt')
             ->add('createdAt')
-            // ->add('isDeleted')
         ;
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
+
+        $query->addSelect('t')
+            ->leftJoin($query->getRootAlias().'.tags', 't')
+            ->addSelect('vs')
+            ->leftJoin($query->getRootAlias().'.videoSuggest', 'vs')
+            ->addSelect('u')
+            ->leftJoin($query->getRootAlias().'.author', 'u')
+        ;
+
+        return $query;
     }
 }

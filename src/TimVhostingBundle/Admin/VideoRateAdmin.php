@@ -41,7 +41,7 @@ class VideoRateAdmin extends BaseAdmin
                     'delete' => array(),
                 )
             ))
-            ->add('id')
+            ->addIdentifier('id')
             ->add('rating')
             ->add('feedback')
             ->add('createdAt')

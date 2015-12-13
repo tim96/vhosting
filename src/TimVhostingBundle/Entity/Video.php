@@ -65,6 +65,7 @@ class Video extends BaseEntity
 
     /**
      * @ORM\ManyToOne(targetEntity="VideoSuggest", inversedBy="video")
+     * @ORM\JoinColumn(name="video_suggest_id", referencedColumnName="id")
      */
     private $videoSuggest;
 
