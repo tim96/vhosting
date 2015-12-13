@@ -44,6 +44,9 @@ class VideoSuggestAdmin extends BaseAdmin
                     'approve' => array(
                         'template' => 'TimVhostingBundle:VideoSuggest:list__action_approve.html.twig'
                     ),
+                    'reject' => array(
+                        'template' => 'TimVhostingBundle:VideoSuggest:list__action_reject.html.twig'
+                    ),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -101,5 +104,6 @@ class VideoSuggestAdmin extends BaseAdmin
         parent::configureRoutes($collection);
 
         $collection->add('approve', $this->getRouterIdParameter().'/approve');
+        $collection->add('reject', $this->getRouterIdParameter().'/reject');
     }
 }

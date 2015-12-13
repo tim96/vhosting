@@ -134,13 +134,25 @@
                 <source>action_approve</source>
                 <target>Approve</target>
             </trans-unit>
-           <trans-unit id="flash_approve_videosuggest_error">
+            <trans-unit id="action_reject">
+                <source>action_reject</source>
+                <target>Reject</target>
+            </trans-unit>
+            <trans-unit id="flash_approve_videosuggest_error">
                 <source>flash_approve_videosuggest_error</source>
                 <target>Error approve video suggest: %error%</target>
             </trans-unit>
             <trans-unit id="flash_approve_videosuggest_success">
                 <source>flash_approve_videosuggest_success</source>
                 <target>Approve video suggest success todo::change this label</target>
+            </trans-unit>
+            <trans-unit id="flash_reject_videosuggest_error">
+                <source>flash_reject_videosuggest_error</source>
+                <target>Error reject video suggest: %error%</target>
+            </trans-unit>
+            <trans-unit id="flash_reject_videosuggest_success">
+                <source>flash_reject_videosuggest_success</source>
+                <target>Reject video suggest success todo::change this label</target>
             </trans-unit>
         </body>
     </file>

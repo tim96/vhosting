@@ -73,4 +73,49 @@ class VideoSuggestAdminController extends BaseCrudController
         $url = $this->admin->generateUrl('list');
         return new RedirectResponse($url);
     }
+
+    public function rejectAction($id = null, Request $request = null)
+    {
+        $id     = $request->get($this->admin->getIdParameter());
+        /** @var VideoSuggest $object */
+        $object = $this->admin->getObject($id);
+
+        if (!$object) {
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        $this->admin->checkAccess('edit', $object);
+
+        $preResponse = $this->preEdit($request, $object);
+        if ($preResponse !== null) {
+            return $preResponse;
+        }
+
+        $this->admin->setSubject($object);
+
+        try {
+
+            $object->setStatus($object::STATUS_REJECT);
+            $object = $this->admin->update($object);
+
+            $this->addFlash(
+                'sonata_flash_success',
+                $this->admin->trans('flash_reject_videosuggest_success', array(), 'TimVhostingBundle'
+                )
+            );
+        }
+        catch(\Exception $ex)
+        {
+            $this->addFlash(
+                'sonata_flash_error',
+                $this->admin->trans('flash_reject_videosuggest_error', array(
+                    '%error%' => $ex->getMessage()
+                ), 'TimVhostingBundle'
+                )
+            );
+        }
+
+        $url = $this->admin->generateUrl('list');
+        return new RedirectResponse($url);
+    }
 }
