@@ -46,8 +46,9 @@ abstract class BaseEntity
         $this->isDeleted = false;
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
-        $this->createdBy = null;
-        $this->createdAt = null;
+        // $this->createdBy = null;
+        // $this->updatedBy = null;
+        $this->author = null;
     }
 
     /**
