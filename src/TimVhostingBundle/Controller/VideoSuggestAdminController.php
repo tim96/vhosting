@@ -34,11 +34,16 @@ class VideoSuggestAdminController extends BaseCrudController
 
         try {
 
+            if (!$object->isHold()) {
+                throw new \Exception("You can't change this status");
+            }
+
             $video = new Video();
             $video->setAuthor($this->getUser());
             $video->setLink($object->getLink());
             $video->setDescription($object->getDescription());
             $video->setName($object->getTitle());
+            $video->setVideoSuggest($object);
             foreach($object->getTags() as $tag) {
                 $video->addTag($tag);
             }
@@ -94,6 +99,10 @@ class VideoSuggestAdminController extends BaseCrudController
         $this->admin->setSubject($object);
 
         try {
+
+            if (!$object->isHold()) {
+                throw new \Exception("You can't change this status");
+            }
 
             $object->setStatus($object::STATUS_REJECT);
             $object = $this->admin->update($object);

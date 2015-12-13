@@ -64,6 +64,11 @@ class Video extends BaseEntity
     private $videoRate;
 
     /**
+     * @ORM\ManyToOne(targetEntity="VideoSuggest", inversedBy="video")
+     */
+    private $videoSuggest;
+
+    /**
      * @var Tags
      *
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="videos", cascade={"persist"})
@@ -76,6 +81,7 @@ class Video extends BaseEntity
         parent::__construct();
 
         $this->videoRate = new ArrayCollection();
+        $this->videoSuggest = null;
     }
 
     /**
@@ -260,5 +266,55 @@ class Video extends BaseEntity
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Add videoSuggest
+     *
+     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     *
+     * @return Video
+     */
+    public function addVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    {
+        $this->videoSuggest[] = $videoSuggest;
+    
+        return $this;
+    }
+
+    /**
+     * Remove videoSuggest
+     *
+     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    {
+        return $this->videoSuggest->removeElement($videoSuggest);
+    }
+
+    /**
+     * Get videoSuggest
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVideoSuggest()
+    {
+        return $this->videoSuggest;
+    }
+
+    /**
+     * Set videoSuggest
+     *
+     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     *
+     * @return Video
+     */
+    public function setVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest = null)
+    {
+        $this->videoSuggest = $videoSuggest;
+    
+        return $this;
     }
 }
