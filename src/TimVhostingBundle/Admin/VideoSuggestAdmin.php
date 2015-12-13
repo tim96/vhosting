@@ -52,7 +52,7 @@ class VideoSuggestAdmin extends BaseAdmin
                 )
             ))
             ->addIdentifier('id')
-            ->add('status', null, array('label' => 'Status'))
+            ->add('StatusAsString', null, array('label' => 'Status'))
             ->add('title', null, array('label' => 'Title'))
             ->add('tags', null, array('label' => 'Tags'))
             ->add('userName', null, array('label' => 'Username'))
@@ -105,5 +105,16 @@ class VideoSuggestAdmin extends BaseAdmin
 
         $collection->add('approve', $this->getRouterIdParameter().'/approve');
         $collection->add('reject', $this->getRouterIdParameter().'/reject');
+    }
+
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
+
+        $query->addSelect('t')
+            ->leftJoin($query->getRootAlias().'.tags', 't')
+        ;
+
+        return $query;
     }
 }

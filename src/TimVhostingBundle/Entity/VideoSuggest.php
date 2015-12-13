@@ -87,6 +87,11 @@ class VideoSuggest
      */
     private $status;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Video", mappedBy="videoSuggest")
+     */
+    private $video;
+
     const STATUS_HOLD = 0;
     const STATUS_REJECT = 1;
     const STATUS_APPROVE = 2;
@@ -333,5 +338,57 @@ class VideoSuggest
     public function isHold()
     {
         return $this->status == self::STATUS_HOLD;
+    }
+
+    public function getStatusAsString()
+    {
+        switch ($this->status)
+        {
+            case self::STATUS_HOLD:
+                return 'Hold';
+                break;
+            case self::STATUS_APPROVE:
+                return 'Approved';
+                break;
+            case self::STATUS_REJECT:
+                return 'Rejected';
+                break;
+        }
+    }
+
+    /**
+     * Add video
+     *
+     * @param \TimVhostingBundle\Entity\Video $video
+     *
+     * @return VideoSuggest
+     */
+    public function addVideo(\TimVhostingBundle\Entity\Video $video)
+    {
+        $this->video[] = $video;
+    
+        return $this;
+    }
+
+    /**
+     * Remove video
+     *
+     * @param \TimVhostingBundle\Entity\Video $video
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeVideo(\TimVhostingBundle\Entity\Video $video)
+    {
+        return $this->video->removeElement($video);
+    }
+
+    /**
+     * Get video
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVideo()
+    {
+        return $this->video;
     }
 }
