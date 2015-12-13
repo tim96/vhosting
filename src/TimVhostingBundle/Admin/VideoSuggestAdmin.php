@@ -74,10 +74,11 @@ class VideoSuggestAdmin extends BaseAdmin
             ->add('email', null, array('label' => 'Email'))
             ->add('link', null, array('label' => 'Link'))
             ->add('description', null, array('label' => 'Description'))
-            ->add('tags', 'sonata_type_model', array(
+            /*->add('tags', 'sonata_type_model', array(
                 'by_reference' => false, 'multiple' => true, 'required' => true,
                 'label' => 'Tags')
-            )
+            )*/
+            ->add('tags', null, array('label' => 'Tags'))
         ;
     }
 
