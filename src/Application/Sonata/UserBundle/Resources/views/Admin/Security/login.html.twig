@@ -48,7 +48,7 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
 
-                    {% if captcha is not null %}
+                    {% if captcha is defined and captcha is not null %}
                         <div class="form-group has-feedback">
                             {{ form_widget(captcha.captcha, { 'attr' : {'class' : 'form-control'} }) }}
                         </div>
