@@ -44,7 +44,7 @@ class VideoRate
     private $createdAt;
 
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="rating", type="integer")
      */
@@ -118,11 +118,11 @@ class VideoRate
     /**
      * Set rating
      *
-     * @param \byte $rating
+     * @param $rating
      *
      * @return VideoRate
      */
-    public function setRating(\byte $rating)
+    public function setRating($rating)
     {
         $this->rating = $rating;
     
