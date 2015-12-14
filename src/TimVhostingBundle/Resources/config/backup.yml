@@ -1,0 +1,23 @@
+dizda_cloud_backup:
+    # By default backup files will have your servers hostname as prefix
+    # php app/console --env=prod dizda:backup:start
+
+    # such as: hostname_2014-01-01_21-08-39.tar
+    output_file_prefix: backup_%database_name%
+    #timeout: 300
+    processor:
+        type: tar #zip
+    #    options:
+    #        compression_ratio: 6
+    cloud_storages:
+        # Local storage definition
+        local:
+            path: "%kernel.root_dir%/../backup" # Required
+    databases:
+        mysql:
+        #    all_databases: false # Only required when no database is set
+        #    database: %database_name%          # Required if all_databases is false
+        #    db_host: localhost   # This, and following is not required and if not specified, the bundle will take ORM configuration in parameters.yml
+        #    db_port: ~           # Default 3306
+        #    db_user: ~
+        #    db_password: ~

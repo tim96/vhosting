@@ -36,6 +36,8 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             // new Sonata\FormatterBundle\SonataFormatterBundle(),
 
+            new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
+
             // nice doctrine features
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 

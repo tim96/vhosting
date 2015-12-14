@@ -11,6 +11,7 @@ imports:
 #    - { resource: sonata_formatter.yml }
     - { resource: ivory.yml }
     - { resource: '@TimVhostingBundle/Resources/config/sonata_fos_core.yml' }
+    - { resource: '@TimVhostingBundle/Resources/config/backup.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
