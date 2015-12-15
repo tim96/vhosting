@@ -6,7 +6,7 @@ services:
         class: TimVhostingBundle\Admin\TagsAdmin
         arguments: [~, TimVhostingBundle\Entity\Tags, TimVhostingBundle:TagsAdmin, @service_container]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Tags }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Tags, icon: '<i class="fa fa-database"></i>' }
 
     tim_vhosting.admin.video_rate:
         class: TimVhostingBundle\Admin\VideoRateAdmin
