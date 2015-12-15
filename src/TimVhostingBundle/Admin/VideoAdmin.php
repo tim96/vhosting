@@ -23,6 +23,7 @@ class VideoAdmin extends BaseAdmin
             ->add('link')
             ->add('description')
             ->add('meta')
+            ->add('isPublic')
             ->add('updatedAt')
             ->add('createdAt')
         ;
@@ -57,6 +58,7 @@ class VideoAdmin extends BaseAdmin
             ->add('link')
             ->add('description')
             ->add('meta')
+            ->add('isPublic')
             ->add('author')
             ->add('updatedAt')
             ->add('createdAt')
@@ -77,8 +79,10 @@ class VideoAdmin extends BaseAdmin
             ->add('tags')
             // ->add('videoSuggest')
             ->add('link')
+            ->add('youtubeVideoId')
             ->add('description')
             ->add('meta')
+            ->add('isPublic')
         ;
     }
 
@@ -92,11 +96,13 @@ class VideoAdmin extends BaseAdmin
             ->add('id')
             ->add('name')
             ->add('link')
+            ->add('youtubeVideoId')
             ->add('tags')
             ->add('videoSuggest')
             ->add('videoRate')
             ->add('description')
             ->add('meta')
+            ->add('isPublic')
             ->add('updatedAt')
             ->add('createdAt')
         ;

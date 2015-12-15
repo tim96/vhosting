@@ -77,12 +77,28 @@ class Video extends BaseEntity
      */
     protected $tags;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_public", type="boolean", options={"default" = false})
+     */
+    private $isPublic;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="youtube_video_id", type="string", nullable=true)
+     */
+    protected $youtubeVideoId;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->videoRate = new ArrayCollection();
         $this->videoSuggest = null;
+        $this->youtubeVideoId = null;
+        $this->isPublic = false;
     }
 
     /**
@@ -317,5 +333,53 @@ class Video extends BaseEntity
         $this->videoSuggest = $videoSuggest;
     
         return $this;
+    }
+
+    /**
+     * Set isPublic
+     *
+     * @param bool $isPublic
+     *
+     * @return Video
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
+    
+        return $this;
+    }
+
+    /**
+     * Get isPublic
+     *
+     * @return bool
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * Set youtubeVideoId
+     *
+     * @param string $youtubeVideoId
+     *
+     * @return Video
+     */
+    public function setYoutubeVideoId($youtubeVideoId)
+    {
+        $this->youtubeVideoId = $youtubeVideoId;
+    
+        return $this;
+    }
+
+    /**
+     * Get youtubeVideoId
+     *
+     * @return string
+     */
+    public function getYoutubeVideoId()
+    {
+        return $this->youtubeVideoId;
     }
 }
