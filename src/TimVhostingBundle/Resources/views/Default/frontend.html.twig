@@ -55,7 +55,22 @@
                     <div class="panel-body">
                         {% if videos is not null %}
                             {% for video in videos %}
-                                {{ video }}
+                                {% if video.youtubeVideoId is not null %}
+                                    {# <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/default.jpg" #}
+                                    <div style="float: left;">
+                                        <a href="{{ path('show_video_name', {'name' : video}) }}">
+                                            <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
+                                             alt="{{ video }}" width="210" height="150" align="left" />
+                                        </a>
+                                    </div>
+
+                                    <div style="padding-left: 15px; float: left;">
+                                        <strong><span style="font-size: 20px;">{{ video }}</span></strong><br/>
+                                        {{ video.createdAt|date("d F Y H:i") }}
+                                    </div>
+                                {% else %}
+
+                                {% endif %}
                             {% endfor %}
                         {% endif %}
                     </div>

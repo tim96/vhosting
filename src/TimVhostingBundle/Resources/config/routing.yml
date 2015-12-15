@@ -3,6 +3,11 @@ tim_cheat_sheet_default:
     type:     annotation
     prefix:   /
 
+tim_vhosting_video_default:
+    resource: "@TimVhostingBundle/Controller/VideoController.php"
+    type:     annotation
+    prefix:   /
+
 #hwi_oauth_redirect:
 #    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
 #    prefix:   /user/connect
