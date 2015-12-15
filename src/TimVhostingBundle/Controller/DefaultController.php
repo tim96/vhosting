@@ -30,7 +30,9 @@ class DefaultController extends Controller
     {
         $serviceTags = $this->container->get('tim_vhosting.tags.handler');
         $tags = $serviceTags->getList(array('isDeleted' => false));
-        $videos = null;
+
+        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
+        $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
 
         return $this->render('TimVhostingBundle:Default:frontend.html.twig', array('tags' => $tags, 'videos' => $videos));
     }
