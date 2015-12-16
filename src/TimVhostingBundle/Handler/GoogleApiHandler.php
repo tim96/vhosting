@@ -12,5 +12,24 @@ use TimConfigBundle\Handler\Base\BaseContainerEmHandler;
 
 class GoogleApiHandler extends BaseContainerEmHandler
 {
+    public function getYoutubeVideos($listSearch = 'id,snippet', $parameters = array())
+    {
+        $client = new \Google_Client();
+        $client->setApplicationName("Client_Library_Examples");
+        $client->setDeveloperKey($this->container->getParameter('google_api_key'));
+        $youtube = new \Google_Service_YouTube($client);
 
+        try {
+            // Call the search.list method to retrieve results matching the specified
+            // query term.
+            $searchResponse = $youtube->search->listSearch($listSearch, $parameters);
+
+            return $searchResponse;
+
+        } catch (\Google_Service_Exception $e) {
+            throw $e;
+        } catch (\Google_Exception $e) {
+            throw $e;
+        }
+    }
 }
