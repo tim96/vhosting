@@ -12,11 +12,18 @@ use TimConfigBundle\Handler\Base\BaseContainerEmHandler;
 
 class GoogleApiHandler extends BaseContainerEmHandler
 {
-    public function getYoutubeVideos($listSearch = 'id,snippet', $parameters = array())
+    protected function initKey()
     {
         $client = new \Google_Client();
         $client->setApplicationName("Client_Library_Examples");
         $client->setDeveloperKey($this->container->getParameter('google_api_key'));
+
+        return $client;
+    }
+
+    public function getYoutubeVideos($listSearch = 'id,snippet', $parameters = array())
+    {
+        $client = $this->initKey();
         $youtube = new \Google_Service_YouTube($client);
 
         try {
