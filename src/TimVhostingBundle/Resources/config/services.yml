@@ -53,6 +53,7 @@ services:
         arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.video.class%]
 
 parameters:
+    google_api_key: '%google_api_key%'
     tim_vhosting.feedback.handler.class: TimVhostingBundle\Handler\FeedbackHandler
     tim_vhosting.video_suggest.handler.class: TimVhostingBundle\Handler\VideoSuggestHandler
     tim_vhosting.tags.handler.class: TimVhostingBundle\Handler\TagsHandler
