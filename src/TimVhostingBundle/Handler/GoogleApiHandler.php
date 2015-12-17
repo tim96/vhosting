@@ -39,4 +39,41 @@ class GoogleApiHandler extends BaseContainerEmHandler
             throw $e;
         }
     }
+
+    public function getYoutubeVideoInfo($videoId)
+    {
+        $client = $this->initKey();
+        $youtube = new \Google_Service_YouTube($client);
+
+        try {
+
+            $videoResponce = $youtube->videos->listVideos('contentDetails', array('id' => $videoId));
+            if (!$videoResponce->count()) {
+                throw new \RuntimeException('Not found video');
+            }
+
+            // video was found
+            $items = $videoResponce->getItems();
+            /** @var \Google_Service_YouTube_Video $item */
+            $item = $items[0];
+
+            return $item;
+
+            } catch (\Google_Service_Exception $e) {
+            throw $e;
+        } catch (\Google_Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function convertYoutubeVideoDuration($youtubeTime)
+    {
+        preg_match_all('/(\d+)/', $youtubeTime ,$parts);
+
+        $hours = floor($parts[0][0]/60);
+        $minutes = $parts[0][0]%60;
+        $seconds = $parts[0][1];
+
+        return array('minutes' => $minutes, 'hours' => $hours, 'seconds' => $seconds);
+    }
 }
