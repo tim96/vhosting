@@ -91,6 +91,14 @@ class Video extends BaseEntity
      */
     protected $youtubeVideoId;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="duration_video", type="string", nullable=true)
+     */
+    protected $durationVideo;
+
+
     public function __construct()
     {
         parent::__construct();
@@ -99,6 +107,7 @@ class Video extends BaseEntity
         $this->videoSuggest = null;
         $this->youtubeVideoId = null;
         $this->isPublic = false;
+        $this->durationVideo = null;
     }
 
     /**
@@ -381,5 +390,29 @@ class Video extends BaseEntity
     public function getYoutubeVideoId()
     {
         return $this->youtubeVideoId;
+    }
+
+    /**
+     * Set durationVideo
+     *
+     * @param string $durationVideo
+     *
+     * @return Video
+     */
+    public function setDurationVideo($durationVideo)
+    {
+        $this->durationVideo = json_encode($durationVideo);
+    
+        return $this;
+    }
+
+    /**
+     * Get durationVideo
+     *
+     * @return string
+     */
+    public function getDurationVideo()
+    {
+        return json_decode($this->durationVideo, true);
     }
 }
