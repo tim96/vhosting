@@ -66,6 +66,14 @@ class GoogleApiHandler extends BaseContainerEmHandler
         }
     }
 
+    public function getYoutubeVideoDuration($videoId)
+    {
+        $data = $this->getYoutubeVideoInfo($videoId);
+        /** @var \Google_Service_YouTube_VideoContentDetails $getContentDetails */
+        $getContentDetails = $data->getContentDetails();
+        return $this->convertYoutubeVideoDuration($getContentDetails->getDuration());
+    }
+
     public function convertYoutubeVideoDuration($youtubeTime)
     {
         preg_match_all('/(\d+)/', $youtubeTime ,$parts);
