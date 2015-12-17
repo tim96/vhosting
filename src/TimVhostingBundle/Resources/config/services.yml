@@ -51,6 +51,9 @@ services:
     tim_vhosting.video.handler:
         class: %tim_vhosting.video.handler.class%
         arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.video.class%]
+    tim_vhosting.google_api.handler:
+        class: %tim_vhosting.google_api.handler.class%
+        arguments: [@service_container, @doctrine.orm.entity_manager]
 
 parameters:
     google_api_key: '%google_api_key%'
@@ -58,6 +61,7 @@ parameters:
     tim_vhosting.video_suggest.handler.class: TimVhostingBundle\Handler\VideoSuggestHandler
     tim_vhosting.tags.handler.class: TimVhostingBundle\Handler\TagsHandler
     tim_vhosting.video.handler.class: TimVhostingBundle\Handler\VideoHandler
+    tim_vhosting.google_api.handler.class: TimVhostingBundle\Handler\GoogleApiHandler
 
     tim_vhosting.feedback.class: TimVhostingBundle\Entity\Feedback
     tim_vhosting.video_suggest.class: TimVhostingBundle\Entity\VideoSuggest
