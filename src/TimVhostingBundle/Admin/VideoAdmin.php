@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use TimConfigBundle\Admin\Base\BaseAdmin;
+use TimVhostingBundle\Entity\Video;
 
 class VideoAdmin extends BaseAdmin
 {
@@ -121,5 +122,19 @@ class VideoAdmin extends BaseAdmin
         ;
 
         return $query;
+    }
+
+    /**
+     * @param Video $object
+     * @return mixed|void
+     */
+    public function preUpdate($object)
+    {
+        parent::preUpdate($object);
+
+        if (!is_null($object->getYoutubeVideoId())) {
+            $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
+            $object->setDurationVideo($serviceYoutube->getYoutubeVideoDuration($object->getYoutubeVideoId()));
+        }
     }
 }
