@@ -1,0 +1,9 @@
+
+.btn-tags {
+    padding-top: 5px;
+}
+
+.panel-body > a {
+    padding-bottom: 10px;
+    display: inline-block;
+}
