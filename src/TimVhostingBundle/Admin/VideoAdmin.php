@@ -132,6 +132,16 @@ class VideoAdmin extends BaseAdmin
     {
         parent::preUpdate($object);
 
+        if (!is_null($object->getYoutubeVideoId()) && is_null($object->getDurationVideo())) {
+            $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
+            $object->setDurationVideo($serviceYoutube->getYoutubeVideoDuration($object->getYoutubeVideoId()));
+        }
+    }
+
+    public function prePersist($object)
+    {
+        parent::prePersist($object);
+
         if (!is_null($object->getYoutubeVideoId())) {
             $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
             $object->setDurationVideo($serviceYoutube->getYoutubeVideoDuration($object->getYoutubeVideoId()));
