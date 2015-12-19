@@ -24,9 +24,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/", name="Home")
+     * @Route("/{page}", name="Home", defaults={"page" = null})
+     *
+     * @param null $page
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function frontendAction()
+    public function frontendAction($page = null, Request $request)
     {
         $serviceTags = $this->container->get('tim_vhosting.tags.handler');
         $tags = $serviceTags->getList(array('isDeleted' => false));
