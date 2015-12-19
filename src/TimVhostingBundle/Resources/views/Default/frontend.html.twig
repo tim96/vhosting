@@ -1,5 +1,13 @@
 {% extends '@TimVhosting/layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets '@TimVhostingBundle/Resources/public/css/frontend.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -57,15 +65,16 @@
                             {% for video in videos %}
                                 {% if video.youtubeVideoId is not null %}
                                     {# <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/default.jpg" #}
-                                    <div style="float: left;">
+                                    <div style="float: left; min-width:50%; max-width: 50%; padding-bottom: 10px;">
                                         <a href="{{ path('show_video_name', {'name' : video}) }}">
                                             <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
-                                             alt="{{ video }}" width="210" height="150" align="left" />
+                                             alt="{{ video }}" width="90%" align="center" />
                                         </a>
-                                    </div>
-
-                                    <div style="padding-left: 15px; float: left;">
-                                        <strong><span style="font-size: 20px;">{{ video }}</span></strong><br/>
+                                        <p>
+                                            <strong>
+                                                <span style="font-size: 20px;">{{ video }}</span>
+                                            </strong>
+                                        </p>
                                         {{ video.createdAt|date("d F Y H:i") }}
                                     </div>
                                 {% else %}
@@ -89,7 +98,7 @@
                                     {% set className = 'btn-primary' %}
                                 {% endif %}
                             {% endif %}
-                            <a href="{{ path('ShowVideoByTag', {'tag' : tag}) }}"><button type="button" class="btn {{ className }}">{{ tag }}</button></a>
+                            <a href="{{ path('ShowVideoByTag', {'tag' : tag}) }}"><button type="button" class="btn {{ className }} btn-tags">{{ tag }}</button></a>
                         {% endfor %}
                     </div>
                 </div>
