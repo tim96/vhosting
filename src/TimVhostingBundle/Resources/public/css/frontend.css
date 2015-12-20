@@ -7,3 +7,11 @@
     padding-bottom: 10px;
     display: inline-block;
 }
+
+.div-img-content {
+    float: left;
+    min-width:50%;
+    max-width: 50%;
+    padding-bottom: 10px;
+    text-align: center;
+}

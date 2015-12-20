@@ -154,6 +154,14 @@
                 <source>flash_reject_videosuggest_success</source>
                 <target>Reject video suggest success todo::change this label</target>
             </trans-unit>
+            <trans-unit id="frontend.video_duration">
+                <source>frontend.video_duration</source>
+                <target>Time</target>
+            </trans-unit>
+            <trans-unit id="frontend.video_added">
+                <source>frontend.video_added</source>
+                <target>Added</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
