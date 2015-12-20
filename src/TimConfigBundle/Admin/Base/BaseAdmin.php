@@ -10,9 +10,9 @@ namespace TimConfigBundle\Admin\Base;
 
 use Sonata\AdminBundle\Admin\Admin as SonataAdmin;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Application\Sonata\UserBundle\Entity\User;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Monolog\Logger;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseAdmin extends SonataAdmin
 {
@@ -41,7 +41,7 @@ abstract class BaseAdmin extends SonataAdmin
 
     protected function getUser()
     {
-        /** @var User $user */
+        /** @var UserInterface $user */
         return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 
