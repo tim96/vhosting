@@ -98,6 +98,40 @@ class Video extends BaseEntity
      */
     protected $durationVideo;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description_video", type="string", nullable=true)
+     */
+    protected $descriptionVideo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="view_count", type="string", nullable=true, options={"default" = 0})
+     */
+    protected $viewCount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="like_count", type="string", nullable=true, options={"default" = 0})
+     */
+    protected $likeCount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dislike_count", type="string", nullable=true, options={"default" = 0})
+     */
+    protected $dislikeCount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="favorite_count", type="string", nullable=true, options={"default" = 0})
+     */
+    protected $favoriteCount;
 
     public function __construct()
     {
@@ -414,5 +448,133 @@ class Video extends BaseEntity
     public function getDurationVideo()
     {
         return json_decode($this->durationVideo, true);
+    }
+
+    public function getDurationVideoAsString()
+    {
+        $data = $this->getDurationVideo();
+        if (is_null($data)) return '';
+
+        return sprintf("%02d:%02d:%02d", $data['hours'],$data['minutes'],$data['seconds']);
+    }
+
+    /**
+     * Set descriptionVideo
+     *
+     * @param string $descriptionVideo
+     *
+     * @return Video
+     */
+    public function setDescriptionVideo($descriptionVideo)
+    {
+        $this->descriptionVideo = $descriptionVideo;
+    
+        return $this;
+    }
+
+    /**
+     * Get descriptionVideo
+     *
+     * @return string
+     */
+    public function getDescriptionVideo()
+    {
+        return $this->descriptionVideo;
+    }
+
+    /**
+     * Set viewCount
+     *
+     * @param string $viewCount
+     *
+     * @return Video
+     */
+    public function setViewCount($viewCount)
+    {
+        $this->viewCount = $viewCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get viewCount
+     *
+     * @return string
+     */
+    public function getViewCount()
+    {
+        return $this->viewCount;
+    }
+
+    /**
+     * Set likeCount
+     *
+     * @param string $likeCount
+     *
+     * @return Video
+     */
+    public function setLikeCount($likeCount)
+    {
+        $this->likeCount = $likeCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get likeCount
+     *
+     * @return string
+     */
+    public function getLikeCount()
+    {
+        return $this->likeCount;
+    }
+
+    /**
+     * Set dislikeCount
+     *
+     * @param string $dislikeCount
+     *
+     * @return Video
+     */
+    public function setDislikeCount($dislikeCount)
+    {
+        $this->dislikeCount = $dislikeCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get dislikeCount
+     *
+     * @return string
+     */
+    public function getDislikeCount()
+    {
+        return $this->dislikeCount;
+    }
+
+    /**
+     * Set favoriteCount
+     *
+     * @param string $favoriteCount
+     *
+     * @return Video
+     */
+    public function setFavoriteCount($favoriteCount)
+    {
+        $this->favoriteCount = $favoriteCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get favoriteCount
+     *
+     * @return string
+     */
+    public function getFavoriteCount()
+    {
+        return $this->favoriteCount;
     }
 }
