@@ -12,6 +12,8 @@ use TimVhostingBundle\Entity\Video;
 
 class VideoAdmin extends BaseAdmin
 {
+    protected $baseRouteName = 'video';
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -132,9 +134,8 @@ class VideoAdmin extends BaseAdmin
     {
         parent::preUpdate($object);
 
-        if (!is_null($object->getYoutubeVideoId()) && is_null($object->getDurationVideo())) {
-            $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
-            $object->setDurationVideo($serviceYoutube->getYoutubeVideoDuration($object->getYoutubeVideoId()));
+        if (!is_null($object->getYoutubeVideoId())) {
+            $this->updateDataFromYoutubeService($object);
         }
     }
 
@@ -143,8 +144,25 @@ class VideoAdmin extends BaseAdmin
         parent::prePersist($object);
 
         if (!is_null($object->getYoutubeVideoId())) {
-            $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
-            $object->setDurationVideo($serviceYoutube->getYoutubeVideoDuration($object->getYoutubeVideoId()));
+            $this->updateDataFromYoutubeService($object);
         }
+    }
+
+    /**
+     * @param Video $object
+     * @return mixed|void
+     */
+    private function updateDataFromYoutubeService($object)
+    {
+        $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
+        $data = $serviceYoutube->getYoutubeVideoInfo($object->getYoutubeVideoId());
+
+        $object->setDurationVideo($serviceYoutube->getYoutubeVideoDurationFromData($data));
+
+        $statistics = $serviceYoutube->getYoutubeVideoStatisticsFromData($data);
+        $object->setViewCount($statistics->getViewCount());
+        $object->setLikeCount($statistics->getLikeCount());
+        $object->setDislikeCount($statistics->getDislikeCount());
+        $object->setFavoriteCount($statistics->getFavoriteCount());
     }
 }
