@@ -17,6 +17,7 @@ security:
         SONATA:
             - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
 
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
@@ -62,7 +63,7 @@ security:
                 use_forward: false
                 resource_owners:
                     google: "/user/login/check-google"
-                    google: "/user/login/check-github"
+                    github: "/user/login/check-github"
                 oauth_user_provider:
                     service: hwi_oauth.user.provider.fosub_bridge
 
