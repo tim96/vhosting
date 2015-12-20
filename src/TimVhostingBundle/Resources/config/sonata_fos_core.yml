@@ -1,13 +1,3 @@
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: Application\Sonata\UserBundle\Entity\User
-    group:
-        group_class: Application\Sonata\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
-    service:
-        user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
-
 sonata_user:
     security_acl: false
     manager_type: orm
@@ -44,24 +34,3 @@ sonata_admin:
     # name of the firewall in which this bundle is active, this setting MUST be set
 #    firewall_name: secured_area
 #    resource_owners:
-
-hwi_oauth:
-    firewall_name: secured_area
-    resource_owners:
-        google:
-            type:                google
-            client_id:           "<client_id>"
-            client_secret:       "<client_secret>"
-            scope:               "email profile"
-    #    github:
-    #        type:                github
-    #        client_id:           "<client_id>"
-    #        client_secret:       "<client_secret>"
-    fosub:
-        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
-        username_iterations: 30
-
-        # mapping between resource owners (see below) and properties
-        properties:
-            google: googleID
-    #        github: githubID

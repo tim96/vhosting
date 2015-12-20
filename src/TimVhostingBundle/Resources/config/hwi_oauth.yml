@@ -1,0 +1,20 @@
+hwi_oauth:
+    firewall_name: secured_area
+    resource_owners:
+        google:
+            type:                google
+            client_id:           "<client_id>"
+            client_secret:       "<client_secret>"
+            scope:               "email profile"
+    #    github:
+    #        type:                github
+    #        client_id:           "<client_id>"
+    #        client_secret:       "<client_secret>"
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            google: googleID
+    #        github: githubID

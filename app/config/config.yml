@@ -12,6 +12,8 @@ imports:
     - { resource: ivory.yml }
     - { resource: '@TimVhostingBundle/Resources/config/sonata_fos_core.yml' }
     - { resource: '@TimVhostingBundle/Resources/config/backup.yml' }
+    - { resource: '@TimVhostingBundle/Resources/config/fos_user.yml' }
+    - { resource: '@TimVhostingBundle/Resources/config/hwi_oauth.yml' }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
