@@ -44,6 +44,27 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/new/{page}", requirements={"page" = "\d+"}, name="Frontend_new", defaults={"page" = null})
+     *
+     * @param null $page
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function frontendNewAction($page = null, Request $request)
+    {
+        $maxVideoOnPage = 10;
+
+        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
+        $tags = $serviceTags->getList(array('isDeleted' => false));
+
+        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
+        $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
+
+        return $this->render('TimVhostingBundle:Default:frontendNew.html.twig', array('tags' => $tags, 'videos' => $videos));
+    }
+
+    /**
      * @Route("/about", name="About")
      */
     public function aboutAction()
