@@ -58,6 +58,16 @@ class VideoRate
     }
 
     /**
+     * To string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->id ? (string)$this->rating : '';
+    }
+
+    /**
      * Get id
      *
      * @return int

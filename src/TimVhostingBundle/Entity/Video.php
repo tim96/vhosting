@@ -161,7 +161,7 @@ class Video extends BaseEntity
      */
     public function __toString()
     {
-        return $this->id ? (string)$this->name : null;
+        return $this->id ? (string)$this->name : '';
     }
 
     /**
