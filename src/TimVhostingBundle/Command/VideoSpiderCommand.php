@@ -33,9 +33,9 @@ class VideoSpiderCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        // call: php app/console video:update isDebug
+        // call: php app/console video:spider isDebug
         $this
-            ->setName('video:update')
+            ->setName('video:spider')
             ->setDescription('Start update video information')
             ->addArgument('isDebug', InputArgument::OPTIONAL, 'Turn on debug mode: true, false. Default - false', false)
         ;

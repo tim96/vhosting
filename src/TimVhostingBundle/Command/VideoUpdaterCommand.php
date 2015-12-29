@@ -60,7 +60,24 @@ class VideoUpdaterCommand extends ContainerAwareCommand
 
         $this->configureHandler();
 
+        try {
+            $this->executeCommand($input, $output);
+        }
+        catch(\Exception $ex)
+        {
+            $this->logError('Error: '.$ex->getMessage().'; Trace: '.$ex->getTraceAsString());
+        }
+
         $this->logMessage("Finish execute command.");
+    }
+
+    protected function executeCommand($input, $output)
+    {
+        $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
+        $videoHandler = $this->container->get('tim_vhosting.video.handler');
+
+        $countRecords = $videoHandler->updateYoutubeVideoInfo($serviceYoutube);
+        $this->logMessage("Records update: ".$countRecords);
     }
 
     public function stopCommand()
@@ -78,5 +95,10 @@ class VideoUpdaterCommand extends ContainerAwareCommand
         if ($this->isDebug) {
             $this->output->writeln($message);
         }
+    }
+
+    protected function logError($error)
+    {
+        $this->output->writeln($error);
     }
 }
