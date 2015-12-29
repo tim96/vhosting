@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use TimConfigBundle\Admin\Base\BaseAdmin;
 use TimVhostingBundle\Entity\Video;
 
@@ -79,7 +80,7 @@ class VideoAdmin extends BaseAdmin
             // ->add('isDeleted')
             // ->add('id')
             ->add('name')
-            ->add('tags')
+            ->add('tags', null, array('multiple' => true))
             // ->add('videoSuggest')
             ->add('link')
             ->add('youtubeVideoId')
@@ -145,6 +146,20 @@ class VideoAdmin extends BaseAdmin
 
         if (!is_null($object->getYoutubeVideoId())) {
             $this->updateDataFromYoutubeService($object);
+        }
+    }
+
+    /**
+     * @param ErrorElement $errorElement
+     * @param Video $object
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        parent::validate($errorElement, $object);
+
+        if (is_null($object->getYoutubeVideoId()) && is_null($object->getLink())) {
+            $errorElement->with('youtubeVideoId')->addViolation('Please, fill YoutubeVideoId or Link')->end();
+            $errorElement->with('link')->addViolation('Please, fill YoutubeVideoId or Link')->end();
         }
     }
 
