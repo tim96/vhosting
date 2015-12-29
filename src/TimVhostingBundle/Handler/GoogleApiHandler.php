@@ -9,8 +9,9 @@
 namespace TimVhostingBundle\Handler;
 
 use TimConfigBundle\Handler\Base\BaseContainerEmHandler;
+use TimVhostingBundle\Interfaces\YoutubeVideoInterface;
 
-class GoogleApiHandler extends BaseContainerEmHandler
+class GoogleApiHandler extends BaseContainerEmHandler implements YoutubeVideoInterface
 {
     protected function initKey()
     {
