@@ -10,4 +10,27 @@ namespace TimVhostingBundle\Entity;
  */
 class VideoRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param bool $isDeleted
+     * @param null $youtubeVideoId
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getVideosQuery($isDeleted = false, $youtubeVideoId = null)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        if (is_bool($isDeleted)) {
+            $qb->andWhere('v.isDeleted != :isDeleted')
+                ->setParameter('isDeleted', !$isDeleted);
+        }
+
+        if (!is_null($youtubeVideoId)) {
+            $qb->andWhere('v.youtubeVideoId = :youtubeVideoId')
+                ->setParameter('youtubeVideoId', $youtubeVideoId);
+        } else {
+            $qb->andWhere('v.youtubeVideoId IS NOT NULL');
+        }
+
+        return $qb;
+    }
 }
