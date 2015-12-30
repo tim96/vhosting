@@ -130,6 +130,16 @@ class Video extends BaseEntity
      */
     protected $favoriteCount;
 
+    /**
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
+     **/
+    private $publishedAt;
+
+    /**
+     * @ORM\Column(name="channel_id", type="string", nullable=true)
+     **/
+    private $channelId;
+
     public function __construct()
     {
         parent::__construct();
@@ -139,6 +149,8 @@ class Video extends BaseEntity
         $this->youtubeVideoId = null;
         $this->isPublic = false;
         $this->durationVideo = null;
+        $this->publishedAt = null;
+        $this->channelId = null;
     }
 
     /**
@@ -573,5 +585,53 @@ class Video extends BaseEntity
     public function getFavoriteCount()
     {
         return $this->favoriteCount;
+    }
+
+    /**
+     * Set publishedAt
+     *
+     * @param \DateTime $publishedAt
+     *
+     * @return Video
+     */
+    public function setPublishedAt($publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get publishedAt
+     *
+     * @return \DateTime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * Set channelId
+     *
+     * @param string $channelId
+     *
+     * @return Video
+     */
+    public function setChannelId($channelId)
+    {
+        $this->channelId = $channelId;
+    
+        return $this;
+    }
+
+    /**
+     * Get channelId
+     *
+     * @return string
+     */
+    public function getChannelId()
+    {
+        return $this->channelId;
     }
 }
