@@ -107,7 +107,11 @@ class GoogleApiHandler extends BaseContainerEmHandler implements YoutubeVideoInt
 
         $hours = floor($parts[0][0]/60);
         $minutes = $parts[0][0]%60;
-        $seconds = $parts[0][1];
+        if (isset($parts[0][1])) {
+            $seconds = $parts[0][1];
+        } else {
+            $seconds = '00';
+        }
 
         return array('minutes' => $minutes, 'hours' => $hours, 'seconds' => $seconds);
     }
