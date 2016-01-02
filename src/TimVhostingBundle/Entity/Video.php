@@ -140,6 +140,13 @@ class Video extends BaseEntity
      **/
     private $channelId;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="language_code", type="string", nullable=true)
+     */
+    private $languageCode;
+
     public function __construct()
     {
         parent::__construct();
@@ -633,5 +640,29 @@ class Video extends BaseEntity
     public function getChannelId()
     {
         return $this->channelId;
+    }
+
+    /**
+     * Set languageCode
+     *
+     * @param string $languageCode
+     *
+     * @return Video
+     */
+    public function setLanguageCode($languageCode)
+    {
+        $this->languageCode = $languageCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get languageCode
+     *
+     * @return string
+     */
+    public function getLanguageCode()
+    {
+        return $this->languageCode;
     }
 }
