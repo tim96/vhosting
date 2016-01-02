@@ -41,6 +41,9 @@ class AppKernel extends Kernel
             // nice doctrine features
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
+            // for pagination
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
