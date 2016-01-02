@@ -23,24 +23,34 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{page}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = null})
+     * @Route("/{page}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = 1})
      *
-     * @param null $page
+     * @param int $page
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function frontendAction($page = null, Request $request)
+    public function frontendAction($page = 1, Request $request)
     {
         $maxVideoOnPage = 10;
+        $paginator = $this->get('knp_paginator');
 
         $serviceTags = $this->container->get('tim_vhosting.tags.handler');
         $tags = $serviceTags->getList(array('isDeleted' => false));
 
         $serviceVideo = $this->container->get('tim_vhosting.video.handler');
-        $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
+        $videos = array();
+        // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
 
-        return $this->render('TimVhostingBundle:Default:frontend.html.twig', array('tags' => $tags, 'videos' => $videos));
+        $query = $serviceVideo->getRepository()->getList()->getQuery();
+        $pagination = $paginator->paginate(
+            $query,
+            $page /*page number*/,
+            $maxVideoOnPage /*limit per page*/
+        );
+
+        return $this->render('TimVhostingBundle:Default:frontend.html.twig',
+            array('tags' => $tags, 'videos' => $videos, 'pagination' => $pagination));
     }
 
     /**

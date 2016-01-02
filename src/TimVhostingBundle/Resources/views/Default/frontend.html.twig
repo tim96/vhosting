@@ -53,45 +53,83 @@
         </a>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-bottom: 40px;">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{{ 'frontend.video_list'|trans({}, 'TimVhostingBundle') }}</h3>
-                    </div>
-                    <div class="panel-body">
-                        {% if videos is not null %}
-                            {% for video in videos %}
-                                {% if video.youtubeVideoId is not null %}
-                                    {# <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/default.jpg" #}
-                                    <div class="div-img-content">
-                                        <a href="{{ path('show_video_name', {'name' : video}) }}">
-                                            <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
-                                             alt="{{ video }}" width="90%" align="center" />
-                                        </a>
-                                        <p>
-                                            <strong>
-                                                <span style="font-size: 20px;">{{ video }}</span>
-                                            </strong>
-                                        </p>
-                                        <p style="text-align: left;">
-                                            {#{{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y H:i") }}#}
-                                            {{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y") }}
-                                            {% if video.durationVideo is not null %}
-                                                <br/>{{ 'frontend.video_duration'|trans({}, 'TimVhostingBundle') }}: {{ video.durationVideoAsString }}
-                                            {% endif %}
-                                        </p>
-                                    </div>
-                                {% else %}
+                        <div>
+                            <div>
+                                <h3 class="panel-title" style="text-align: left;">
+                                    <span>
+                                        {{ 'frontend.video_list'|trans({}, 'TimVhostingBundle') }}
+                                    </span>
 
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                                    <span style="float: right;">
+                                        {{ 'frontend.video_found_count'|trans({}, 'TimVhostingBundle') }}: {{ pagination.getTotalItemCount }}
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        {% for video in pagination %}
+                            {% if loop.index is odd %}<div class="row">{% endif %}
+
+                            {% if video.youtubeVideoId is not null %}
+
+                                <div class="div-img-content">
+                                    <a href="{{ path('show_video_name', {'name' : video}) }}">
+                                        <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
+                                             alt="{{ video }}" width="90%" align="center" />
+                                    </a>
+                                    <p>
+                                        <strong>
+                                            <span style="font-size: 20px;">{{ video }}</span>
+                                        </strong>
+                                    </p>
+                                    <p style="text-align: left;">
+                                        {#{{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y H:i") }}#}
+                                        {{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y") }}
+                                        {% if video.durationVideo is not null %}
+                                            <br/>{{ 'frontend.video_duration'|trans({}, 'TimVhostingBundle') }}: {{ video.durationVideoAsString }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="div-img-content">
+                                    <a href="{{ path('show_video_name', {'name' : video}) }}">
+                                        <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
+                                             alt="{{ video }}" width="90%" align="center" />
+                                    </a>
+                                    <p>
+                                        <strong>
+                                            <span style="font-size: 20px;">{{ video }}</span>
+                                        </strong>
+                                    </p>
+                                    <p style="text-align: left;">
+                                        {#{{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y H:i") }}#}
+                                        {{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y") }}
+                                        {% if video.durationVideo is not null %}
+                                            <br/>{{ 'frontend.video_duration'|trans({}, 'TimVhostingBundle') }}: {{ video.durationVideoAsString }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            {% if loop.index is not odd %}</div>{% endif %}
+                        {% endfor %}
+
+                        <div class="navigation navigation-frontend">
+                            {{ knp_pagination_render(pagination) }}
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ 'frontend.video_tags'|trans({}, 'TimVhostingBundle') }}</h3>

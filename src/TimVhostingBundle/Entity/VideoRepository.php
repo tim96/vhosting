@@ -10,6 +10,23 @@ namespace TimVhostingBundle\Entity;
  */
 class VideoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getList($isDeleted = false, $isPublic = true)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        if (is_bool($isDeleted)) {
+            $qb->andWhere('v.isDeleted != :isDeleted')
+                ->setParameter('isDeleted', !$isDeleted);
+        }
+
+        if (is_bool($isPublic)) {
+            $qb->andWhere('v.isPublic = :isPublic')
+                ->setParameter('isPublic', $isPublic);
+        }
+
+        return $qb;
+    }
+
     /**
      * @param bool $isDeleted
      * @param null $youtubeVideoId

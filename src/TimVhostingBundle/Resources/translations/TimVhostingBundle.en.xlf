@@ -162,6 +162,10 @@
                 <source>frontend.video_added</source>
                 <target>Added</target>
             </trans-unit>
+            <trans-unit id="frontend.video_found_count">
+                <source>frontend.video_found_count</source>
+                <target>Found items</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

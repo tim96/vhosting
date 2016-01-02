@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -100,4 +101,9 @@ body {
 
 .required:after {
     content: "*";
+}
+
+
+.navigation-frontend {
+    text-align: center;
 }
