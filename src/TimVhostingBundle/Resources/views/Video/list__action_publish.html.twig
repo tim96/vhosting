@@ -1,0 +1,8 @@
+
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('publish') and not object.isPublic %}
+    <a href="{{ admin.generateObjectUrl('publish', object) }}"
+       class="btn btn-sm btn-default edit_link" title="{{ 'action_publish'|trans({}, 'TimVhostingBundle') }}">
+        <i class="fa fa-check"></i>
+        {{ 'action_publish'|trans({}, 'TimVhostingBundle') }}
+    </a>
+{% endif %}

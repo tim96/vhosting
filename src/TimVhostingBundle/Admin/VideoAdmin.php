@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use TimConfigBundle\Admin\Base\BaseAdmin;
@@ -27,6 +28,8 @@ class VideoAdmin extends BaseAdmin
             ->add('link')
             ->add('description')
             ->add('meta')
+            ->add('likeCount')
+            ->add('viewCount')
             ->add('isPublic')
             ->add('updatedAt')
             ->add('createdAt')
@@ -46,6 +49,12 @@ class VideoAdmin extends BaseAdmin
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
+                    'publish' => array(
+                        'template' => 'TimVhostingBundle:Video:list__action_publish.html.twig'
+                    ),
+                    'unpublish' => array(
+                        'template' => 'TimVhostingBundle:Video:list__action_unpublish.html.twig'
+                    ),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -61,6 +70,10 @@ class VideoAdmin extends BaseAdmin
             ->add('tags')
             ->add('link')
             ->add('description')
+            ->add('likeCount')
+            ->add('viewCount')
+            ->add('dislikeCount')
+            ->add('favoriteCount')
             ->add('meta')
             ->add('isPublic')
             ->add('author')
@@ -125,6 +138,14 @@ class VideoAdmin extends BaseAdmin
         ;
 
         return $query;
+    }
+
+    public function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+
+        $collection->add('publish', $this->getRouterIdParameter().'/publish');
+        $collection->add('unpublish', $this->getRouterIdParameter().'/unpublish');
     }
 
     /**

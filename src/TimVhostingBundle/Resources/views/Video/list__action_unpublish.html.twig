@@ -1,0 +1,8 @@
+
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('unpublish') and object.isPublic %}
+    <a href="{{ admin.generateObjectUrl('unpublish', object) }}"
+       class="btn btn-sm btn-default edit_link" title="{{ 'action_unpublish'|trans({}, 'TimVhostingBundle') }}">
+        <i class="fa fa-reply"></i>
+        {{ 'action_unpublish'|trans({}, 'TimVhostingBundle') }}
+    </a>
+{% endif %}

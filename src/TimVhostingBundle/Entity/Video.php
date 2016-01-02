@@ -105,28 +105,28 @@ class Video extends BaseEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="view_count", type="string", nullable=true, options={"default" = 0})
+     * @ORM\Column(name="view_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $viewCount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="like_count", type="string", nullable=true, options={"default" = 0})
+     * @ORM\Column(name="like_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $likeCount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="dislike_count", type="string", nullable=true, options={"default" = 0})
+     * @ORM\Column(name="dislike_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $dislikeCount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="favorite_count", type="string", nullable=true, options={"default" = 0})
+     * @ORM\Column(name="favorite_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $favoriteCount;
 
