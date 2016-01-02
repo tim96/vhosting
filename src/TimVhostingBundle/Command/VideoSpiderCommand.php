@@ -27,6 +27,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
     private $input;
     /** @var  boolean */
     protected $isDebug;
+    /** @var  string */
+    protected $language;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -40,6 +42,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
             ->setName('video:spider')
             ->setDescription('Start update video information')
             ->addOption('searchWords', null, InputOption::VALUE_OPTIONAL, 'The search words')
+            ->addOption('language', null, InputOption::VALUE_OPTIONAL, 'The language code.
+                The parameter value is typically an ISO 639-1 two-letter language code')
             ->addArgument('isDebug', InputArgument::OPTIONAL, 'Turn on debug mode: true, false. Default - false', false)
         ;
     }
@@ -64,6 +68,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
         $this->configureHandler();
 
         $searchWords = $input->getOption('searchWords');
+        $this->language = $input->getOption('language') ? $input->getOption('language') : 'en';
+
         $countRepeat = 5;
         $this->executeCommand($searchWords, $countRepeat, null);
 
@@ -80,6 +86,7 @@ class VideoSpiderCommand extends ContainerAwareCommand
             'order' => 'rating', /* date, rating, relevance, title, videoCount, viewCount */
             'q' => $searchWords,
             'type' => 'video', /* channel, playlist, video */
+            'relevanceLanguage' => $this->language
         );
 
         if (!empty($token)) {
@@ -90,6 +97,7 @@ class VideoSpiderCommand extends ContainerAwareCommand
         $token = $data->getNextPageToken();
         $items = $data->getItems();
         $countRecords = 0;
+
         if (count($items) > 0) {
 
             $em = $this->container->get('doctrine')->getManager();
