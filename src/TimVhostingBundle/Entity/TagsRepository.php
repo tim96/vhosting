@@ -10,4 +10,19 @@ namespace TimVhostingBundle\Entity;
  */
 class TagsRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param bool $isDeleted
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getTagsQuery($isDeleted = false)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        if (is_bool($isDeleted)) {
+            $qb->andWhere('v.isDeleted != :isDeleted')
+                ->setParameter('isDeleted', !$isDeleted);
+        }
+
+        return $qb;
+    }
 }
