@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use TimVhostingBundle\Entity\Tags;
 use TimVhostingBundle\Entity\Video;
 
 class VideoSpiderCommand extends ContainerAwareCommand
@@ -63,12 +64,13 @@ class VideoSpiderCommand extends ContainerAwareCommand
         $this->configureHandler();
 
         $searchWords = $input->getOption('searchWords');
-        $this->executeCommand($searchWords);
+        $countRepeat = 5;
+        $this->executeCommand($searchWords, $countRepeat, null);
 
         $this->logMessage("Finish execute command.");
     }
 
-    protected function executeCommand($searchWords)
+    protected function executeCommand($searchWords, $countRepeat, $token)
     {
         $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
 
@@ -80,18 +82,36 @@ class VideoSpiderCommand extends ContainerAwareCommand
             'type' => 'video', /* channel, playlist, video */
         );
 
+        if (!empty($token)) {
+            $parameters['pageToken'] = $token;
+        }
+
         $data = $serviceYoutube->getYoutubeVideos($part, $parameters);
         $token = $data->getNextPageToken();
         $items = $data->getItems();
         $countRecords = 0;
         if (count($items) > 0) {
 
-            // todo: check videoId before save
             $em = $this->container->get('doctrine')->getManager();
+
+            $ids = array();
+            /** @var \Google_Service_YouTube_SearchResult $item */
+            foreach($items as $item) {
+                $objectId = $item->getId();
+                $ids[] = $objectId['videoId'];
+            }
+
+            $repository = $em->getRepository('TimVhostingBundle:Video');
+            $repositoryTags = $em->getRepository('TimVhostingBundle:Tags');
+            $results = $repository->getVideoListCompareList($ids)->getQuery()->getArrayResult();
+            $resultsTags = $repositoryTags->getTagsQuery()->getQuery()->getResult();
 
             /** @var \Google_Service_YouTube_SearchResult $item */
             foreach($items as $item) {
                 $objectId = $item->getId();
+
+                if ($this->isVideoIdExists($results, $objectId['videoId'])) continue;
+
                 $objectSnippet = $item->getSnippet();
 
                 $video = new Video();
@@ -102,15 +122,45 @@ class VideoSpiderCommand extends ContainerAwareCommand
                 $video->setPublishedAt(new \DateTime($objectSnippet['publishedAt']));
                 $video->setIsPublic(false);
 
-                // todo: add parsing tags, meta and search user
+                /** @var Tags $tag */
+                foreach($resultsTags as $tag) {
+                    if (strpos($video->getDescription(), $tag->getName()) !== false) {
+                        $video->addTag($tag);
+                        $meta = $video->getMeta();
+                        $video->setMeta($meta.' '.$tag->getName());
+                    } else if (strpos($video->getName(), $tag->getName()) !== false) {
+                        $video->addTag($tag);
+                        $meta = $video->getMeta();
+                        $video->setMeta($meta.' '.$tag->getName());
+                    }
+                }
+
+                $video->setMeta($video->getMeta().' '.$video->getName());
+
                 $em->persist($video);
                 $em->flush();
                 $countRecords++;
             }
         }
 
-        // todo: add work logic with nextPageToken
         $this->logMessage("Records created: ".$countRecords);
+
+        if ($countRepeat > 0) {
+            $countRepeat = $countRepeat - 1;
+            $this->executeCommand($searchWords, $countRepeat, $token);
+        }
+    }
+
+    private function isVideoIdExists($array, $videoId)
+    {
+        foreach ($array as $video)
+        {
+            if ($video['youtubeVideoId'] == $videoId) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function stopCommand()
@@ -118,8 +168,9 @@ class VideoSpiderCommand extends ContainerAwareCommand
         $this->logMessage("Stop signal from system.");
     }
 
-    public function errorHandler()
+    public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
+        $this->myErrorHandler($errno, $errstr, $errfile, $errline);
         $this->logMessage("Error handler.");
     }
 
@@ -128,5 +179,38 @@ class VideoSpiderCommand extends ContainerAwareCommand
         if ($this->isDebug) {
             $this->output->writeln($message);
         }
+    }
+
+    protected function myErrorHandler($errno, $errstr, $errfile, $errline)
+    {
+        if (!(error_reporting() & $errno)) {
+            // This error code is not included in error_reporting
+            return;
+        }
+
+        switch ($errno) {
+            case E_USER_ERROR:
+                $this->logMessage("<b>My ERROR</b> [$errno] $errstr<br />\n");
+                $this->logMessage( "  Fatal error on line $errline in file $errfile");
+                $this->logMessage(", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n");
+                $this->logMessage("Aborting...<br />\n");
+                exit(1);
+                break;
+
+            case E_USER_WARNING:
+                $this->logMessage("<b>My WARNING</b> [$errno] $errstr<br />\n");
+                break;
+
+            case E_USER_NOTICE:
+                $this->logMessage("<b>My NOTICE</b> [$errno] $errstr<br />\n");
+                break;
+
+            default:
+                $this->logMessage("Unknown error type: [$errno] $errstr<br />\n");
+                break;
+        }
+
+        /* Don't execute PHP internal error handler */
+        return true;
     }
 }
