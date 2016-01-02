@@ -33,4 +33,20 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb;
     }
+
+    public function getVideoListCompareList($ids, $isDeleted = false)
+    {
+        $qb = $this->createQueryBuilder('v');
+
+        if (is_bool($isDeleted)) {
+            $qb->andWhere('v.isDeleted != :isDeleted')
+                ->setParameter('isDeleted', !$isDeleted);
+        }
+
+        $qb->andWhere('v.youtubeVideoId IN (:ids)')
+            ->setParameter('ids', $ids)
+        ;
+
+        return $qb;
+    }
 }
