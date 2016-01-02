@@ -30,7 +30,7 @@ class Tags extends BaseEntity
      * @Assert\NotBlank()
      * @Assert\NotNull()
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     protected $name;
 
