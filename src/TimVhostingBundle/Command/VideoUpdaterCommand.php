@@ -85,8 +85,14 @@ class VideoUpdaterCommand extends ContainerAwareCommand
         $this->logMessage("Stop signal from system.");
     }
 
-    public function errorHandler()
+    protected function logError($error)
     {
+        $this->output->writeln($error);
+    }
+
+    public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
+    {
+        $this->myErrorHandler($errno, $errstr, $errfile, $errline);
         $this->logMessage("Error handler.");
     }
 
@@ -97,8 +103,36 @@ class VideoUpdaterCommand extends ContainerAwareCommand
         }
     }
 
-    protected function logError($error)
+    protected function myErrorHandler($errno, $errstr, $errfile, $errline)
     {
-        $this->output->writeln($error);
+        if (!(error_reporting() & $errno)) {
+            // This error code is not included in error_reporting
+            return;
+        }
+
+        switch ($errno) {
+            case E_USER_ERROR:
+                $this->logMessage("<b>My ERROR</b> [$errno] $errstr<br />\n");
+                $this->logMessage( "  Fatal error on line $errline in file $errfile");
+                $this->logMessage(", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n");
+                $this->logMessage("Aborting...<br />\n");
+                exit(1);
+                break;
+
+            case E_USER_WARNING:
+                $this->logMessage("<b>My WARNING</b> [$errno] $errstr (line $errline) (file $errfile)<br />\n");
+                break;
+
+            case E_USER_NOTICE:
+                $this->logMessage("<b>My NOTICE</b> [$errno] $errstr (line $errline) (file $errfile)<br />\n");
+                break;
+
+            default:
+                $this->logMessage("Unknown error type: [$errno] $errstr (line $errline) (file $errfile)<br />\n");
+                break;
+        }
+
+        /* Don't execute PHP internal error handler */
+        return true;
     }
 }

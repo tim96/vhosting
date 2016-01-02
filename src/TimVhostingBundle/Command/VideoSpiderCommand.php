@@ -133,13 +133,17 @@ class VideoSpiderCommand extends ContainerAwareCommand
                 /** @var Tags $tag */
                 foreach($resultsTags as $tag) {
                     if (strpos($video->getDescription(), $tag->getName()) !== false) {
-                        $video->addTag($tag);
-                        $meta = $video->getMeta();
-                        $video->setMeta($meta.' '.$tag->getName());
+                        if (!$video->getTags()->contains($tag)) {
+                            $video->addTag($tag);
+                            $meta = $video->getMeta();
+                            $video->setMeta($meta . ' ' . $tag->getName());
+                        }
                     } else if (strpos($video->getName(), $tag->getName()) !== false) {
-                        $video->addTag($tag);
-                        $meta = $video->getMeta();
-                        $video->setMeta($meta.' '.$tag->getName());
+                        if (!$video->getTags()->contains($tag)) {
+                            $video->addTag($tag);
+                            $meta = $video->getMeta();
+                            $video->setMeta($meta . ' ' . $tag->getName());
+                        }
                     }
                 }
 
@@ -206,15 +210,15 @@ class VideoSpiderCommand extends ContainerAwareCommand
                 break;
 
             case E_USER_WARNING:
-                $this->logMessage("<b>My WARNING</b> [$errno] $errstr<br />\n");
+                $this->logMessage("<b>My WARNING</b> [$errno] $errstr (line $errline) (file $errfile)<br />\n");
                 break;
 
             case E_USER_NOTICE:
-                $this->logMessage("<b>My NOTICE</b> [$errno] $errstr<br />\n");
+                $this->logMessage("<b>My NOTICE</b> [$errno] $errstr (line $errline) (file $errfile)<br />\n");
                 break;
 
             default:
-                $this->logMessage("Unknown error type: [$errno] $errstr<br />\n");
+                $this->logMessage("Unknown error type: [$errno] $errstr (line $errline) (file $errfile)<br />\n");
                 break;
         }
 

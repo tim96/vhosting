@@ -31,21 +31,52 @@ class VideoHandler extends BaseEntityHandler
     {
         $count = 0;
         $videos = $this->getRepository()->getVideosQuery()->getQuery()->getResult();
+        $repositoryTags = $this->om->getRepository('TimVhostingBundle:Tags');
+        $resultsTags = $repositoryTags->getTagsQuery()->getQuery()->getResult();
 
         /** @var Video $object */
         foreach($videos as $object) {
+            $isUpdate = false;
+
+            /** @var \Google_Service_YouTube_Video $data */
             $data = $serviceYoutube->getYoutubeVideoInfo($object->getYoutubeVideoId());
             $duration = $serviceYoutube->getYoutubeVideoDurationFromData($data);
 
-            $isUpdate = false;
+            $lang = $data->getLocalizations();
+            /** @var \Google_Service_YouTube_VideoSnippet $snippet */
+            $snippet = $data->getSnippet();
+
+            $snippet->getDefaultLanguage();
+
+            $tags = $snippet->getTags();
+            if (is_array($tags)) {
+                foreach ($tags as $tag) {
+                    foreach ($resultsTags as $resultsTag) {
+                        if (strtoupper($resultsTag->getName()) == strtoupper($tag)) {
+                            if (!$object->getTags()->contains($resultsTag)) {
+                                $object->addTag($resultsTag);
+                                $meta = $object->getMeta();
+                                $object->setMeta($meta . ' ' . $resultsTag->getName());
+                                $isUpdate = true;
+                            }
+                        }
+                    }
+                }
+            }
+
             if ($object->getDurationVideo() != $duration) {
                 $object->setDurationVideo($duration);
                 $isUpdate = true;
             }
 
+            if ($object->getLanguageCode() != $snippet->getDefaultLanguage()) {
+                $object->setLanguageCode($snippet->getDefaultLanguage());
+                $isUpdate = true;
+            }
+
             $statistics = $serviceYoutube->getYoutubeVideoStatisticsFromData($data);
 
-            if ($object->getDurationVideo() != $duration) {
+            if ($object->getViewCount() != $duration) {
                 $object->setViewCount($statistics->getViewCount());
                 $isUpdate = true;
             }
