@@ -135,8 +135,12 @@
                                     {% set className = 'btn-primary' %}
                                 {% endif %}
                             {% endif %}
-                            <a href="{{ path('ShowVideoByTag', {'tag' : tag}) }}"><button type="button" class="btn {{ className }} btn-tags">{{ tag }}</button></a>
+                            <a href="{{ path('Home', {'tag' : tag}) }}"><button type="button" class="btn {{ className }} btn-tags">{{ tag }}</button></a>
                         {% endfor %}
+
+                        <hr style="width: 100%; margin-top: 0px;" />
+                        <a href="{{ path('Home') }}"><button type="button" class="btn btn-danger btn-tags">{{ 'frontend.clear_tags_filter'|trans({}, 'TimVhostingBundle') }}</button></a>
+
                     </div>
                 </div>
             </div>

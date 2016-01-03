@@ -15,34 +15,32 @@ use TimVhostingBundle\Form\VideoSuggestType;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/name/{name}", name="Name")
-     */
-    public function indexAction($name)
-    {
-        return $this->render('TimVhostingBundle:Default:index.html.twig', array('name' => $name));
-    }
-
-    /**
-     * @Route("/{page}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = 1})
+     * @Route("/{page}/{tag}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = 1, "tag" = null})
      *
      * @param int $page
+     * @param null $tag
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function frontendAction($page = 1, Request $request)
+    public function frontendAction($page = 1, $tag = null, Request $request)
     {
         $maxVideoOnPage = 10;
         $paginator = $this->get('knp_paginator');
 
         $serviceTags = $this->container->get('tim_vhosting.tags.handler');
-        $tags = $serviceTags->getList(array('isDeleted' => false));
+        if (is_null($tag)) {
+            $tags = $serviceTags->getList(array('isDeleted' => false));
+        } else {
+            $tags = $serviceTags->getList(array('isDeleted' => false, 'name' => $tag));
+        }
 
         $serviceVideo = $this->container->get('tim_vhosting.video.handler');
         $videos = array();
         // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
 
-        $query = $serviceVideo->getRepository()->getList()->getQuery();
+        // $query = $serviceVideo->getRepository()->getList()->getQuery();
+        $query = $serviceVideo->getRepository()->getTagsQuery($tag)->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $page /*page number*/,
@@ -161,21 +159,5 @@ class DefaultController extends Controller
 
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
-    }
-
-    /**
-     * @Route("/tags/{tag}", name="ShowVideoByTag")
-     */
-    public function showVideoByTagAction($tag, Request $request)
-    {
-        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
-        $tags = $serviceTags->getList(array('isDeleted' => false));
-
-        $tag = $serviceTags->getOneByName($tag);
-        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
-        $videos = $serviceVideo->getList();
-
-        return $this->render('TimVhostingBundle:Default:frontend.html.twig', array('tags' => $tags, 'selectedTag' => $tag,
-            'videos' => $videos));
     }
 }

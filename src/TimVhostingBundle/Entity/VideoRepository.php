@@ -27,6 +27,21 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
         return $qb;
     }
 
+    public function getTagsQuery($tagName = null)
+    {
+        $qb = $this->getList();
+
+        if (!is_null($tagName)) {
+            $qb->leftJoin('v.tags', 'tags')
+                ->addSelect('tags')
+                ->andWhere('tags.name = :tagName')
+                ->setParameter('tagName', $tagName)
+            ;
+        }
+
+        return $qb;
+    }
+
     /**
      * @param bool $isDeleted
      * @param null $youtubeVideoId
