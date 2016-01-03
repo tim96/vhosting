@@ -33,8 +33,9 @@ class VideoController extends Controller
         }
 
         $tags = $video->getTags();
+        $carousel = $serviceVideo->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
 
         return $this->render('TimVhostingBundle:Video:index.html.twig',
-            array('tags' => $tags, 'video' => $video));
+            array('tags' => $tags, 'video' => $video, 'carousel' => $carousel));
     }
 }

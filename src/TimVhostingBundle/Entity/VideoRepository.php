@@ -42,6 +42,16 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
         return $qb;
     }
 
+    public function getTopVideos($maxResults = 5)
+    {
+        $qb = $this->getList();
+
+        $qb->setMaxResults($maxResults);
+        $qb->orderBy('v.viewCount', 'DESC');
+
+        return $qb;
+    }
+
     /**
      * @param bool $isDeleted
      * @param null $youtubeVideoId

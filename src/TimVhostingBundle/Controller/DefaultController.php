@@ -36,6 +36,8 @@ class DefaultController extends Controller
         }
 
         $serviceVideo = $this->container->get('tim_vhosting.video.handler');
+        $carousel = $serviceVideo->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
+
         $videos = array();
         // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
 
@@ -48,28 +50,7 @@ class DefaultController extends Controller
         );
 
         return $this->render('TimVhostingBundle:Default:frontend.html.twig',
-            array('tags' => $tags, 'videos' => $videos, 'pagination' => $pagination));
-    }
-
-    /**
-     * @Route("/new/{page}", requirements={"page" = "\d+"}, name="Frontend_new", defaults={"page" = null})
-     *
-     * @param null $page
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function frontendNewAction($page = null, Request $request)
-    {
-        $maxVideoOnPage = 10;
-
-        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
-        $tags = $serviceTags->getList(array('isDeleted' => false));
-
-        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
-        $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
-
-        return $this->render('TimVhostingBundle:Default:frontendNew.html.twig', array('tags' => $tags, 'videos' => $videos));
+            array('tags' => $tags, 'videos' => $videos, 'pagination' => $pagination, 'carousel' => $carousel));
     }
 
     /**

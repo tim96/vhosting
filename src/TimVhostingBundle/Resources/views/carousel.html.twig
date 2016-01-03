@@ -1,0 +1,53 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators" style="bottom: 0px;">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption" style="max-height: 290px; padding-bottom: 60px;">
+                    <h1>{{ 'carousel.title_hello'|trans({}, 'TimVhostingBundle') }}</h1>
+                    <p>{{ 'carousel.title_description'|trans({}, 'TimVhostingBundle') }}</p>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        {% for video in carousel %}
+            <div class="item">
+                <div class="container">
+                    <div class="carousel-caption" style="max-height: 290px; padding-bottom: 60px;">
+                        <h3>{{ video.name }}</h3>
+                        <div>
+                            {% set url = path('show_video_name', {'name' : video}) %}
+                            <p>
+                                <a href="{{ url }}">
+                                <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
+                                     alt="{{ video }}" height="150px" width="250px" align="center" />
+                                </a>
+                            </p>
+                            <p>
+                                <a class="btn btn-primary" href="{{ url }}" role="button">
+                                    {{ 'carousel.watch_video'|trans({}, 'TimVhostingBundle') }}
+                                </a>
+                            </p>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
