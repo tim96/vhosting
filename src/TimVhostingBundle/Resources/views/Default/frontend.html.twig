@@ -60,7 +60,7 @@
                     <div class="panel-heading">
                         <div>
                             <div>
-                                <h3 class="panel-title" style="text-align: left;">
+                                <h3 class="panel-title" style="text-align: left;"><i class="fa fa-video-camera"></i>
                                     <span>
                                         {{ 'frontend.video_list'|trans({}, 'TimVhostingBundle') }}
                                     </span>
@@ -75,48 +75,41 @@
 
                     <div class="panel-body">
                         {% for video in pagination %}
-                            {% if loop.index is odd %}<div class="row">{% endif %}
-
-                            {% if video.youtubeVideoId is not null %}
+                            {% if loop.index is odd %}<div class="row row-video-items">{% endif %}
 
                                 <div class="div-img-content">
                                     <a href="{{ path('show_video_name', {'name' : video}) }}">
                                         <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
-                                             alt="{{ video }}" width="90%" align="center" />
+                                             alt="{{ video }}" width="80%" align="center" />
                                     </a>
-                                    <p>
+                                    <p style="padding-top: 10px;">
                                         <strong>
-                                            <span style="font-size: 20px;">{{ video }}</span>
+                                            <span style="font-size: 17px;">{{ video }}</span>
                                         </strong>
                                     </p>
-                                    <p style="text-align: left;">
-                                        {#{{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y H:i") }}#}
-                                        {{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y") }}
-                                        {% if video.durationVideo is not null %}
-                                            <br/>{{ 'frontend.video_duration'|trans({}, 'TimVhostingBundle') }}: {{ video.durationVideoAsString }}
-                                        {% endif %}
-                                    </p>
+                                    <div class="row" style="padding-left: 25px;">
+                                        <div style="width: 49%; float: left;">
+                                            {# {{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y") }} #}
+                                            <i class="fa fa-calendar-plus-o"></i> {{ video.createdAt|date("d F Y") }}
+                                        </div>
+                                        <div style="width: 49%; float: left;">
+                                            {% if video.durationVideo is not null %}
+                                                {#<br/>{{ 'frontend.video_duration'|trans({}, 'TimVhostingBundle') }}: {{ video.durationVideoAsString }}#}
+                                                <i class="fa fa-clock-o"></i> {{ video.durationVideoAsString }}
+                                            {% else %}
+                                                <i class="fa fa-clock-o"></i> {{ 'frontend.video_duration_unknown'|trans({}, 'TimVhostingBundle') }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-left: 25px;">
+                                        <div style="width: 49%; float: left;">
+                                        <i class="fa fa-binoculars"></i> {{ video.viewCount }} {{ 'frontend.video_view_count'|trans({}, 'TimVhostingBundle') }}
+                                        </div>
+                                        <div style="width: 49%; float: left;">
+                                        <i class="fa fa-thumbs-o-up"></i> {{ video.likeCount }} {#{{ 'frontend.video_like_count'|trans({}, 'TimVhostingBundle') }}#}
+                                        </div>
+                                    </div>
                                 </div>
-                            {% else %}
-                                <div class="div-img-content">
-                                    <a href="{{ path('show_video_name', {'name' : video}) }}">
-                                        <img src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg"
-                                             alt="{{ video }}" width="90%" align="center" />
-                                    </a>
-                                    <p>
-                                        <strong>
-                                            <span style="font-size: 20px;">{{ video }}</span>
-                                        </strong>
-                                    </p>
-                                    <p style="text-align: left;">
-                                        {#{{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y H:i") }}#}
-                                        {{ 'frontend.video_added'|trans({}, 'TimVhostingBundle') }}: {{ video.createdAt|date("d F Y") }}
-                                        {% if video.durationVideo is not null %}
-                                            <br/>{{ 'frontend.video_duration'|trans({}, 'TimVhostingBundle') }}: {{ video.durationVideoAsString }}
-                                        {% endif %}
-                                    </p>
-                                </div>
-                            {% endif %}
 
                             {% if loop.index is not odd %}</div>{% endif %}
                         {% endfor %}
@@ -132,7 +125,7 @@
             <div class="col-md-3">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{{ 'frontend.video_tags'|trans({}, 'TimVhostingBundle') }}</h3>
+                        <h3 class="panel-title"><i class="fa fa-tags"></i> {{ 'frontend.video_tags'|trans({}, 'TimVhostingBundle') }}</h3>
                     </div>
                     <div class="panel-body">
                         {% for tag in tags %}

@@ -12,6 +12,10 @@
     float: left;
     min-width:50%;
     max-width: 50%;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
     text-align: center;
+}
+
+.row-video-items {
+    padding-bottom: 20px;
 }

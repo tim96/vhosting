@@ -166,6 +166,14 @@
                 <source>frontend.video_found_count</source>
                 <target>Found items</target>
             </trans-unit>
+            <trans-unit id="frontend.video_view_count">
+                <source>frontend.video_view_count</source>
+                <target>views</target>
+            </trans-unit>
+            <trans-unit id="frontend.video_duration_unknown">
+                <source>frontend.video_duration_unknown</source>
+                <target>no information</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
