@@ -11,6 +11,8 @@ namespace TimVhostingBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use TimVhostingBundle\Entity\Video;
 
 /**
  * @Route("/video")
@@ -22,6 +24,17 @@ class VideoController extends Controller
      */
     public function videoShowAction($name)
     {
-        return array('test' => $name);
+        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
+        /** @var Video $video */
+        $video = $serviceVideo->getVideoByName($name);
+        if (is_null($video)) {
+            $url = $this->generateUrl('Home');
+            return new RedirectResponse($url);
+        }
+
+        $tags = $video->getTags();
+
+        return $this->render('TimVhostingBundle:Video:index.html.twig',
+            array('tags' => $tags, 'video' => $video));
     }
 }

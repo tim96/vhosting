@@ -1,0 +1,81 @@
+{% extends '@TimVhosting/layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets '@TimVhostingBundle/Resources/public/css/frontend.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block body %}
+
+    {{ block('carousel') }}
+
+    <div class="container" style="margin-bottom: 40px;">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div>
+                            <h3 class="panel-title" style="text-align: left;"><i class="fa fa-video-camera"></i>
+                                <span>
+                                    {{ video.name }}
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="video-information" style="padding-bottom: 15px;">
+                                <span style="padding-left: 15px; padding-right: 25px;"><i class="fa fa-calendar-plus-o"></i> {{ video.createdAt|date("d F Y") }}</span>
+
+                                {% if video.durationVideo is not null %}
+                                    <i class="fa fa-clock-o"></i> {{ video.durationVideoAsString }}
+                                {% else %}
+                                    <i class="fa fa-clock-o"></i> {{ 'frontend.video_duration_unknown'|trans({}, 'TimVhostingBundle') }}
+                                {% endif %}
+
+                                <span style="padding-left: 25px; padding-right: 25px;"><i class="fa fa-binoculars"></i> {{ video.viewCount }}</span>
+                                <span><i class="fa fa-thumbs-o-up"></i> {{ video.likeCount }}</span>
+                                <span style="padding-left: 25px; padding-right: 25px;"><i class="fa fa-thumbs-o-down"></i> {{ video.dislikeCount }}</span>
+                        </div>
+
+                        <div class="video-block" style="text-align: center;">
+                            {% if video.youtubeVideoId is not null %}
+                                <iframe width="640px" height="360px" src="http://www.youtube.com/embed/{{ video.youtubeVideoId }}" frameborder="0" allowfullscreen></iframe>
+                            {% else %}
+                                <iframe width="640px" height="360px" src="{{ video.link }}" frameborder="0" allowfullscreen></iframe>
+                            {% endif %}
+                        </div>
+
+                        <div class="video-description" style="padding-top: 15px;">
+                            <p>
+                                {{ video.description }}
+                            </p>
+                        </div>
+
+                        <div class="video-comments">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-tags"></i> {{ 'frontend.video_tags'|trans({}, 'TimVhostingBundle') }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% for tag in tags %}
+                            <a href="#"><button type="button" class="btn btn-success btn-tags">{{ tag }}</button></a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
