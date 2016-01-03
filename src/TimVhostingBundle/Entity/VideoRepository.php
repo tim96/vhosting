@@ -42,6 +42,32 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
         return $qb;
     }
 
+    public function getSearch($search, $qb)
+    {
+        if (is_null($qb)) {
+            $qb = $this->getList();
+        }
+
+        if (!is_null($search)) {
+            /*$qb->andWhere('v.description LIKE :word')
+                ->setParameter('word', '%'.$search.'%')
+                ->andWhere('v.name LIKE :word1')
+                ->setParameter('word1', '%'.$search.'%')
+            ;*/
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('v.description', '?1'),
+                    $qb->expr()->like('v.name', '?2')
+                )
+            )
+            ->setParameter('1', '%'.$search.'%')
+            ->setParameter('2', '%'.$search.'%')
+            ;
+        }
+
+        return $qb;
+    }
+
     public function getTopVideos($maxResults = 5)
     {
         $qb = $this->getList();

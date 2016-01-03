@@ -25,6 +25,8 @@ class DefaultController extends Controller
      */
     public function frontendAction($page = 1, $tag = null, Request $request)
     {
+        $serach = $request->query->get('search');
+
         $maxVideoOnPage = 10;
         $paginator = $this->get('knp_paginator');
 
@@ -42,7 +44,8 @@ class DefaultController extends Controller
         // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
 
         // $query = $serviceVideo->getRepository()->getList()->getQuery();
-        $query = $serviceVideo->getRepository()->getTagsQuery($tag)->getQuery();
+        $query = $serviceVideo->getRepository()->getTagsQuery($tag);
+        $query = $serviceVideo->getRepository()->getSearch($serach, $query)->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $page /*page number*/,

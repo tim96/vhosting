@@ -70,7 +70,8 @@
                                     </div>
                                 </div>
 
-                            {% if loop.index is not odd %}</div>{% endif %}
+                            {# {{ dump(loop) }} #}
+                            {% if loop.last or loop.index is not odd %}</div>{% endif %}
                         {% endfor %}
 
                         <div class="navigation navigation-frontend">
