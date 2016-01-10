@@ -144,4 +144,16 @@ class DefaultController extends Controller
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
     }
+
+
+    /**
+     * @Route("/angular", name="angular")
+     * @Template("TimVhostingBundle:Default:angular.html.twig")
+     */
+    public function angularAction(Request $request)
+    {
+        // todo: rewrite frontend using angularjs
+
+        return array();
+    }
 }
