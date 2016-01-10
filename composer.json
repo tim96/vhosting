@@ -54,7 +54,8 @@
         "dizda/cloud-backup-bundle": "3.*",
 
         "knplabs/knp-menu-bundle": "*@dev",
-        "knplabs/knp-paginator-bundle": "^2.5"
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "nelmio/api-doc-bundle": "^2.11"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
