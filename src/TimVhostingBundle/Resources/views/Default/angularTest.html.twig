@@ -23,6 +23,36 @@
 </head>
 <body>
 
+{% block body %}
+    <div ng-app="app">
+        <div class="container" ng-controller="GuessTheNumberController">
+            <h2>Guess the Number !</h2>
+            <p class="well lead">Guess the computer generated random number
+                between 1 and 1000.</p>
+            <label>Your Guess: </label><input type="number" ng-model="guess"/>
+            <button ng-click="verifyGuess()" class="btn btn-primary btn-sm">Verify</button>
+            <button ng-click="initializeGame()" class= "btn btn-warning btn-sm">Restart</button>
+            <p>
+                <p ng-show="isDeviationLessThanZero()" class="alert alert-warning">Your guess is higher.</p>
+                <p ng-show="isDeviationMoreThanZero()" class="alert alert-warning">Your guess is lower.</p>
+                <p ng-show="isDeviationEqualZero()" class="alert alert-success">Yes! That"s it.</p>
+            </p>
+            <p class="text-info">No of guesses : <span class="badge" ng-bind="noOfTries">
+                    {# another way to include angularjs variable in twig template #}
+                    {# {{ '{{noOfTries}}' }} #}
+
+                    {# another way: #}
+                    {# {% verbatim %}
+                            {% for item in seq %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                       {% endverbatim %} #}
+                </span>
+            </p>
+        </div>
+    </div>
+{% endblock body %}
+
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
@@ -32,6 +62,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
 
     {% javascripts '@TimVhostingBundle/Resources/public/js/app.js'
+        '@TimVhostingBundle/Resources/public/js/guessNumber/guessController.js'
+        '@TimVhostingBundle/Resources/public/js/guessNumber/app.js'
         '@TimVhostingBundle/Resources/public/js/retina.min.js' output='js/app.min.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
