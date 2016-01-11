@@ -163,6 +163,17 @@ class DefaultController extends Controller
      */
     public function angularTestAction(Request $request)
     {
+        // guess the number
+        return array();
+    }
+
+    /**
+     * @Route("/angularTest1", name="angular_test1")
+     * @Template("TimVhostingBundle:Default:angularTest1.html.twig")
+     */
+    public function angularTest1Action(Request $request)
+    {
+        // 12 minutes workout
         return array();
     }
 
