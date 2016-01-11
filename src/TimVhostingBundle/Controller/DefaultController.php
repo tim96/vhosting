@@ -165,4 +165,13 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/angular2Test", name="angular2_test")
+     * @Template("TimVhostingBundle:Default:angular2Test.html.twig")
+     */
+    public function angular2TestAction(Request $request)
+    {
+        return array();
+    }
 }
