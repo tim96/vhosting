@@ -178,6 +178,16 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/angularTest2", name="angular_test2")
+     * @Template("TimVhostingBundle:Default:angularTest2.html.twig")
+     */
+    public function angularTest1Action(Request $request)
+    {
+        // zero game
+        return array();
+    }
+
+    /**
      * @Route("/angular2Test", name="angular2_test")
      * @Template("TimVhostingBundle:Default:angular2Test.html.twig")
      */
