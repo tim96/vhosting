@@ -181,7 +181,7 @@ class DefaultController extends Controller
      * @Route("/angularTest2", name="angular_test2")
      * @Template("TimVhostingBundle:Default:angularTest2.html.twig")
      */
-    public function angularTest1Action(Request $request)
+    public function angularTest2Action(Request $request)
     {
         // zero game
         return array();
@@ -193,6 +193,16 @@ class DefaultController extends Controller
      */
     public function angular2TestAction(Request $request)
     {
+        return array();
+    }
+
+    /**
+     * @Route("/angular2Test1", name="angular2_test1")
+     * @Template("TimVhostingBundle:Default:angular2Test1.html.twig")
+     */
+    public function angular2Test1Action(Request $request)
+    {
+        // example of todo application
         return array();
     }
 }
