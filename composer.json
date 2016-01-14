@@ -56,7 +56,8 @@
         "knplabs/knp-menu-bundle": "*@dev",
         "knplabs/knp-paginator-bundle": "^2.5",
         "nelmio/api-doc-bundle": "^2.11",
-        "beberlei/DoctrineExtensions": "^1.0"
+        "beberlei/DoctrineExtensions": "^1.0",
+        "richsage/rms-push-notifications-bundle": "^0.1.9"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
