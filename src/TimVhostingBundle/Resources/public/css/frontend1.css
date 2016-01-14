@@ -12,3 +12,45 @@ body {
     background: #e4e4e4;
     color: #000;
 }
+
+.container {
+    float: left;
+    width: 100%;
+    background: #1A1A1A
+}
+
+.content {
+    background: #262626;
+    margin: 0 0 0 200px;
+    padding: 1.2em 2.2em 0 2.2em;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+}
+
+.seotext a {
+    color: #472e8e;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.seotext {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    font-style: italic;
+    padding: 0 24px 0 0;
+    margin-bottom: 50px;
+    opacity: .6;
+    overflow: hidden;
+}

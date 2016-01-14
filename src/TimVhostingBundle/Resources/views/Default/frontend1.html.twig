@@ -10,6 +10,22 @@
 {% block header %}
 {% endblock header %}
 
+{% block body %}
+<div class="body">
+    <div class="wrapper">
+        <div class="container sidebar-color">
+            <div class="content white" id="content">
+                {% block seotext %}
+                    <div class="seotext" id="seotext">
+                        <p>{{ 'seo_text'|trans({}, 'TimVhostingBundle') }}</p>
+                    </div>
+                {% endblock seotext %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}
 
 {% block footer_container %}
 {% endblock footer_container %}
