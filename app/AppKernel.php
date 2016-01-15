@@ -44,6 +44,9 @@ class AppKernel extends Kernel
             // for pagination
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
+            // for send push
+            new \RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
+
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
