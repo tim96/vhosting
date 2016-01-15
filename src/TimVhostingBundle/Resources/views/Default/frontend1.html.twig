@@ -62,9 +62,38 @@
                             </div>
                         </div>
                     </div>
+
+                    <nav class="tags collapsed">
+                        <a href="#" class="link tag-link pinned weight-2" title="Test1">Test1</a>
+                        <a href="#" class="link tag-link pinned weight-1" title="Test2">Test2</a>
+                    </nav>
                 </div>
             </div>
         </div>
+
+        <aside class="menu">
+            <div class="">
+                <p class="logo"></p>
+                <form method="post" class="search-form">
+                    <input class="form-control" name="search" placeholder="{{ 'header.search'|trans({}, 'TimVhostingBundle') }}..."
+                           type="text">
+                    <input class="search-submit" value="" type="submit">
+                </form>
+            </div>
+            <div class="">
+                <div>
+                    <a class="menu-link" href="#">Test1</a>
+                    <a class="menu-link" href="#">Test2</a>
+                    <a class="menu-link" href="#">Test3</a>
+                </div>
+
+                <div>
+                    <a class="menu-link" href="#">Test4</a>
+                    <a class="menu-link" href="#">Test5</a>
+                    <a class="menu-link" href="#">Test6</a>
+                </div>
+            </div>
+        </aside>
     </div>
 </div>
 {% endblock body %}
