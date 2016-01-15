@@ -20,10 +20,27 @@
                         <p>{{ 'seo_text'|trans({}, 'TimVhostingBundle') }}</p>
                     </div>
                 {% endblock seotext %}
+
+                <div class="content-main">
+                    <div class="tags-filter">
+                        <div class="dropdown-filters">
+                            <div class="dropdown">
+                                <a class="link dropdown-toggle" href="#" data-toggle="dropdown">
+                                    <span class="dropdown-u">{{ 'frontend.tag.best'|trans({}, 'TimVhostingBundle') }}</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.popular'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li class="dropdown-item"><a class="menu-link menu-link-active" href="#">{{ 'frontend.tag.best'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.comment'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.new'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock body %}
 
@@ -32,4 +49,7 @@
 
 
 {% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {# <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script> #}
 {% endblock javascripts %}
