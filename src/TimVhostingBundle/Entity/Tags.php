@@ -55,6 +55,14 @@ class Tags extends BaseEntity
      */
     protected $countVideo;
 
+    /**
+     * @var integer
+     *
+     * Depend on how much videos exists for this tag (<10 -> 1, <25 -> 2, <50 -> 3, <100 -> 4,  other -> 5
+     * @ORM\Column(name="classification_number", type="integer")
+     */
+    protected $classificationNumber;
+
     public function __construct()
     {
         parent::__construct();
@@ -62,6 +70,7 @@ class Tags extends BaseEntity
         $this->videos = new ArrayCollection();
         $this->videoSuggests = new ArrayCollection();
         $this->countVideo = 0;
+        $this->classificationNumber = 0;
     }
 
     /**
@@ -198,5 +207,29 @@ class Tags extends BaseEntity
     public function getCountVideo()
     {
         return $this->countVideo;
+    }
+
+    /**
+     * Set classificationNumber
+     *
+     * @param int $classificationNumber
+     *
+     * @return Tags
+     */
+    public function setClassificationNumber($classificationNumber)
+    {
+        $this->classificationNumber = $classificationNumber;
+    
+        return $this;
+    }
+
+    /**
+     * Get classificationNumber
+     *
+     * @return int
+     */
+    public function getClassificationNumber()
+    {
+        return $this->classificationNumber;
     }
 }
