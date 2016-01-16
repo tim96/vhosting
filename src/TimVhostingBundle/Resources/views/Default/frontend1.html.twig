@@ -1,6 +1,8 @@
 {% extends '@TimVhosting/layout.html.twig' %}
 
  {% block stylesheets %}
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
      {% stylesheets '@TimVhostingBundle/Resources/public/css/frontend1.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
      {% endstylesheets %}
@@ -64,33 +66,60 @@
                     </div>
 
                     <nav class="tags collapsed">
-                        <a href="#" class="link tag-link pinned weight-2" title="Test1">Test1</a>
-                        <a href="#" class="link tag-link pinned weight-1" title="Test2">Test2</a>
+                        {% for tag in tags %}
+                            <a href="#" class="link tag-link pinned weight-{{ tag.classificationNumber + 1 }}" title="{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
                     </nav>
+
+                    <div class="result-wrap">
+                        <div class="result">
+                            {% for video in pagination %}
+                                <a href="{{ path('show_video_name', {'name' : video}) }}" class="result-item is-favorites-initialized" >
+                                    <div class="item-img" style="background-image:url(http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg)"></div>
+                                    <h3 class="item-title" title="{{ video }}">{{ video }}</h3>
+                                    <span class="item-stats">
+                                      <span class="item-stats-left">
+                                        <span class="item-plus" title="{{ 'frontend.video.rating'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-thumbs-o-up"></i> {{ video.likeCount }}</span>
+                                        <span style="padding-right: 5px;" title="{{ 'frontend.video.view'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-binoculars"></i> {{ video.viewCount }}</span>
+                                        <span style="padding-right: 15px;" title="{{ 'frontend.video.comment'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-comments"></i> {{ video.commentCount }}</span>
+                                          {% if video.durationVideo is not null %}
+                                              <span title="{{ 'frontend.video.duration'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-clock-o"></i> {{ video.durationVideoAsString }}</span>
+                                          {% else %}
+                                              <span title="{{ 'frontend.video.duration'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-clock-o"></i> {{ 'frontend.video_duration_unknown'|trans({}, 'TimVhostingBundle') }}</span>
+                                          {% endif %}
+                                      </span>
+                                    </span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <aside class="menu">
-            <div class="">
-                <p class="logo"></p>
-                <form method="post" class="search-form">
-                    <input class="form-control" name="search" placeholder="{{ 'header.search'|trans({}, 'TimVhostingBundle') }}..."
-                           type="text">
-                    <input class="search-submit" value="" type="submit">
-                </form>
-            </div>
-            <div class="">
-                <div>
-                    <a class="menu-link" href="#">Test1</a>
-                    <a class="menu-link" href="#">Test2</a>
-                    <a class="menu-link" href="#">Test3</a>
+            <div>
+                <div class="">
+                    <p class="logo"></p>
+                    <form method="post" class="search-form">
+                        <input class="form-control" name="search" placeholder="{{ 'header.search'|trans({}, 'TimVhostingBundle') }}..."
+                               type="text">
+                        <input class="search-submit" value="" type="submit">
+                    </form>
                 </div>
 
-                <div>
-                    <a class="menu-link" href="#">Test4</a>
-                    <a class="menu-link" href="#">Test5</a>
-                    <a class="menu-link" href="#">Test6</a>
+                <div class="">
+                    <div>
+                        <a class="menu-link" href="#">Test1</a>
+                        <a class="menu-link" href="#">Test2</a>
+                        <a class="menu-link" href="#">Test3</a>
+                    </div>
+
+                    <div>
+                        <a class="menu-link" href="#">Test4</a>
+                        <a class="menu-link" href="#">Test5</a>
+                        <a class="menu-link" href="#">Test6</a>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -98,9 +127,8 @@
 </div>
 {% endblock body %}
 
-{% block footer_container %}
-{% endblock footer_container %}
-
+{% block footer %}
+{% endblock footer %}
 
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
