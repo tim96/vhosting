@@ -103,28 +103,28 @@ class Video extends BaseEntity
     protected $descriptionVideo;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="view_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $viewCount;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="like_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $likeCount;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="dislike_count", type="integer", nullable=true, options={"default" = 0})
      */
     protected $dislikeCount;
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\Column(name="favorite_count", type="integer", nullable=true, options={"default" = 0})
      */
@@ -147,6 +147,13 @@ class Video extends BaseEntity
      */
     private $languageCode;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="comment_count", type="integer", options={"default" = 0})
+     */
+    protected $commentCount;
+
     public function __construct()
     {
         parent::__construct();
@@ -158,6 +165,7 @@ class Video extends BaseEntity
         $this->durationVideo = null;
         $this->publishedAt = null;
         $this->channelId = null;
+        $this->commentCount = 0;
     }
 
     /**
@@ -664,5 +672,29 @@ class Video extends BaseEntity
     public function getLanguageCode()
     {
         return $this->languageCode;
+    }
+
+    /**
+     * Set commentCount
+     *
+     * @param int $commentCount
+     *
+     * @return Video
+     */
+    public function setCommentCount($commentCount)
+    {
+        $this->commentCount = $commentCount;
+    
+        return $this;
+    }
+
+    /**
+     * Get commentCount
+     *
+     * @return int
+     */
+    public function getCommentCount()
+    {
+        return $this->commentCount;
     }
 }
