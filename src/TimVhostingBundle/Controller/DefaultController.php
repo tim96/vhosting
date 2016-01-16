@@ -57,7 +57,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("frontend1/{page}/{tag}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = 1, "tag" = null})
+     * @Route("frontend1/{page}/{tag}", requirements={"page" = "\d+"}, name="Home1", defaults={"page" = 1, "tag" = null})
      *
      * @param int $page
      * @param null $tag
