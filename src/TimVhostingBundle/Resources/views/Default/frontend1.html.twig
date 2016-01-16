@@ -2,8 +2,9 @@
 
  {% block stylesheets %}
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-     {% stylesheets '@TimVhostingBundle/Resources/public/css/frontend1.css' filter='cssrewrite' %}
+    {% stylesheets '@TimVhostingBundle/Resources/public/css/frontend1.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
      {% endstylesheets %}
  {% endblock stylesheets %}
@@ -25,41 +26,44 @@
 
                 <div class="content-main">
                     <div class="tags-filter">
-                        <div class="dropdown-filters">
-                            <div class="dropdown">
-                                <a class="link dropdown-toggle" href="#" data-toggle="dropdown">
-                                    <span class="dropdown-u">{{ 'frontend.tag.best'|trans({}, 'TimVhostingBundle') }}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.popular'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link menu-link-active" href="#">{{ 'frontend.tag.best'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.comment'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.new'|trans({}, 'TimVhostingBundle') }}</a></li>
+                        <div class="dropdown-filters row">
+                            <div class="dropdown item">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{ 'frontend.tag.best'|trans({}, 'TimVhostingBundle') }}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">{{ 'frontend.tag.popular'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.best'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.comment'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.new'|trans({}, 'TimVhostingBundle') }}</a></li>
                                 </ul>
                             </div>
 
-                            <div class="dropdown">
-                                <a class="link dropdown-toggle" href="#" data-toggle="dropdown">
-                                    <span class="dropdown-u">{{ 'frontend.tag.for_week'|trans({}, 'TimVhostingBundle') }}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.for_all_time'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.today'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link menu-link-active" href="#">{{ 'frontend.tag.week'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.month'|trans({}, 'TimVhostingBundle') }}</a></li>
+                            <div class="dropdown item">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{ 'frontend.tag.for_week'|trans({}, 'TimVhostingBundle') }}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">{{ 'frontend.tag.for_all_time'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.today'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.for_week'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.month'|trans({}, 'TimVhostingBundle') }}</a></li>
                                 </ul>
                             </div>
 
-                            <div class="dropdown">
-                                <a class="link dropdown-toggle" href="#" data-toggle="dropdown">
-                                    <span class="dropdown-u">{{ 'frontend.tag.time.any'|trans({}, 'TimVhostingBundle') }}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item"><a class="menu-link menu-link-active" href="#">{{ 'frontend.tag.time.any'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.time.small'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.time.middle'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.time.long'|trans({}, 'TimVhostingBundle') }}</a></li>
-                                    <li class="dropdown-item"><a class="menu-link" href="#">{{ 'frontend.tag.time.verylong'|trans({}, 'TimVhostingBundle') }}</a></li>
+                            <div class="dropdown item">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{ 'frontend.tag.time.any'|trans({}, 'TimVhostingBundle') }}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">{{ 'frontend.tag.time.any'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.time.small'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.time.middle'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.time.long'|trans({}, 'TimVhostingBundle') }}</a></li>
+                                    <li><a href="#">{{ 'frontend.tag.time.verylong'|trans({}, 'TimVhostingBundle') }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -80,12 +84,12 @@
                                     <span class="item-stats">
                                       <span class="item-stats-left">
                                         <span class="item-plus" title="{{ 'frontend.video.rating'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-thumbs-o-up"></i> {{ video.likeCount }}</span>
-                                        <span style="padding-right: 5px;" title="{{ 'frontend.video.view'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-binoculars"></i> {{ video.viewCount }}</span>
-                                        <span style="padding-right: 15px;" title="{{ 'frontend.video.comment'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-comments"></i> {{ video.commentCount }}</span>
+                                        <span class="item-views" title="{{ 'frontend.video.view'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-binoculars"></i> {{ video.viewCount }}</span>
+                                        <span class="item-comments" title="{{ 'frontend.video.comment'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-comments"></i> {{ video.commentCount }}</span>
                                           {% if video.durationVideo is not null %}
-                                              <span title="{{ 'frontend.video.duration'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-clock-o"></i> {{ video.durationVideoAsString }}</span>
+                                              <span class="item-duration" title="{{ 'frontend.video.duration'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-clock-o"></i> {{ video.durationVideoAsString }}</span>
                                           {% else %}
-                                              <span title="{{ 'frontend.video.duration'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-clock-o"></i> {{ 'frontend.video_duration_unknown'|trans({}, 'TimVhostingBundle') }}</span>
+                                              <span class="item-duration" title="{{ 'frontend.video.duration'|trans({}, 'TimVhostingBundle') }}"><i class="fa fa-clock-o"></i> {{ 'frontend.video_duration_unknown'|trans({}, 'TimVhostingBundle') }}</span>
                                           {% endif %}
                                       </span>
                                     </span>

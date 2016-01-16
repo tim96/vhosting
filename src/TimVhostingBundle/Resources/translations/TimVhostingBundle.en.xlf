@@ -203,6 +203,42 @@
                 <source>carousel.title_hello</source>
                 <target>Welcome to 'Video hosting'. It's Nice to Meet You!</target>
             </trans-unit>
+            <trans-unit id="frontend.tag.best">
+                <source>frontend.tag.best</source>
+                <target>Best</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.popular">
+                <source>frontend.tag.popular</source>
+                <target>Popular</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.comment">
+                <source>frontend.tag.comment</source>
+                <target>Comment</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.new">
+                <source>frontend.tag.new</source>
+                <target>New</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.for_week">
+                <source>frontend.tag.for_week</source>
+                <target>Week</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.for_all_time">
+                <source>frontend.tag.for_all_time</source>
+                <target>All time</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.today">
+                <source>frontend.tag.today</source>
+                <target>Today</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.month">
+                <source>frontend.tag.month</source>
+                <target>Month</target>
+            </trans-unit>
+            <trans-unit id="seo_text">
+                <source>seo_text</source>
+                <target>video hosting</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
