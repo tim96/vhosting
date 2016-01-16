@@ -48,12 +48,20 @@ class Tags extends BaseEntity
      */
     protected $videoSuggests;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="count_video", type="integer")
+     */
+    protected $countVideo;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->videos = new ArrayCollection();
         $this->videoSuggests = new ArrayCollection();
+        $this->countVideo = 0;
     }
 
     /**
@@ -166,5 +174,29 @@ class Tags extends BaseEntity
     public function getVideoSuggests()
     {
         return $this->videoSuggests;
+    }
+
+    /**
+     * Set countVideo
+     *
+     * @param int $countVideo
+     *
+     * @return Tags
+     */
+    public function setCountVideo($countVideo)
+    {
+        $this->countVideo = $countVideo;
+    
+        return $this;
+    }
+
+    /**
+     * Get countVideo
+     *
+     * @return int
+     */
+    public function getCountVideo()
+    {
+        return $this->countVideo;
     }
 }
