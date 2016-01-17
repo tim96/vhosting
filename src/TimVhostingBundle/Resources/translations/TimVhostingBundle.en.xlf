@@ -259,6 +259,14 @@
                 <source>frontend.tag.time.verylong</source>
                 <target>&#8805; 60 min</target>
             </trans-unit>
+            <trans-unit id="action_unpublish">
+                <source>action_unpublish</source>
+                <target>Unpublish</target>
+            </trans-unit>
+            <trans-unit id="action_publish">
+                <source>action_publish</source>
+                <target>Publish</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
