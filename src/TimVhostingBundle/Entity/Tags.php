@@ -195,7 +195,7 @@ class Tags extends BaseEntity
     public function setCountVideo($countVideo)
     {
         $this->countVideo = $countVideo;
-    
+
         return $this;
     }
 
@@ -231,5 +231,21 @@ class Tags extends BaseEntity
     public function getClassificationNumber()
     {
         return $this->classificationNumber;
+    }
+
+    public function calculateClassification($countVideo)
+    {
+        // Depend on how much videos exists for this tag (<10 -> 1, <25 -> 2, <50 -> 3, <100 -> 4,  other -> 5
+        if ($countVideo >= 100) {
+            return 5;
+        } elseif ($countVideo >= 50) {
+            return 4;
+        } elseif ($countVideo >= 25) {
+            return 3;
+        } elseif ($countVideo >= 10) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }
