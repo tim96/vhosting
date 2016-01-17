@@ -3,6 +3,7 @@
 namespace TimVhostingBundle\Handler;
 
 use TimConfigBundle\Handler\Base\BaseEntityHandler;
+use TimVhostingBundle\Entity\TagsRepository;
 
 class TagsHandler extends BaseEntityHandler
 {
@@ -19,5 +20,18 @@ class TagsHandler extends BaseEntityHandler
     public function getOneByName($name, $isDeleted = false)
     {
         return $this->getRepository()->findOneBy(array('name' => $name, 'isDeleted' => $isDeleted));
+    }
+
+    public function getTagsNotDeleted()
+    {
+        return $this->getRepository()->getTagsQuery()->getQuery()->getResult();
+    }
+
+    /**
+     * @return TagsRepository
+     */
+    public function getRepository()
+    {
+        return parent::getRepository();
     }
 }
