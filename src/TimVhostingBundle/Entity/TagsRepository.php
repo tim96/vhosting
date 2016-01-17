@@ -16,12 +16,22 @@ class TagsRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getTagsQuery($isDeleted = false)
     {
-        $qb = $this->createQueryBuilder('v');
+        $qb = $this->createQueryBuilder('t');
 
         if (is_bool($isDeleted)) {
-            $qb->andWhere('v.isDeleted != :isDeleted')
+            $qb->andWhere('t.isDeleted != :isDeleted')
                 ->setParameter('isDeleted', !$isDeleted);
         }
+
+        return $qb;
+    }
+
+    public function getJoinVideoQuery($isDeleted = false)
+    {
+        $qb = $this->getTagsQuery($isDeleted);
+
+        $qb->leftJoin($qb->getRootAlias().'.videos', 'v')
+            ->addSelect('v');
 
         return $qb;
     }

@@ -64,7 +64,8 @@ class CalculateTagsCommand extends ContainerAwareCommand
     protected function executeCommand()
     {
         $tagsService = $this->container->get('tim_vhosting.tags.handler');
-        $tags = $tagsService->getTagsNotDeleted();
+        $tags = $tagsService->getRepository()->getJoinVideoQuery()->getQuery()->getResult();
+        $this->logMessage("Find count tags: ".count($tags));
         $countUpdate = 0;
 
         $em = $this->container->get('doctrine')->getManager();
