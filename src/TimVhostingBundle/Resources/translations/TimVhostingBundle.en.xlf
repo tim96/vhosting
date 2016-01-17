@@ -239,6 +239,26 @@
                 <source>seo_text</source>
                 <target>video hosting</target>
             </trans-unit>
+            <trans-unit id="frontend.tag.time.any">
+                <source>frontend.tag.time.any</source>
+                <target>Any time</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.time.small">
+                <source>frontend.tag.time.small</source>
+                <target>&#8804; 5 min</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.time.middle">
+                <source>frontend.tag.time.middle</source>
+                <target>From 5 to 20 min</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.time.long">
+                <source>frontend.tag.time.long</source>
+                <target>From 20 to 60 min</target>
+            </trans-unit>
+            <trans-unit id="frontend.tag.time.verylong">
+                <source>frontend.tag.time.verylong</source>
+                <target>&#8805; 60 min</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
