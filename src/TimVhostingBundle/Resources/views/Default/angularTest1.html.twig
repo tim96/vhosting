@@ -30,7 +30,7 @@
 <body>
 
 {% block body %}
-    <div ng-app="app">
+    <div ng-app="7minWorkout">
 
     </div>
 {% endblock body %}
@@ -45,7 +45,8 @@
 
     {% javascripts '@TimVhostingBundle/Resources/public/js/app.js'
         '@TimVhostingBundle/Resources/public/js/12MinWorkout/app.js'
-        '@TimVhostingBundle/Resources/public/js/retina.min.js' output='js/app.min.js' %}
+        '@TimVhostingBundle/Resources/public/js/12MinWorkout/workout.js'
+        '@TimVhostingBundle/Resources/public/js/retina.min.js' output='js/app1.min.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
