@@ -34,7 +34,7 @@ angular.module('7minWorkout')
                     description: " Relax a bit!",
                     image: "img/rest.png"
                 }),
-                duration: workoutPlan.restBetweenExcercise
+                duration: workoutPlan.restBetweenExercise
             };
             startExercise(workoutPlan.exercises.shift());
         };
@@ -81,7 +81,15 @@ angular.module('7minWorkout')
                 function () {
                     ++$scope.currentExerciseDuration;
                 }, 1000, $scope.currentExercise.duration
-            );
+            ).then(function () {
+                var next = getNextExercise(exercisePlan);
+                if (next) {
+                    startExercise(next);
+                }
+                else {
+                    console.log("Workout complete!")
+                }
+            });
         };
 
         var getNextExercise = function (currentExercisePlan) {
@@ -96,16 +104,16 @@ angular.module('7minWorkout')
             return nextExercise;
         };
 
-        $scope.$watch('currentExerciseDuration', function (nVal) {
-            if (nVal == $scope.currentExercise.duration) {
-                var next = getNextExercise($scope.currentExercise);
-                if (next) {
-                    startExercise(next);
-                } else {
-                    console.log("Workout complete!")
-                }
-            }
-        });
+        // $scope.$watch('currentExerciseDuration', function (nVal) {
+        //    if (nVal == $scope.currentExercise.duration) {
+        //        var next = getNextExercise($scope.currentExercise);
+        //        if (next) {
+        //            startExercise(next);
+        //        } else {
+        //            console.log("Workout complete!")
+        //        }
+        //    }
+        // });
 
         // $scope.$watch('obj', function(n,o) { console.log('Data changed!'); } );
         // These changes to $scope.obj will trigger the watch listener:
