@@ -1,5 +1,6 @@
 
-angular.module('7minWorkout').controller('WorkoutController',
+angular.module('7minWorkout')
+    .controller('WorkoutController',
     // example how to declare dependencies so that DI does not break after minification.
     ['$scope', '$interval', function($scope, $interval) {
 
@@ -24,14 +25,10 @@ angular.module('7minWorkout').controller('WorkoutController',
         var restExercise;
         var workoutPlan;
 
-        var init = function () {
-            startWorkout();
-        };
-
         var startWorkout = function() {
             workoutPlan = createWorkout();
             restExercise = {
-                details: new Excercise({
+                details: new Exercise({
                     name: "rest",
                     title: " Relax!",
                     description: " Relax a bit!",
@@ -60,7 +57,21 @@ angular.module('7minWorkout').controller('WorkoutController',
                     procedure: ""
                 }),
                 duration: 30
-            })
+            });
+
+            workout.exercises.push({
+                details: new Exercise({
+                    name: "wallSit",
+                    title: "Wall Sit",
+                    description: "A wall sit, also known as a Roman Chair, is an exercise done to strengthen the quadriceps muscles.",
+                    image: "img/wallsit.png",
+                    videos: [],
+                    procedure: ""
+                }),
+                duration: 30
+            });
+
+            return workout;
         };
 
         var startExercise = function (exercisePlan) {
@@ -71,6 +82,10 @@ angular.module('7minWorkout').controller('WorkoutController',
                     ++$scope.currentExerciseDuration;
                 }, 1000, $scope.currentExercise.duration
             );
+        };
+
+        var init = function () {
+            startWorkout();
         };
 
         init();
