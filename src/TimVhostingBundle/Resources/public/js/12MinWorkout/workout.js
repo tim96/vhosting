@@ -84,6 +84,41 @@ angular.module('7minWorkout')
             );
         };
 
+        var getNextExercise = function (currentExercisePlan) {
+            var nextExercise = null;
+            if (currentExercisePlan === restExercise) {
+                nextExercise = workoutPlan.exercises.shift();
+            } else {
+                if (workoutPlan.exercises.length != 0) {
+                    nextExercise = restExercise;
+                }
+            }
+            return nextExercise;
+        };
+
+        $scope.$watch('currentExerciseDuration', function (nVal) {
+            if (nVal == $scope.currentExercise.duration) {
+                var next = getNextExercise($scope.currentExercise);
+                if (next) {
+                    startExercise(next);
+                } else {
+                    console.log("Workout complete!")
+                }
+            }
+        });
+
+        // $scope.$watch('obj', function(n,o) { console.log('Data changed!'); } );
+        // These changes to $scope.obj will trigger the watch listener:
+        // $scope.obj = {}; // Logs 'Data changed!'
+        // $scope.obj = obj1; // Logs 'Data changed!'
+        // $scope.obj = null; // Logs 'Data changed!'
+        // Whereas these will not:
+        // $scope.obj.prop1=value; // Does not log 'Data changed!'
+        // $scope.obj.prop2={}; // Does not log 'Data changed!'
+        // $scope.obj=$scope.obj; // Does not log 'Data changed!'
+        // $scope.$watch('obj', function(n,o){console.log('Data changed!'},true);
+        // All the previous changes will trigger the listener except the last one.
+
         var init = function () {
             startWorkout();
         };
