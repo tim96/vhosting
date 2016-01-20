@@ -32,7 +32,7 @@ angular.module('7minWorkout')
                     name: "rest",
                     title: " Relax!",
                     description: " Relax a bit!",
-                    image: "img/rest.png"
+                    image: "images/rest.png"
                 }),
                 duration: workoutPlan.restBetweenExercise
             };
@@ -51,7 +51,7 @@ angular.module('7minWorkout')
                     name: 'jumpingJacks',
                     title: "Jumping Jacks",
                     description: "Jumping Jacks.",
-                    image: "img/JumpingJacks.png",
+                    image: "images/JumpingJacks.png",
                     videos: [],
                     variations: [],
                     procedure: ""
@@ -64,7 +64,7 @@ angular.module('7minWorkout')
                     name: "wallSit",
                     title: "Wall Sit",
                     description: "A wall sit, also known as a Roman Chair, is an exercise done to strengthen the quadriceps muscles.",
-                    image: "img/wallsit.png",
+                    image: "images/wallsit.png",
                     videos: [],
                     procedure: ""
                 }),
