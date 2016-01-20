@@ -23,7 +23,7 @@
     {% block stylesheets %}
         {% stylesheets  '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
         '@TimVhostingBundle/Resources/public/css/font-awesome.min.css'
-        '@TimVhostingBundle/Resources/public/css/12MinWorkout/index.css'
+        '@TimVhostingBundle/Resources/public/css/12MinWorkout/index.css' output="css/index1.css"
                 filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -42,7 +42,12 @@
                 </div>
             </div>
         </div>
-        {% verbatim %}
+
+        <div class="container body-content app-container">
+            <div ng-view></div>
+        </div>
+
+        {# {% verbatim %}
             <div class="container body-content app-container">
                 <div class="row">
                     <div id="exercise-pane" class="col-sm-8 col-sm-offset-2">
@@ -60,19 +65,24 @@
                     </div>
                 </div>
             </div>
-        {% endverbatim %}
+        {% endverbatim %} #}
     </div>
 {% endblock body %}
 
 {% block javascripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    {# <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> #}
     {# <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script> #}
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    {# <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> #}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    {# <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script> #}
 
-    {% javascripts '@TimVhostingBundle/Resources/public/js/app.js'
+    {% javascripts
+        '@TimVhostingBundle/Resources/public/js/jquery.min.js'
+        '@TimVhostingBundle/Resources/public/js/bootstrap.min.js'
+        '@TimVhostingBundle/Resources/public/js/angular.min.js'
+        '@TimVhostingBundle/Resources/public/js/angular-route.min.js'
+        '@TimVhostingBundle/Resources/public/js/app.js'
         '@TimVhostingBundle/Resources/public/js/12MinWorkout/app.js'
         '@TimVhostingBundle/Resources/public/js/12MinWorkout/workout.js' output='js/app1.min.js' %}
         <script src="{{ asset_url }}"></script>
