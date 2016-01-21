@@ -2,7 +2,7 @@
 angular.module('7minWorkout')
     .controller('WorkoutController',
     // example how to declare dependencies so that DI does not break after minification.
-    ['$scope', '$interval', function($scope, $interval) {
+    ['$scope', '$interval', '$location', function($scope, $interval, $location) {
 
         function WorkoutPlan(args) {
             this.exercises = [];
@@ -87,7 +87,8 @@ angular.module('7minWorkout')
                     startExercise(next);
                 }
                 else {
-                    console.log("Workout complete!")
+                    // console.log("Workout complete!")
+                    $location.path('/finish');
                 }
             });
         };
