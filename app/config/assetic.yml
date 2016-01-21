@@ -24,3 +24,7 @@ assetic:
             inputs:
                 - '@TimVhostingBundle/Resources/public/partials/workout.html'
             output: partials/workout.html
+        image_start:
+            inputs:
+                - '@TimVhostingBundle/Resources/public/images/12MinWorkout/start.png'
+            output: images/start.png
