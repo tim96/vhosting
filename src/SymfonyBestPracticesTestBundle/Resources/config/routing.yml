@@ -1,0 +1,4 @@
+tim_cheat_sheet_default:
+    resource: "@SymfonyBestPracticesTestBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /

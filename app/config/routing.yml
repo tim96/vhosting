@@ -1,3 +1,7 @@
+symfony_best_practices_test:
+    resource: "@SymfonyBestPracticesTestBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tim_config:
     resource: "@TimConfigBundle/Resources/config/routing.yml"
     prefix:   /

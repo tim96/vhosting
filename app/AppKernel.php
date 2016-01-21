@@ -52,6 +52,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new TimVhostingBundle\TimVhostingBundle(),
             new TimConfigBundle\TimConfigBundle(),
+            new SymfonyBestPracticesTestBundle\SymfonyBestPracticesTestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
