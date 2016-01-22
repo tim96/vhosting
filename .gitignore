@@ -21,3 +21,4 @@ composer.lock
 *.php~
 web/images/
 web/partials/
+web/public/
