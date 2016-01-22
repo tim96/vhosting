@@ -84,3 +84,7 @@ assetic:
             inputs:
                 - '@TimVhostingBundle/Resources/public/images/12MinWorkout/wallsit.png'
             output: images/wallsit.png
+        image_finish:
+            inputs:
+                - '@TimVhostingBundle/Resources/public/images/12MinWorkout/finish.png'
+            output: images/finish.png
