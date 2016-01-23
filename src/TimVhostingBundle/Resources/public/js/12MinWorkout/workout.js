@@ -1,5 +1,24 @@
 
 angular.module('7minWorkout')
+    // The primary aim of an Angular filter is to format the value of an expression
+    // displayed to the user. Filters can be used across views, services, controllers, and
+    // directives. The framework comes with multiple predefined filters such as date,
+    // number, lowercase, uppercase, and others.
+    .filter('secondsToTime', function () {
+        return function (input) {
+            var sec = parseInt(input, 10);
+            if (isNaN(sec)) return '00:00:00';
+
+            var hours = Math.floor(sec / 3600);
+            var minutes = Math.floor((sec - (hours * 3600)) / 60);
+            var seconds = sec - (hours * 3600) - (minutes * 60);
+
+            return ("0" + hours).substr(-2) + ':'
+                + ("0" + minutes).substr(-2) + ':'
+                + ("0" + seconds).substr(-2)
+            ;
+        }
+    })
     .controller('WorkoutController',
     // example how to declare dependencies so that DI does not break after minification.
     ['$scope', '$interval', '$location', function($scope, $interval, $location) {
@@ -9,6 +28,16 @@ angular.module('7minWorkout')
             this.name = args.name;
             this.title = args.title;
             this.restBetweenExercise = args.restBetweenExercise;
+
+            this.totalWorkoutDuration = function () {
+                if (this.exercises.length == 0) return 0;
+                var total = 0;
+                angular.forEach(this.exercises, function (exercise) {
+                    total = total + exercise.duration;
+                });
+                return this.restBetweenExercise * (this.exercises.length - 1)
+                    + total;
+            }
         }
 
         function Exercise(args) {
@@ -27,6 +56,9 @@ angular.module('7minWorkout')
 
         var startWorkout = function() {
             workoutPlan = createWorkout();
+
+            $scope.workoutTimeRemaining = workoutPlan.totalWorkoutDuration();
+
             restExercise = {
                 details: new Exercise({
                     name: "rest",
@@ -36,6 +68,11 @@ angular.module('7minWorkout')
                 }),
                 duration: workoutPlan.restBetweenExercise
             };
+
+            $interval(function () {
+                $scope.workoutTimeRemaining--;
+            }, 1000, $scope.workoutTimeRemaining);
+
             startExercise(workoutPlan.exercises.shift());
         };
 
