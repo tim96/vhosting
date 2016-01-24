@@ -1,5 +1,5 @@
 
-angular.module('app', ['ngRoute', '7minWorkout']).
+angular.module('app', ['ngRoute', 'ngSanitize', '7minWorkout']).
 config(function ($routeProvider, $sceDelegateProvider) {
     $routeProvider.when('/start', {
         templateUrl: '/partials/start.html'
