@@ -1,10 +1,20 @@
 
+php app/console dizda:backup:start --env=prod
+
 git stash
 git pull --force
 
 php composer.phar self-update
 php composer.phar update
 php composer.phar dump-autoload --optimize
+
+php app/console doctrine:database:create
+php app/console doctrine:schema:create
+
+# Add test data to DB
+#php app/console doctrine:fixtures:load --append
+
+#php app/console fos:user:create --super-admin admin
 
 php app/console cache:clear
 php app/console cache:clear --env=prod --no-debug
