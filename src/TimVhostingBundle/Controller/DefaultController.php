@@ -225,7 +225,7 @@ class DefaultController extends Controller
      */
     public function angularTest2Action(Request $request)
     {
-        // zero game
+        // zero/time game
         return array();
     }
 
