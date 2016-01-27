@@ -247,4 +247,13 @@ class DefaultController extends Controller
         // example of todo application
         return array();
     }
+
+    /**
+     * @Route("/canvasTest1", name="acanvas_test1")
+     * @Template("TimVhostingBundle:Default:canvasTest1.html.twig")
+     */
+    public function canvasTest1Action(Request $request)
+    {
+        return array();
+    }
 }
