@@ -51,6 +51,115 @@
                 }
             }
         </script>
+
+        <!-- Example 2. Paint lines -->
+        <canvas id='example2'>Refresh page</canvas>
+        <script>
+            var example = document.getElementById("example2");
+            var ctx     = example.getContext('2d');
+
+            example.height = 480;
+            example.width  = 640;
+            ctx.beginPath();
+            ctx.arc(80, 100, 56, 3/4 * Math.PI, 1/4 * Math.PI, true);
+            ctx.fill(); // *14
+            ctx.moveTo(40, 140);
+            ctx.lineTo(20, 40);
+            ctx.lineTo(60, 100);
+            ctx.lineTo(80, 20);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(140, 40);
+            ctx.lineTo(120, 140);
+            ctx.stroke();
+        </script>
+
+        <!-- Example 3. Paint battlefield -->
+        <canvas id='example3'>Refresh page</canvas>
+        <script>
+            // Tank's level
+            var example = document.getElementById("example3");
+            var ctx     = example.getContext('2d');
+
+            var cellSize = 32;
+            var map = [
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1],
+                        [2, 2, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                    ];
+            example.width = 16 * cellSize;
+            example.height = 15 * cellSize;
+            ctx.fillStyle = '#ccc';
+            ctx.fillRect(0, 0, example.width, example.height);
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cellSize, cellSize, 13 * cellSize, 13 * cellSize)
+
+            for (var j = 0; j < 26; j++)
+                for (var i = 0; i < 26; i++) {
+                    switch (map[j][i]) {
+                        case 1:
+                            DrawBrick(i * cellSize / 2 + cellSize, j * cellSize / 2 + cellSize);
+                            break;
+                        case 2:
+                            DrawHardBrick(i * cellSize / 2 + cellSize, j * cellSize / 2 + cellSize);
+                            break;
+                    }
+                }
+
+            function DrawBrick(x, y) {
+                ctx.fillStyle = '#FFA500';
+                ctx.fillRect(x, y, cellSize / 2, cellSize / 2);
+
+                ctx.fillStyle = '#CD8500';
+                ctx.fillRect(x, y, cellSize / 2, cellSize / 16);
+                ctx.fillRect(x, y + cellSize / 4, cellSize / 2, cellSize / 16);
+                ctx.fillRect(x + cellSize / 4, y, cellSize / 16, cellSize / 4);
+                ctx.fillRect(x + cellSize / 16, y + cellSize / 4, cellSize / 16, cellSize / 4);
+
+                ctx.fillStyle = '#D3D3D3';
+                ctx.fillRect(x, y + cellSize / 4 - cellSize / 16, cellSize / 2, cellSize / 16);
+                ctx.fillRect(x, y + cellSize / 2 - cellSize / 16, cellSize / 2, cellSize / 16);
+                ctx.fillRect(x + cellSize / 4 - cellSize / 16, y, cellSize / 16, cellSize / 4);
+                ctx.fillRect(x, y + cellSize / 4 - cellSize / 16, cellSize / 16, cellSize / 4);
+            }
+
+            function DrawHardBrick(x, y) {
+                ctx.fillStyle = '#cccccc';
+                ctx.fillRect(x, y, cellSize / 2, cellSize / 2);
+
+                ctx.fillStyle = '#909090';
+                ctx.beginPath();
+                ctx.moveTo(x, y + cellSize / 2);
+                ctx.lineTo(x + cellSize / 2, y + cellSize / 2);
+                ctx.lineTo(x + cellSize / 2, y);
+                ctx.fill();
+
+                ctx.fillStyle = '#eeeeee';
+                ctx.fillRect(x + cellSize / 8, y + cellSize / 8, cellSize / 4, cellSize / 4);
+            }
+        </script>
     </div>
 {% endblock body %}
 
