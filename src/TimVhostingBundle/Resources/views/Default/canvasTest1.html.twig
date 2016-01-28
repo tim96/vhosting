@@ -168,6 +168,12 @@
             Your browser does not support HTML5 canvas.
         </canvas>
     </div>
+
+    <div>
+        <canvas id="example5" width="1024px" height="576px">
+            Your browser does not support HTML5 canvas.
+        </canvas>
+    </div>
 {% endblock body %}
 
 {% block javascripts %}
@@ -178,6 +184,7 @@
     {% javascripts '@TimVhostingBundle/Resources/public/js/appTime.js'
         '@TimVhostingBundle/Resources/public/js/modernizr-canvas.js'
         '@TimVhostingBundle/Resources/public/js/underscore-min.js'
+        '@TimVhostingBundle/Resources/public/js/canvasTest2.js'
         '@TimVhostingBundle/Resources/public/js/canvasTest1.js' output='js/canvasTest1.min.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
