@@ -22,7 +22,8 @@
 
     {% block stylesheets %}
         {% stylesheets '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
-        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css' filter='cssrewrite' %}
+        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css'
+        '@TimVhostingBundle/Resources/public/css/canvasTest1.css' filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
     {% endblock stylesheets %}
@@ -34,7 +35,7 @@
 {% block body %}
     <div>
         <!-- Example 1. Paint chess board. -->
-        <canvas id='example1'>Refresh page</canvas>
+        <canvas id='example1'>Your browser does not support HTML5 canvas.</canvas>
         <script>
             var example = document.getElementById("example1");
             var ctx     = example.getContext('2d');
@@ -53,7 +54,7 @@
         </script>
 
         <!-- Example 2. Paint lines -->
-        <canvas id='example2'>Refresh page</canvas>
+        <canvas id='example2'>Your browser does not support HTML5 canvas.</canvas>
         <script>
             var example = document.getElementById("example2");
             var ctx     = example.getContext('2d');
@@ -74,7 +75,7 @@
         </script>
 
         <!-- Example 3. Paint battlefield -->
-        <canvas id='example3'>Refresh page</canvas>
+        <canvas id='example3'>Your browser does not support HTML5 canvas.</canvas>
         <script>
             // Tank's level
             var example = document.getElementById("example3");
@@ -161,6 +162,12 @@
             }
         </script>
     </div>
+
+    <div style="background-color: #000000; text-align: center; ">
+        <canvas id="displayCanvas" width="1024px" height="576px">
+            Your browser does not support HTML5 canvas.
+        </canvas>
+    </div>
 {% endblock body %}
 
 {% block javascripts %}
@@ -170,7 +177,8 @@
 
     {% javascripts '@TimVhostingBundle/Resources/public/js/appTime.js'
         '@TimVhostingBundle/Resources/public/js/modernizr-canvas.js'
-        '@TimVhostingBundle/Resources/public/js/underscore-min.js' output='js/canvasTest1.min.js' %}
+        '@TimVhostingBundle/Resources/public/js/underscore-min.js'
+        '@TimVhostingBundle/Resources/public/js/canvasTest1.js' output='js/canvasTest1.min.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
