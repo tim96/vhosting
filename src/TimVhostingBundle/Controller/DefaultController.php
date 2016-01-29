@@ -256,4 +256,13 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/canvasTest2", name="acanvas_test2")
+     * @Template("TimVhostingBundle:Default:canvasTest2.html.twig")
+     */
+    public function canvasTest2Action(Request $request)
+    {
+        return array();
+    }
 }

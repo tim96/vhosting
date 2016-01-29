@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html {% block html_attributes %}class="no-js"{% endblock %}>
+<head>
+    {% block meta_tags %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    {% endblock %}
+
+    {% block stylesheets %}
+        {% stylesheets '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
+        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock stylesheets %}
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+{% block body %}
+    <div>
+        <!-- Example. Paint rectangle. Move rectangle using keyboard. -->
+        <canvas id='example'>Your browser does not support HTML5 canvas.</canvas>
+    </div>
+{% endblock body %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
+
+    {% javascripts '@TimVhostingBundle/Resources/public/js/bootstrap.min.js'
+        '@TimVhostingBundle/Resources/public/js/keyboardExample.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+</body>
+</html>
