@@ -34,7 +34,7 @@
 {% block body %}
     <div id="fieldBlock" style="padding: 25px;">
         <!-- Example. Paint rectangle. Move rectangle using keyboard. -->
-        <canvas id='example'>Your browser does not support HTML5 canvas.</canvas>
+        <canvas id='example' tabindex='1'>Your browser does not support HTML5 canvas.</canvas>
     </div>
 {% endblock body %}
 
@@ -43,6 +43,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
 
     {% javascripts '@TimVhostingBundle/Resources/public/js/bootstrap.min.js'
+        '@TimVhostingBundle/Resources/public/js/modernizr-canvas.js'
         '@TimVhostingBundle/Resources/public/js/keyboardExample.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}

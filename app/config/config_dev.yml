@@ -9,6 +9,7 @@ framework:
 
 web_profiler:
     toolbar: true
+    #toolbar: false
     intercept_redirects: false
 
 monolog:
