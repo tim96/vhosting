@@ -16,7 +16,7 @@ function keyboardExampleApp() {
         ctx = canvas.getContext("2d"),
         W = 640, // window.innerWidth,
         H = 480, // window.innerHeight,
-        fps = 60;
+        fps = 30; // 60;
     var isDebug = false;
     var renderTimer = setInterval(draw, 1/fps*100);
     var player = null;
@@ -30,7 +30,7 @@ function keyboardExampleApp() {
     // or
     document.addEventListener('keydown', handleKeyDown, false);
     document.addEventListener('click', handleClick, false);
-    document.addEventListener('mousemove', handleMouseMove, false);
+    // document.addEventListener('mousemove', handleMouseMove, false);
 
     var Player = function() {
         this.name = "playerName";
@@ -47,6 +47,10 @@ function keyboardExampleApp() {
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
         ctx.fill();
         writeLog('Render player');
+    };
+    Player.prototype.update = function() {
+        if (this.position.x < 0) this.setPositionX(0);
+        if (this.position.x + this.width > canvas.width) this.setPositionX(canvas.width - this.width);
     };
     Player.prototype.about = function() {
         console.log('Player', this);
@@ -133,6 +137,14 @@ function keyboardExampleApp() {
 
     function handleMouseMove(e) {
         // console.log('MouseMove', e);
+        var field = canvas.getBoundingClientRect();
+        var mouseX = e.clientX - field.left;
+        if (mouseX + player.width <= canvas.width) {
+            player.setPositionX(mouseX);
+        } else {
+            player.setPositionX(canvas.width - player.width);
+        }
+
         return false;
     }
 
@@ -140,6 +152,13 @@ function keyboardExampleApp() {
     {
         for(var index in playersList) {
             playersList[index].render();
+        }
+    }
+
+    function updatePlayers()
+    {
+        for(var index in playersList) {
+            playersList[index].update();
         }
     }
 
@@ -152,6 +171,8 @@ function keyboardExampleApp() {
         paintCanvas();
 
         paintPlayers();
+
+        updatePlayers();
         // playersList.forEach(function(e) { e.render(); });
         ball.draw();
 
