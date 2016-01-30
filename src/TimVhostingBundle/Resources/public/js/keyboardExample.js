@@ -19,6 +19,8 @@ function keyboardExampleApp() {
         fps = 60;
     var isDebug = false;
     var renderTimer = setInterval(draw, 1/fps*100);
+    var player = null;
+    var playersList = [];
 
     canvas.width = W;
     canvas.height = H;
@@ -33,6 +35,37 @@ function keyboardExampleApp() {
     var Player = function() {
         this.name = "playerName";
         this.color = "#FFFFFF";
+        this.position = new Point(0, 0);
+        this.width = 25;
+        this.height = 25;
+        this.speed = 2;
+    };
+
+    Player.prototype.render = function() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        ctx.fill();
+        writeLog('Render player');
+    };
+    Player.prototype.about = function() {
+        console.log('Player', this);
+    };
+    Player.prototype.changeStyle = function(color) {
+        this.color = color;
+    };
+    Player.prototype.changeSize = function(width, height) {
+        this.width = width;
+        this.height = height;
+    };
+    Player.prototype.setPositionX = function(newX) {
+        this.position.x = newX;
+    };
+    Player.prototype.setPositionY = function(newY) {
+        this.position.y = newY;
+    };
+    Player.prototype.changeSpeed = function(newSpeed) {
+        this.speed = newSpeed;
     };
 
     var Point = function(x1, y1) {
@@ -61,18 +94,53 @@ function keyboardExampleApp() {
     };
 
     function handleKeyDown(e) {
-        console.log('Keycode: ' + e.keyCode, e);
+        //console.log('Keycode: ' + e.keyCode, e);
+        var left = 37;
+        var right = 39;
+        var up = 38;
+        var down = 40;
+        var space = 32;
+        var keyCode = e.keyCode;
+
+        // todo: change to switch ?
+        if (keyCode == left) {
+            if (player.position.x - player.speed > 0) {
+                player.setPositionX(player.position.x - player.speed);
+            } else {
+                player.setPositionX(0);
+            }
+        } else if (keyCode == right) {
+            if (player.position.x + player.width + player.speed < canvas.width) {
+                player.setPositionX(player.position.x + player.speed);
+            } else {
+                player.setPositionX(canvas.width - player.width);
+            }
+        } else if (keyCode == up) {
+
+        } else if (keyCode == down) {
+
+        } else if (keyCode == space) {
+
+        }
+
         return false;
     }
 
     function handleClick(e) {
-        console.log('Click', e);
+        // console.log('Click', e);
         return false;
     }
 
     function handleMouseMove(e) {
-        console.log('MouseMove', e);
+        // console.log('MouseMove', e);
         return false;
+    }
+
+    function paintPlayers()
+    {
+        for(var index in playersList) {
+            playersList[index].render();
+        }
     }
 
     function paintCanvas() {
@@ -83,12 +151,21 @@ function keyboardExampleApp() {
     function draw() {
         paintCanvas();
 
+        paintPlayers();
+        // playersList.forEach(function(e) { e.render(); });
         ball.draw();
-        console.log('draw');
+
+        writeLog('draw');
     }
 
     function init() {
-        draw();
+        // draw();
+
+        player = new Player();
+        player.position.set(canvas.width / 2, canvas.height - player.height);
+        player.render();
+
+        playersList.push(player);
     }
 
     function writeLog(text, object) {
