@@ -17,7 +17,8 @@ function keyboardExampleApp() {
         W = 640, // window.innerWidth,
         H = 480, // window.innerHeight,
         fps = 30; // 60;
-    var isDebug = false;
+    var isDebug = true;
+    // var isDebug = false;
     var renderTimer = setInterval(draw, 1/fps*100);
     var player = null;
     var playersList = [];
@@ -46,9 +47,9 @@ function keyboardExampleApp() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
         ctx.fill();
-        writeLog('Render player');
+        // writeLog('Render player');
     };
-    Player.prototype.update = function() {
+    Player.prototype.update = function(time) {
         if (this.position.x < 0) this.setPositionX(0);
         if (this.position.x + this.width > canvas.width) this.setPositionX(canvas.width - this.width);
     };
@@ -81,6 +82,37 @@ function keyboardExampleApp() {
         this.x = x1;
         this.y = y1;
     };
+
+    var Bullet = function() {
+        this.name = "Bullet";
+        this.color = '#FFFFFF';
+        this.position = new Point(0, 0);
+        this.width = 15;
+        this.height = 15;
+        this.delay = 2;
+        this.speed = 20;
+    };
+
+    Bullet.prototype.update = function(time) {
+        this.position.y += (-this.speed) * time;
+    };
+    Bullet.prototype.render = function() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        ctx.fill();
+        // writeLog('Render bullet');
+    };
+
+    function fire(startPoint) {
+        // writeLog('fire');
+        var bullet = new Bullet();
+        bullet.position.set(player.position.x + player.width/2 - bullet.width/2 + startPoint.x,
+            player.position.y + player.width/2 - bullet.width/2 + startPoint.y);
+
+        playersList.push(bullet);
+        // writeLog('Bullet', bullet);
+    }
 
     var ball = {
         x: 0,
@@ -124,7 +156,7 @@ function keyboardExampleApp() {
         } else if (keyCode == down) {
 
         } else if (keyCode == space) {
-
+            fire(new Point(0, -player.width));
         }
 
         return false;
@@ -158,7 +190,7 @@ function keyboardExampleApp() {
     function updatePlayers()
     {
         for(var index in playersList) {
-            playersList[index].update();
+            playersList[index].update(1/fps);
         }
     }
 
@@ -176,7 +208,7 @@ function keyboardExampleApp() {
         // playersList.forEach(function(e) { e.render(); });
         ball.draw();
 
-        writeLog('draw');
+        // writeLog('draw');
     }
 
     function init() {
