@@ -30,6 +30,21 @@ function keyboardExampleApp() {
     document.addEventListener('click', handleClick, false);
     document.addEventListener('mousemove', handleMouseMove, false);
 
+    var Player = function() {
+        this.name = "playerName";
+        this.color = "#FFFFFF";
+    };
+
+    var Point = function(x1, y1) {
+        this.x = x1;
+        this.y = y1;
+    };
+
+    Point.prototype.set = function(x1, y1) {
+        this.x = x1;
+        this.y = y1;
+    };
+
     var ball = {
         x: 0,
         y: 0,
