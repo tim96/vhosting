@@ -17,6 +17,8 @@ function keyboardExampleApp() {
         W = 640, // window.innerWidth,
         H = 480, // window.innerHeight,
         fps = 60;
+    var isDebug = false;
+    var renderTimer = setInterval(draw, 1/fps*100);
 
     canvas.width = W;
     canvas.height = H;
@@ -25,13 +27,15 @@ function keyboardExampleApp() {
     // canvas.addEventListener('keydown', handleKeyDown, false);
     // or
     document.addEventListener('keydown', handleKeyDown, false);
+    document.addEventListener('click', handleClick, false);
+    document.addEventListener('mousemove', handleMouseMove, false);
 
     var ball = {
-        x: 50,
-        y: 50,
+        x: 0,
+        y: 0,
         c: "white",
-        w: 50,
-        h: 50,
+        w: 25,
+        h: 25,
 
         draw: function() {
             ctx.beginPath();
@@ -42,7 +46,17 @@ function keyboardExampleApp() {
     };
 
     function handleKeyDown(e) {
-        console.log('keycode: ' + e.keyCode, e);
+        console.log('Keycode: ' + e.keyCode, e);
+        return false;
+    }
+
+    function handleClick(e) {
+        console.log('Click', e);
+        return false;
+    }
+
+    function handleMouseMove(e) {
+        console.log('MouseMove', e);
         return false;
     }
 
@@ -55,10 +69,17 @@ function keyboardExampleApp() {
         paintCanvas();
 
         ball.draw();
+        console.log('draw');
     }
 
     function init() {
         draw();
+    }
+
+    function writeLog(text, object) {
+        if (isDebug) {
+            console.log(text, object);
+        }
     }
 
     init();
