@@ -71,6 +71,7 @@ angular.module('7minWorkout')
 
             $interval(function () {
                 $scope.workoutTimeRemaining--;
+                console.log('Decrease time remaining');
             }, 1000, $scope.workoutTimeRemaining);
 
             startExercise(workoutPlan.exercises.shift());
@@ -95,7 +96,8 @@ angular.module('7minWorkout')
                             Slightly bend your knees, and propel yourself a few inches into the air.\
                             While in air, bring your legs out to the side about shoulder width or slightly wider.\
                             As you are moving your legs outward, you should raise your arms up over your head; arms should be slightly bent throughout the entire in-air movement.\
-                            Your feet should land shoulder width or wider as your hands meet above your head with arms slightly bent"
+                            Your feet should land shoulder width or wider as your hands meet above your head with arms slightly bent",
+                    nameSound: "content/jumpingjacks.wav"
                 }),
                 duration: 20
             });
@@ -108,7 +110,8 @@ angular.module('7minWorkout')
                     image: "images/wallsit.png",
                     videos: ["//www.youtube.com/embed/y-wV4Venusw", "//www.youtube.com/embed/MMV3v4ap4ro"],
                     procedure: "Place your back against a wall with your feet shoulder width apart and a little ways out from the wall.\
-                              Then, keeping your back against the wall, lower your hips until your knees form right angles. "
+                              Then, keeping your back against the wall, lower your hips until your knees form right angles. ",
+                    nameSound: "content/jumpingjacks.wav"
                 }),
                 duration: 20
             });
@@ -122,6 +125,7 @@ angular.module('7minWorkout')
             $interval(
                 function () {
                     ++$scope.currentExerciseDuration;
+                    console.log('Decrease current exercise duration');
                 }, 1000, $scope.currentExercise.duration
             ).then(function () {
                 var next = getNextExercise(exercisePlan);
@@ -171,7 +175,13 @@ angular.module('7minWorkout')
         // All the previous changes will trigger the listener except the last one.
 
         var init = function () {
+            console.log('init');
             startWorkout();
+        };
+
+        $scope.initTest = function() {
+        //    console.log('initTest');
+        //    startWorkout();
         };
 
         init();
