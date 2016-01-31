@@ -22,6 +22,9 @@ function keyboardExampleApp() {
     var renderTimer = setInterval(draw, 1/fps*100);
     var player = null;
     var playersList = [];
+    var timeSpend = 0;
+    var timeBarrierAppear = 500; // 500 ms
+    var barrierTimer = null;
 
     canvas.width = W;
     canvas.height = H;
@@ -64,6 +67,10 @@ function keyboardExampleApp() {
         this.position.x = newX;
     };
     BaseObject.prototype.setPositionY = function(newY) {
+        this.position.y = newY;
+    };
+    BaseObject.prototype.setPosition = function(newX, newY) {
+        this.position.x = newX;
         this.position.y = newY;
     };
     BaseObject.prototype.changeSpeed = function(newSpeed) {
@@ -132,7 +139,7 @@ function keyboardExampleApp() {
     var Barrier = function() {
         BaseObject.call(this);
         this.name = "Barrier";
-        this.color = '#FFFFFF';
+        this.color = getRandomColor();
         this.position = new Point(0, 0);
         this.width = 15;
         this.height = 15;
@@ -141,6 +148,27 @@ function keyboardExampleApp() {
 
     Barrier.prototype = Object.create(BaseObject.prototype);
     Barrier.prototype.constructor = BaseObject;
+
+    function createBarier() {
+        var barrier = new Barrier();
+
+        var diffX = Math.floor((Math.random() * canvas.width));
+        var diffY = -barrier.height;
+
+        barrier.setPosition(diffX, diffY);
+
+        downMove(barrier);
+
+        playersList.push(barrier);
+        writeLog('Create barier', barrier);
+    }
+
+    function downMove(object) {
+        object.update = function(time){
+            // this.position.x = 0;
+            this.position.y += this.speed * time;
+        }
+    }
 
     /*var ball = {
         x: 0,
@@ -247,6 +275,14 @@ function keyboardExampleApp() {
         // writeLog('draw');
     }
 
+    function initTimer() {
+        barrierTimer = setInterval(createBarier, timeBarrierAppear);
+    }
+
+    function clearTimer() {
+        clearInterval(barrierTimer);
+    }
+
     function init() {
         // draw();
 
@@ -255,6 +291,17 @@ function keyboardExampleApp() {
         player.render();
 
         playersList.push(player);
+
+        initTimer();
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 
     function writeLog(text, object) {
