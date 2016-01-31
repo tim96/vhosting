@@ -34,7 +34,44 @@ function keyboardExampleApp() {
     // document.addEventListener('click', handleClick, false);
     // document.addEventListener('mousemove', handleMouseMove, false);
 
+    var BaseObject = function() {
+        this.name = "BaseObject";
+        this.color = '#FFFFFF';
+        this.position = new Point(0, 0);
+        this.width = 15;
+        this.height = 15;
+        this.speed = 10;
+    };
+    BaseObject.prototype.render = function() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        ctx.fill();
+        // writeLog('Render baseObject');
+    };
+    BaseObject.prototype.about = function() {
+        console.log('about object', this);
+        // writeLog('About object');
+    };
+    BaseObject.prototype.changeStyle = function(color) {
+        this.color = color;
+    };
+    BaseObject.prototype.changeSize = function(width, height) {
+        this.width = width;
+        this.height = height;
+    };
+    BaseObject.prototype.setPositionX = function(newX) {
+        this.position.x = newX;
+    };
+    BaseObject.prototype.setPositionY = function(newY) {
+        this.position.y = newY;
+    };
+    BaseObject.prototype.changeSpeed = function(newSpeed) {
+        this.speed = newSpeed;
+    };
+
     var Player = function() {
+        BaseObject.call(this);
         this.name = "playerName";
         this.color = "#FFFFFF";
         this.position = new Point(0, 0);
@@ -42,36 +79,16 @@ function keyboardExampleApp() {
         this.height = 25;
         this.speed = 2;
     };
+    Player.prototype = Object.create(BaseObject.prototype);
+    Player.prototype.constructor = BaseObject;
 
-    Player.prototype.render = function() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        ctx.fill();
-        // writeLog('Render player');
-    };
     Player.prototype.update = function(time) {
         if (this.position.x < 0) this.setPositionX(0);
         if (this.position.x + this.width > canvas.width) this.setPositionX(canvas.width - this.width);
     };
+    // override function about player
     Player.prototype.about = function() {
         console.log('Player', this);
-    };
-    Player.prototype.changeStyle = function(color) {
-        this.color = color;
-    };
-    Player.prototype.changeSize = function(width, height) {
-        this.width = width;
-        this.height = height;
-    };
-    Player.prototype.setPositionX = function(newX) {
-        this.position.x = newX;
-    };
-    Player.prototype.setPositionY = function(newY) {
-        this.position.y = newY;
-    };
-    Player.prototype.changeSpeed = function(newSpeed) {
-        this.speed = newSpeed;
     };
 
     var Point = function(x1, y1) {
@@ -85,6 +102,7 @@ function keyboardExampleApp() {
     };
 
     var Bullet = function() {
+        BaseObject.call(this);
         this.name = "Bullet";
         this.color = '#FFFFFF';
         this.position = new Point(0, 0);
@@ -94,15 +112,11 @@ function keyboardExampleApp() {
         this.speed = 20;
     };
 
+    Bullet.prototype = Object.create(BaseObject.prototype);
+    Bullet.prototype.constructor = BaseObject;
+
     Bullet.prototype.update = function(time) {
         this.position.y += (-this.speed) * time;
-    };
-    Bullet.prototype.render = function() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        ctx.fill();
-        // writeLog('Render bullet');
     };
 
     function fire(startPoint) {
@@ -115,7 +129,20 @@ function keyboardExampleApp() {
         // writeLog('Bullet', bullet);
     }
 
-    var ball = {
+    var Barrier = function() {
+        BaseObject.call(this);
+        this.name = "Barrier";
+        this.color = '#FFFFFF';
+        this.position = new Point(0, 0);
+        this.width = 15;
+        this.height = 15;
+        this.speed = 10;
+    };
+
+    Barrier.prototype = Object.create(BaseObject.prototype);
+    Barrier.prototype.constructor = BaseObject;
+
+    /*var ball = {
         x: 0,
         y: 0,
         c: "white",
@@ -128,7 +155,7 @@ function keyboardExampleApp() {
             ctx.fillRect(this.x, this.y, this.w, this.h);
             ctx.fill();
         }
-    };
+    };*/
 
     function handleKeyDown(e) {
         //console.log('Keycode: ' + e.keyCode, e);
@@ -209,11 +236,14 @@ function keyboardExampleApp() {
         paintCanvas();
 
         paintPlayers();
+        // another way
+        // playersList.forEach(function(e) { e.render(); });
 
         updatePlayers();
-        // playersList.forEach(function(e) { e.render(); });
-        ball.draw();
+        // another way
+        // playersList.forEach(function(e) { e.update(1/fps); });
 
+        // ball.draw();
         // writeLog('draw');
     }
 
