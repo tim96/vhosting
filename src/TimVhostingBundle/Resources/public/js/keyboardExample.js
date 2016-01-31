@@ -11,6 +11,16 @@ function keyboardExampleApp() {
         return;
     }
 
+    var stats = new Stats();
+    stats.setMode(0); // 0: fps, 1: ms, 2: mb
+
+    // align top-left
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+
+    document.body.appendChild( stats.domElement );
+
     // Initialize canvas and required variables
     var canvas = document.getElementById("example"),
         ctx = canvas.getContext("2d"),
@@ -261,6 +271,8 @@ function keyboardExampleApp() {
     }
 
     function draw() {
+        stats.begin();
+
         paintCanvas();
 
         paintPlayers();
@@ -273,6 +285,8 @@ function keyboardExampleApp() {
 
         // ball.draw();
         // writeLog('draw');
+
+        stats.end();
     }
 
     function initTimer() {
