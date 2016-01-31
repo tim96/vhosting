@@ -30,7 +30,8 @@ function keyboardExampleApp() {
     // canvas.addEventListener('keydown', handleKeyDown, false);
     // or
     document.addEventListener('keydown', handleKeyDown, false);
-    document.addEventListener('click', handleClick, false);
+    // disable mouse events for debug
+    // document.addEventListener('click', handleClick, false);
     // document.addEventListener('mousemove', handleMouseMove, false);
 
     var Player = function() {
@@ -164,6 +165,11 @@ function keyboardExampleApp() {
 
     function handleClick(e) {
         // console.log('Click', e);
+        // fire only left button click on mouse
+        if (e.button == 0) {
+            fire(new Point(0, -player.width));
+        }
+
         return false;
     }
 
