@@ -17,12 +17,14 @@ function constellationExampleApp() {
     // var isDebug = false;
     var velocity = 0.2;
     var length = 200;
+    var countStar = 250;
     var config = {
         star: {
             color: '#FFFFFF',
             width: 2
         }
     };
+    var stars = [];
 
     function init() {
         if (!isCanvasSupport()) {
@@ -33,6 +35,8 @@ function constellationExampleApp() {
         initCanvas();
 
         initStats();
+
+        createStars();
     }
 
     function initStats() {
@@ -51,6 +55,10 @@ function constellationExampleApp() {
         canvas.height = window.innerHeight;
     }
 
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
     var Star = function() {
         this.x = getRandom() * canvas.width;
         this.y = getRandom() * canvas.height;
@@ -59,15 +67,30 @@ function constellationExampleApp() {
         this.vy = (velocity - (getRandom() * 0.5));
 
         this.radius = getRandom() * config.star.width;
+        this.color = config.star.color;
     };
 
     Star.prototype.render = function() {
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        context.fill();
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        ctx.fill();
 
         writeLog('Render star');
     };
+
+    function createStars() {
+        var count = countStar;
+
+        clearCanvas();
+
+        for(var index = 0; index < count; index++) {
+            var tempStar = new Star();
+            tempStar.render();
+
+            stars.push(tempStar);
+        }
+    }
 
     function getRandom() {
         return Math.random();
