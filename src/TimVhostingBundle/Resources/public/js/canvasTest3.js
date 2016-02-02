@@ -16,8 +16,12 @@ function constellationExampleApp() {
     var isDebug = true;
     // var isDebug = false;
     var velocity = 0.2;
-    var length = 200;
-    var countStar = 250;
+    var distance = 120;
+    var countStar = 400;
+    var positionX = 0;
+    var positionY = 0;
+    var radius = 150;
+    var selectColor = '#FF0000';
     var config = {
         star: {
             color: '#FFFFFF',
@@ -79,17 +83,77 @@ function constellationExampleApp() {
         writeLog('Render star');
     };
 
+    Star.prototype.connect = function() {
+        var count = countStar;
+        var starOne = null;
+        var starTwo = null;
+
+        for(var i = 0; i < count; i++) {
+            for(var j = 0; j < count; j++) {
+                starOne = stars[i];
+                starTwo = stars[j];
+
+                var diffX = starOne.x - starTwo.x;
+                var diffY = starOne.y - starTwo.y;
+
+                if (diffX < distance && diffY < distance &&
+                    diffX > - distance && diffY > - distance)
+                {
+                    diffX = starOne.x - positionX;
+                    diffY = starOne.y - positionY;
+
+                    if (diffX < radius && diffY < radius &&
+                        diffX > - radius && diffY > - radius) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = selectColor;
+                        // ctx.fillStyle = selectColor;
+                        ctx.moveTo(starOne.x, starOne.y);
+                        ctx.lineTo(starTwo.x, starTwo.y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+        writeLog('Connect stars');
+    };
+
+    Star.prototype.move = function() {
+        var count = countStar;
+
+        for (var i = 0; i < count; i++) {
+            var star = stars[i];
+
+            if (star.y < 0 || star.y > canvas.height) {
+                // star.vx = star.vx;
+                star.vy = - star.vy;
+            } else if (star.x < 0 || star.x > canvas.width) {
+                star.vx = - star.vx;
+                // star.vy = star.vy;
+            }
+
+            star.x += star.vx;
+            star.y += star.vy;
+        }
+
+        writeLog('Move stars');
+    };
+
     function createStars() {
         var count = countStar;
+        var tempStar = null;
 
         clearCanvas();
 
         for(var index = 0; index < count; index++) {
-            var tempStar = new Star();
+            tempStar = new Star();
             tempStar.render();
 
             stars.push(tempStar);
         }
+
+        tempStar.connect();
+        tempStar.move();
     }
 
     function getRandom() {
