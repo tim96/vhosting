@@ -13,14 +13,14 @@ function constellationExampleApp() {
     var fps = 60;
     var canvas = null;
     var ctx = null;
-    var isDebug = true;
-    // var isDebug = false;
+    // var isDebug = true;
+    var isDebug = false;
     var velocity = 0.2;
-    var distance = 120;
+    var distance = 100;
     var countStar = 400;
     var positionX = 0;
     var positionY = 0;
-    var radius = 150;
+    var radius = 200;
     var selectColor = '#FF0000';
     var config = {
         star: {
@@ -29,6 +29,7 @@ function constellationExampleApp() {
         }
     };
     var stars = [];
+    var stats = null;
 
     function init() {
         if (!isCanvasSupport()) {
@@ -48,9 +49,13 @@ function constellationExampleApp() {
     }
 
     function initMove() {
+        stats.begin();
+
         paintStars();
         connect();
         move();
+
+        stats.end();
     }
 
     function initMouseEvents() {
@@ -66,7 +71,7 @@ function constellationExampleApp() {
     }
 
     function initStats() {
-        var stats = new Stats();
+        stats = new Stats();
         stats.setMode(0);
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.left = '0px';
