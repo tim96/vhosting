@@ -41,6 +41,26 @@ function constellationExampleApp() {
         initStats();
 
         createStars();
+
+        initMouseEvents();
+
+        var renderTimer = setInterval(initMove, 1/fps*100);
+    }
+
+    function initMove() {
+        createStars();
+    }
+
+    function initMouseEvents() {
+        document.addEventListener('mousemove', handleMouseMove, false);
+    }
+
+    function handleMouseMove(e) {
+        // console.log('Mouse move', e);
+
+        var field = canvas.getBoundingClientRect();
+        positionX = e.clientX - field.left;
+        positionY = e.clientY - field.top;
     }
 
     function initStats() {
