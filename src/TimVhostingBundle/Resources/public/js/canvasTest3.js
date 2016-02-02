@@ -10,7 +10,7 @@ function constellationExampleApp() {
         return Modernizr.canvas;
     }
 
-    var fps = 30;
+    var fps = 60;
     var canvas = null;
     var ctx = null;
     var isDebug = true;
@@ -48,7 +48,9 @@ function constellationExampleApp() {
     }
 
     function initMove() {
-        createStars();
+        paintStars();
+        connect();
+        move();
     }
 
     function initMouseEvents() {
@@ -103,7 +105,7 @@ function constellationExampleApp() {
         writeLog('Render star');
     };
 
-    Star.prototype.connect = function() {
+    function connect() {
         var count = countStar;
         var starOne = null;
         var starTwo = null;
@@ -136,9 +138,9 @@ function constellationExampleApp() {
             }
         }
         writeLog('Connect stars');
-    };
+    }
 
-    Star.prototype.move = function() {
+    function move() {
         var count = countStar;
 
         for (var i = 0; i < count; i++) {
@@ -157,7 +159,7 @@ function constellationExampleApp() {
         }
 
         writeLog('Move stars');
-    };
+    }
 
     function createStars() {
         var count = countStar;
@@ -172,8 +174,17 @@ function constellationExampleApp() {
             stars.push(tempStar);
         }
 
-        tempStar.connect();
-        tempStar.move();
+        connect();
+        move();
+    }
+
+    function paintStars() {
+        clearCanvas();
+
+        for(var index in stars) {
+            var tempStar = stars[index];
+            tempStar.render();
+        }
     }
 
     function getRandom() {
