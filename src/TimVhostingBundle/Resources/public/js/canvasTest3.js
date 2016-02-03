@@ -6,15 +6,10 @@ function windowLoadHandlerNew() {
 
 function constellationExampleApp() {
 
-    function isCanvasSupport() {
-        return Modernizr.canvas;
-    }
-
     var fps = 60;
-    var canvas = null;
-    var ctx = null;
-    // var isDebug = true;
-    var isDebug = false;
+    var canvasObject = null;
+    window.isDebug = false;
+    // window.isDebug = true;
     var velocity = 0.2;
     var distance = 100;
     var countStar = 400;
@@ -30,6 +25,7 @@ function constellationExampleApp() {
     };
     var stars = [];
     var stats = null;
+    var canvasId = 'example';
 
     function init() {
         if (!isCanvasSupport()) {
@@ -37,9 +33,9 @@ function constellationExampleApp() {
             return;
         }
 
-        initCanvas();
+        canvasObject = new CanvasObject(canvasId);
 
-        initStats();
+        stats = initStats();
 
         createStars();
 
@@ -65,34 +61,14 @@ function constellationExampleApp() {
     function handleMouseMove(e) {
         // console.log('Mouse move', e);
 
-        var field = canvas.getBoundingClientRect();
+        var field = canvasObject.canvas.getBoundingClientRect();
         positionX = e.clientX - field.left;
         positionY = e.clientY - field.top;
     }
 
-    function initStats() {
-        stats = new Stats();
-        stats.setMode(0);
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.left = '0px';
-        stats.domElement.style.top = '0px';
-        document.body.appendChild(stats.domElement);
-    }
-
-    function initCanvas() {
-        canvas = document.getElementById("example");
-        ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    function clearCanvas() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
     var Star = function() {
-        this.x = getRandom() * canvas.width;
-        this.y = getRandom() * canvas.height;
+        this.x = getRandom() * canvasObject.canvas.width;
+        this.y = getRandom() * canvasObject.canvas.height;
 
         this.vx = (velocity - (getRandom() * 0.5));
         this.vy = (velocity - (getRandom() * 0.5));
@@ -102,12 +78,12 @@ function constellationExampleApp() {
     };
 
     Star.prototype.render = function() {
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.fill();
+        canvasObject.ctx.beginPath();
+        canvasObject.ctx.fillStyle = this.color;
+        canvasObject.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        canvasObject.ctx.fill();
 
-        writeLog('Render star');
+        // writeLog('Render star');
     };
 
     function connect() {
@@ -131,18 +107,19 @@ function constellationExampleApp() {
 
                     if (diffX < radius && diffY < radius &&
                         diffX > - radius && diffY > - radius) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = selectColor;
+                        canvasObject.ctx.beginPath();
+                        canvasObject.ctx.strokeStyle = selectColor;
                         // ctx.fillStyle = selectColor;
-                        ctx.moveTo(starOne.x, starOne.y);
-                        ctx.lineTo(starTwo.x, starTwo.y);
-                        ctx.stroke();
-                        ctx.closePath();
+                        canvasObject.ctx.moveTo(starOne.x, starOne.y);
+                        canvasObject.ctx.lineTo(starTwo.x, starTwo.y);
+                        canvasObject.ctx.stroke();
+                        canvasObject.ctx.closePath();
                     }
                 }
             }
         }
-        writeLog('Connect stars');
+
+        // writeLog('Connect stars');
     }
 
     function move() {
@@ -151,10 +128,10 @@ function constellationExampleApp() {
         for (var i = 0; i < count; i++) {
             var star = stars[i];
 
-            if (star.y < 0 || star.y > canvas.height) {
+            if (star.y < 0 || star.y > canvasObject.canvas.height) {
                 // star.vx = star.vx;
                 star.vy = - star.vy;
-            } else if (star.x < 0 || star.x > canvas.width) {
+            } else if (star.x < 0 || star.x > canvasObject.canvas.width) {
                 star.vx = - star.vx;
                 // star.vy = star.vy;
             }
@@ -163,14 +140,14 @@ function constellationExampleApp() {
             star.y += star.vy;
         }
 
-        writeLog('Move stars');
+        // writeLog('Move stars');
     }
 
     function createStars() {
         var count = countStar;
         var tempStar = null;
 
-        clearCanvas();
+        canvasObject.clearCanvas();
 
         for(var index = 0; index < count; index++) {
             tempStar = new Star();
@@ -184,21 +161,11 @@ function constellationExampleApp() {
     }
 
     function paintStars() {
-        clearCanvas();
+        canvasObject.clearCanvas();
 
         for(var index in stars) {
             var tempStar = stars[index];
             tempStar.render();
-        }
-    }
-
-    function getRandom() {
-        return Math.random();
-    }
-
-    function writeLog(text, object) {
-        if (isDebug) {
-            console.log(text, object);
         }
     }
 
