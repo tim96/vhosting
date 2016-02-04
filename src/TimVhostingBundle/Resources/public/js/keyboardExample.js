@@ -35,6 +35,7 @@ function keyboardExampleApp() {
     var timeSpend = 0;
     var timeBarrierAppear = 500; // 500 ms
     var barrierTimer = null;
+    var isStart = false;
 
     canvas.width = W;
     canvas.height = H;
@@ -324,11 +325,30 @@ function keyboardExampleApp() {
         }
     }
 
+    this.stop = function() {
+        clearInterval(renderTimer);
+        clearInterval(barrierTimer);
+
+        writeLog('stop timers', 1);
+    };
+
     init();
+
+    return this;
 }
 
-
-
 function windowLoadHandlerNew() {
-    keyboardExampleApp();
+    // keyboardExampleApp();
+    var application = null;
+
+    $('#start').click(function() {
+        application = keyboardExampleApp();
+    });
+
+    $('#stop').click(function() {
+        if (application != null) {
+            application.stop();
+            application = null;
+        }
+    });
 }

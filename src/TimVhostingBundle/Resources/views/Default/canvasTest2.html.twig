@@ -36,6 +36,8 @@
         <!-- Example. Paint rectangle. Move rectangle using keyboard. -->
         <canvas id='example' tabindex='1'>Your browser does not support HTML5 canvas.</canvas>
     </div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
 {% endblock body %}
 
 {% block javascripts %}
@@ -45,6 +47,7 @@
 
     {% javascripts '@TimVhostingBundle/Resources/public/js/bootstrap.min.js'
         '@TimVhostingBundle/Resources/public/js/modernizr-canvas.js'
+        '@TimVhostingBundle/Resources/public/js/utilsFunctions.js'
         '@TimVhostingBundle/Resources/public/js/keyboardExample.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
