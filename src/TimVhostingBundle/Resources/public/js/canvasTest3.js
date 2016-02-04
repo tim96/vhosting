@@ -39,7 +39,7 @@ function constellationExampleApp() {
 
         createStars();
 
-        initMouseEvents();
+        initMouseEvents(handleMouseMove);
 
         var renderTimer = setInterval(initMove, 1/fps*100);
     }
@@ -52,10 +52,6 @@ function constellationExampleApp() {
         move();
 
         stats.end();
-    }
-
-    function initMouseEvents() {
-        document.addEventListener('mousemove', handleMouseMove, false);
     }
 
     function handleMouseMove(e) {
