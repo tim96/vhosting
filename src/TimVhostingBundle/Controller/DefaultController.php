@@ -283,4 +283,13 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/webglTest1", name="webgl_test1")
+     * @Template("TimVhostingBundle:Default:webglTest1.html.twig")
+     */
+    public function webglTest1Action(Request $request)
+    {
+        return array();
+    }
 }
