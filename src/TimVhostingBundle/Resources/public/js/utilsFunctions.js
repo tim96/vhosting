@@ -76,3 +76,27 @@ function intersect(sx1, sy1, sx2, sy2, dx1, dy1, dx2, dy2) {
     }
     return ! (dw <= 0 || dh <= 0);
 }
+
+// todo: check this function
+function intersectFromPhp($p0_x, $p0_y, $p1_x, $p1_y, $p2_x, $p2_y, $p3_x, $p3_y) {
+    var $s1_x = $p1_x - $p0_x;
+    var $s1_y = $p1_y - $p0_y;
+    var $s2_x = $p3_x - $p2_x;
+    var $s2_y = $p3_y - $p2_y;
+
+    var $fps = (-$s2_x * $s1_y) + ($s1_x * $s2_y);
+    var $fpt = (-$s2_x * $s1_y) + ($s1_x * $s2_y);
+
+    if ($fps == 0 || $fpt == 0) {
+        return false;
+    }
+
+    var $s = (-$s1_y * ($p0_x - $p2_x) + $s1_x * ($p0_y - $p2_y)) / $fps;
+    var $t = ( $s2_x * ($p0_y - $p2_y) - $s2_y * ($p0_x - $p2_x)) / $fpt;
+
+    if ($s > 0 && $s < 1 && $t > 0 && $t < 1) {
+        // Collision detected
+        return true;
+    }
+    return false;
+}
