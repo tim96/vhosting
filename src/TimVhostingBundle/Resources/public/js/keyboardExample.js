@@ -27,9 +27,8 @@ function keyboardExampleApp() {
 
     var player = null;
     var playersList = [];
-    var playersListRemove = [];
     var timeSpend = 0;
-    var timeBarrierAppear = 500; // 500 ms
+    var timeBarrierAppear = 1000; // 500 ms
     var timeRender = 1/fps*100;
     var renderTimer = null;
     var barrierTimer = null;
@@ -83,6 +82,9 @@ function keyboardExampleApp() {
     BaseObject.prototype.changeSpeed = function(newSpeed) {
         this.speed = newSpeed;
     };
+    BaseObject.prototype.isDeleted = function() {
+        return this.position.y < 0;
+    };
 
     var Player = function() {
         BaseObject.call(this);
@@ -132,6 +134,9 @@ function keyboardExampleApp() {
     Bullet.prototype.update = function(time) {
         this.position.y += (-this.speed) * time;
     };
+    Bullet.prototype.isDeleted = function() {
+        return this.position.y + this.height < 0;
+    };
 
     function fire(startPoint) {
         // writeLog('fire');
@@ -150,16 +155,24 @@ function keyboardExampleApp() {
         this.position = new Point(0, 0);
         this.width = 15;
         this.height = 15;
-        this.speed = 10;
+        this.speed = 20;
     };
 
     Barrier.prototype = Object.create(BaseObject.prototype);
     Barrier.prototype.constructor = BaseObject;
 
+    Barrier.prototype.isDeleted = function() {
+        return (this.position.y > canvas.height + 20);
+    };
+
     function createBarier() {
         var barrier = new Barrier();
 
         var diffX = Math.floor((Math.random() * canvas.width));
+        var maxX = canvas.width - barrier.width;
+        if (diffX > maxX) {
+            diffX = maxX;
+        }
         var diffY = -barrier.height;
 
         barrier.setPosition(diffX, diffY);
@@ -243,9 +256,16 @@ function keyboardExampleApp() {
 
     function updatePlayers()
     {
-        for(var index in playersList) {
-            playersList[index].update(1/fps);
+        for(var i = 0, len = playersList.length; i < len; i++) {
+            if (playersList[i].isDeleted()) {
+                playersList.splice(i, 1);
+                return;
+            }
+
+            playersList[i].update(1/fps);
         }
+
+        // writeLog('count Players', playersList.length);
     }
 
     function paintCanvas() {
@@ -266,7 +286,6 @@ function keyboardExampleApp() {
         // another way
         // playersList.forEach(function(e) { e.update(1/fps); });
 
-        // ball.draw();
         // writeLog('draw');
     }
 
@@ -287,11 +306,20 @@ function keyboardExampleApp() {
         initTimers();
     }
 
+    this.destroy = function() {
+
+        paintCanvas();
+
+        player = null;
+        playersList = [];
+
+        this.stopTimers();
+    };
+
     this.stopTimers = function() {
         clearInterval(renderTimer);
         clearInterval(barrierTimer);
 
-        paintCanvas();
         // writeLog('stop timers', 1);
     };
 
@@ -310,7 +338,7 @@ function windowLoadHandlerNew() {
 
     $('#stop').click(function() {
         if (application != null) {
-            application.stopTimers();
+            application.destroy();
             application = null;
         }
     });
