@@ -11,8 +11,17 @@ function CanvasObject(canvasId) {
         this.canvas.height = window.innerHeight;
     };
 
-    this.clearCanvas = function() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.clearCanvas = function(color) {
+        this.ctx.fillStyle = color;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    };
+
+    this.setCanvasWidth = function(width) {
+        this.canvas.width = width;
+    };
+
+    this.setCanvasHeight = function(height) {
+        this.canvas.height = height;
     };
 
     this.initCanvas();
@@ -30,6 +39,15 @@ function initStats() {
 
 function getRandom() {
     return Math.random();
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 function isCanvasSupport() {

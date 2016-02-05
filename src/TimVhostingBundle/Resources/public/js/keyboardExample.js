@@ -10,25 +10,30 @@ function keyboardExampleApp() {
     var stats = initStats();
 
     // Initialize canvas and required variables
-    var canvas = document.getElementById("example"),
-        ctx = canvas.getContext("2d"),
-        W = 640, // window.innerWidth,
-        H = 480, // window.innerHeight,
-        fps = 30; // 60;
+    var canvasId = 'example';
+    var canvasColor = 'green';
+    var canvasObject = new CanvasObject(canvasId);
+    var canvas = canvasObject.canvas;
+
+    var W = 640;  // window.innerWidth,
+    var H = 480;  // window.innerHeight,
+    var fps = 30; // 60;
+
+    canvasObject.setCanvasWidth(W);
+    canvasObject.setCanvasHeight(H);
 
     window.isDebug = true;
     // window.isDebug = false;
 
-    var renderTimer = setInterval(draw, 1/fps*100);
     var player = null;
     var playersList = [];
+    var playersListRemove = [];
     var timeSpend = 0;
     var timeBarrierAppear = 500; // 500 ms
+    var timeRender = 1/fps*100;
+    var renderTimer = null;
     var barrierTimer = null;
     var isStart = false;
-
-    canvas.width = W;
-    canvas.height = H;
 
     // use <canvas id='example' tabindex='1'>
     // canvas.addEventListener('keydown', handleKeyDown, false);
@@ -41,13 +46,13 @@ function keyboardExampleApp() {
 
     var BaseObject = function() {
         this.name = "BaseObject";
-        this.color = '#FFFFFF';
+        this.color = '#FFF000';
         this.position = new Point(0, 0);
         this.width = 15;
         this.height = 15;
         this.speed = 10;
     };
-    BaseObject.prototype.render = function() {
+    BaseObject.prototype.render = function(ctx) {
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -162,7 +167,8 @@ function keyboardExampleApp() {
         downMove(barrier);
 
         playersList.push(barrier);
-        writeLog('Create barier', barrier);
+
+        // writeLog('Create barier', barrier);
     }
 
     function downMove(object) {
@@ -228,10 +234,10 @@ function keyboardExampleApp() {
         return false;
     }
 
-    function paintPlayers()
+    function paintPlayers(ctx)
     {
         for(var index in playersList) {
-            playersList[index].render();
+            playersList[index].render(ctx);
         }
     }
 
@@ -243,8 +249,7 @@ function keyboardExampleApp() {
     }
 
     function paintCanvas() {
-        ctx.fillStyle = "green";
-        ctx.fillRect(0, 0, W, H);
+        canvasObject.clearCanvas(canvasColor);
     }
 
     function draw() {
@@ -252,9 +257,10 @@ function keyboardExampleApp() {
 
         paintCanvas();
 
-        paintPlayers();
+        paintPlayers(canvasObject.ctx);
         // another way
         // playersList.forEach(function(e) { e.render(); });
+        stats.end();
 
         updatePlayers();
         // another way
@@ -262,53 +268,34 @@ function keyboardExampleApp() {
 
         // ball.draw();
         // writeLog('draw');
-
-        stats.end();
     }
 
-    function initTimer() {
+    function initTimers() {
+        renderTimer = setInterval(draw, timeRender);
         barrierTimer = setInterval(createBarier, timeBarrierAppear);
+
+        // writeLog('initTimers', timeRender);
     }
 
-    function clearTimer() {
-        clearInterval(barrierTimer);
-    }
-
-    function init() {
-        // draw();
-
+    function init(canvasObject) {
         player = new Player();
-        player.position.set(canvas.width / 2, canvas.height - player.height);
-        player.render();
+        player.position.set(canvasObject.canvas.width / 2, canvasObject.canvas.height - player.height);
+        player.render(canvasObject.ctx);
 
         playersList.push(player);
 
-        initTimer();
+        initTimers();
     }
 
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    function writeLog(text, object) {
-        if (isDebug) {
-            console.log(text, object);
-        }
-    }
-
-    this.stop = function() {
+    this.stopTimers = function() {
         clearInterval(renderTimer);
         clearInterval(barrierTimer);
 
-        writeLog('stop timers', 1);
+        paintCanvas();
+        // writeLog('stop timers', 1);
     };
 
-    init();
+    init(canvasObject);
 
     return this;
 }
@@ -323,7 +310,7 @@ function windowLoadHandlerNew() {
 
     $('#stop').click(function() {
         if (application != null) {
-            application.stop();
+            application.stopTimers();
             application = null;
         }
     });
