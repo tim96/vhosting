@@ -43,10 +43,11 @@ function keyboardExampleApp() {
     // use <canvas id='example' tabindex='1'>
     // canvas.addEventListener('keydown', handleKeyDown, false);
     // or
-    document.addEventListener('keydown', handleKeyDown, false);
+    // document.addEventListener('keydown', handleKeyDown, false);
     // disable mouse events for debug
     // document.addEventListener('click', handleClick, false);
     // document.addEventListener('mousemove', handleMouseMove, false);
+    initKeyDown(handleKeyDown);
 
     var BaseObject = function() {
         this.name = "BaseObject";
@@ -180,21 +181,6 @@ function keyboardExampleApp() {
             this.position.y += this.speed * time;
         }
     }
-
-    /*var ball = {
-        x: 0,
-        y: 0,
-        c: "white",
-        w: 25,
-        h: 25,
-
-        draw: function() {
-            ctx.beginPath();
-            ctx.fillStyle = this.c;
-            ctx.fillRect(this.x, this.y, this.w, this.h);
-            ctx.fill();
-        }
-    };*/
 
     function handleKeyDown(e) {
         //console.log('Keycode: ' + e.keyCode, e);

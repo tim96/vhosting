@@ -40,6 +40,14 @@ function initMouseEvents(handleEvent) {
     document.addEventListener('mousemove', handleEvent, false);
 }
 
+function initMouseClick(handleEvent) {
+    document.addEventListener('click', handleEvent, false);
+}
+
+function initKeyDown(handleKeyDown) {
+    document.addEventListener('keydown', handleKeyDown, false);
+}
+
 function writeLog(text, object) {
     if (window.isDebug) {
         console.log(text, object);
