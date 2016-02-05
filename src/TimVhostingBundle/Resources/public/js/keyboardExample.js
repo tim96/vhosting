@@ -1,25 +1,13 @@
 window.addEventListener("load", windowLoadHandlerNew, false);
 
-function canvasSupport() {
-    return Modernizr.canvas;
-}
-
 function keyboardExampleApp() {
 
-    if (!canvasSupport()) {
-        console.log('Your browser does not support HTML5 canvas.')
+    if (!isCanvasSupport()) {
+        console.log('Your browser does not support HTML5 canvas.');
         return;
     }
 
-    var stats = new Stats();
-    stats.setMode(0); // 0: fps, 1: ms, 2: mb
-
-    // align top-left
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.left = '0px';
-    stats.domElement.style.top = '0px';
-
-    document.body.appendChild( stats.domElement );
+    var stats = initStats();
 
     // Initialize canvas and required variables
     var canvas = document.getElementById("example"),
@@ -27,8 +15,10 @@ function keyboardExampleApp() {
         W = 640, // window.innerWidth,
         H = 480, // window.innerHeight,
         fps = 30; // 60;
-    var isDebug = true;
-    // var isDebug = false;
+
+    window.isDebug = true;
+    // window.isDebug = false;
+
     var renderTimer = setInterval(draw, 1/fps*100);
     var player = null;
     var playersList = [];
