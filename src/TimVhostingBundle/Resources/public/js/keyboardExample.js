@@ -191,6 +191,51 @@ function keyboardExampleApp() {
         }
     }
 
+    var Button = function() {
+        BaseObject.call(this);
+        this.name = 'Button';
+        this.color = 'white';
+        this.position = new Point(0, 0);
+        this.width = 100;
+        this.height = 50;
+        this.text = 'Button';
+    };
+
+    Button.prototype = Object.create(BaseObject.prototype);
+    Button.prototype.constructor = BaseObject;
+
+    Button.prototype.render = function(ctx) {
+        if (ctx.measureText(this.text).width > this.width) {
+            this.width = ctx.measureText(this.text).width;
+        }
+        if (ctx.measureText(this.text).height > this.height) {
+            this.height = ctx.measureText(this.text).height;
+        }
+
+        ctx.font = "18pt Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.strokeStyle = this.color;
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.strokeRect(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = this.color;
+
+        ctx.fillText(this.text, this.position.x, this.position.y);
+        // ctx.fillText(ctx.measureText(this.text).width, this.position.x, this.position.y);
+    };
+
+    function createStartBtn() {
+        var startBtn = new Button();
+        startBtn.setPosition(W/2, H/2);
+        startBtn.text = 'Start';
+
+        return startBtn;
+    }
+
     function handleKeyDown(e) {
         //console.log('Keycode: ' + e.keyCode, e);
         var left = 37;
@@ -296,7 +341,26 @@ function keyboardExampleApp() {
         // writeLog('initTimers', timeRender);
     }
 
-    function init(canvasObject) {
+    function prepareData() {
+        player = null;
+        playersList = [];
+        timeSpend = 0;
+        timeBarrierAppear = 1000;
+        renderTimer = null;
+        barrierTimer = null;
+        isStart = false;
+    }
+
+    function init() {
+        canvasObject.clearCanvas(canvasColor);
+
+        var startBtn = createStartBtn();
+        startBtn.render(canvasObject.ctx);
+    }
+
+    this.start = function() {
+        prepareData();
+
         player = new Player();
         player.position.set(canvasObject.canvas.width / 2, canvasObject.canvas.height - player.height);
         player.render(canvasObject.ctx);
@@ -304,7 +368,7 @@ function keyboardExampleApp() {
         playersList.push(player);
 
         initTimers();
-    }
+    };
 
     this.destroy = function() {
 
@@ -323,23 +387,21 @@ function keyboardExampleApp() {
         // writeLog('stop timers', 1);
     };
 
-    init(canvasObject);
+    init();
 
     return this;
 }
 
 function windowLoadHandlerNew() {
-    // keyboardExampleApp();
-    var application = null;
+    var application = keyboardExampleApp();
 
     $('#start').click(function() {
-        application = keyboardExampleApp();
+        application.start();
     });
 
     $('#stop').click(function() {
         if (application != null) {
             application.destroy();
-            application = null;
         }
     });
 }
