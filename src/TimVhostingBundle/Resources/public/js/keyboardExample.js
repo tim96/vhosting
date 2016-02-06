@@ -416,10 +416,6 @@ function keyboardExampleApp() {
 function windowLoadHandlerNew() {
     var application = keyboardExampleApp();
 
-    $('#start').click(function() {
-        application.start();
-    });
-
     $('#stop').click(function() {
         if (application != null) {
             application.destroy();
