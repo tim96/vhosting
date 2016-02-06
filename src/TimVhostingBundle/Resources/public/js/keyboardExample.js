@@ -15,6 +15,7 @@ function keyboardExampleApp() {
     var canvasObject = new CanvasObject(canvasId);
     var canvas = canvasObject.canvas;
     var startBtn = null;
+    var endBtn = null;
 
     var W = 640;  // window.innerWidth,
     var H = 480;  // window.innerHeight,
@@ -53,6 +54,9 @@ function keyboardExampleApp() {
         this.width = 15;
         this.height = 15;
         this.speed = 10;
+    };
+    BaseObject.prototype.update = function() {
+        // move logic
     };
     BaseObject.prototype.render = function(ctx) {
         ctx.beginPath();
@@ -202,6 +206,7 @@ function keyboardExampleApp() {
         this.width = 100;
         this.height = 50;
         this.text = 'Button';
+        this.textAlign = 'center';
     };
 
     Button.prototype = Object.create(BaseObject.prototype);
@@ -216,9 +221,10 @@ function keyboardExampleApp() {
         }
 
         ctx.font = "18pt Arial, sans-serif";
-        ctx.textAlign = "center";
+        ctx.textAlign = this.textAlign;
         ctx.textBaseline = "middle";
         ctx.strokeStyle = this.color;
+        ctx.lineWidth = "2";
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.strokeRect(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
@@ -234,8 +240,17 @@ function keyboardExampleApp() {
     function createStartBtn(ctx) {
         startBtn = new Button();
         startBtn.setPosition(W/2, H/2);
+        startBtn.name = 'Start';
         startBtn.text = 'Start';
         startBtn.render(ctx);
+    }
+
+    function createEndBtn(ctx) {
+        endBtn = new Button();
+        endBtn.setPosition(W - endBtn.width / 2 - 1, 0 + endBtn.height / 2 + 1);
+        endBtn.name = 'End';
+        endBtn.text = 'End';
+        endBtn.render(ctx);
     }
 
     function handleKeyDown(e) {
@@ -275,11 +290,27 @@ function keyboardExampleApp() {
         // console.log('Click', e);
 
         if (isStart) {
+
+            if (isEndBtnClick(e)) {
+                destroy();
+                init();
+
+                return false;
+            }
+
             // fire only left button click on mouse
             if (e.button == 0) {
                 fire(new Point(0, -player.width));
             }
             return false;
+        }
+
+        function isEndBtnClick(e) {
+            var mx = e.pageX;
+            var my = e.pageY;
+
+            return (mx >= endBtn.position.x && mx <= endBtn.position.x + endBtn.width
+            && my >= endBtn.position.y && my <= endBtn.position.y + endBtn.height);
         }
 
         function isStartBtnClick(e) {
@@ -377,10 +408,14 @@ function keyboardExampleApp() {
         createStartBtn(canvasObject.ctx);
     };
 
+    // todo: refactor this function
     this.start = function() {
         prepareData();
 
         isStart = true;
+
+        createEndBtn(canvasObject.ctx);
+        playersList.push(endBtn);
 
         player = new Player();
         player.position.set(canvasObject.canvas.width / 2, canvasObject.canvas.height - player.height);
@@ -415,11 +450,4 @@ function keyboardExampleApp() {
 
 function windowLoadHandlerNew() {
     var application = keyboardExampleApp();
-
-    $('#stop').click(function() {
-        if (application != null) {
-            application.destroy();
-            application.init();
-        }
-    });
 }
