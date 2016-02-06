@@ -14,6 +14,7 @@ function keyboardExampleApp() {
     var canvasColor = 'green';
     var canvasObject = new CanvasObject(canvasId);
     var canvas = canvasObject.canvas;
+    var startBtn = null;
 
     var W = 640;  // window.innerWidth,
     var H = 480;  // window.innerHeight,
@@ -34,6 +35,7 @@ function keyboardExampleApp() {
     var barrierTimer = null;
     var isStart = false;
 
+
     // use <canvas id='example' tabindex='1'>
     // canvas.addEventListener('keydown', handleKeyDown, false);
     // or
@@ -42,6 +44,7 @@ function keyboardExampleApp() {
     // document.addEventListener('click', handleClick, false);
     // document.addEventListener('mousemove', handleMouseMove, false);
     initKeyDown(handleKeyDown);
+    initMouseClick(handleClick);
 
     var BaseObject = function() {
         this.name = "BaseObject";
@@ -228,12 +231,11 @@ function keyboardExampleApp() {
         // ctx.fillText(ctx.measureText(this.text).width, this.position.x, this.position.y);
     };
 
-    function createStartBtn() {
-        var startBtn = new Button();
+    function createStartBtn(ctx) {
+        startBtn = new Button();
         startBtn.setPosition(W/2, H/2);
         startBtn.text = 'Start';
-
-        return startBtn;
+        startBtn.render(ctx);
     }
 
     function handleKeyDown(e) {
@@ -271,9 +273,25 @@ function keyboardExampleApp() {
 
     function handleClick(e) {
         // console.log('Click', e);
-        // fire only left button click on mouse
-        if (e.button == 0) {
-            fire(new Point(0, -player.width));
+
+        if (isStart) {
+            // fire only left button click on mouse
+            if (e.button == 0) {
+                fire(new Point(0, -player.width));
+            }
+            return false;
+        }
+
+        function isStartBtnClick(e) {
+            var mx = e.pageX;
+            var my = e.pageY;
+
+            return (mx >= startBtn.position.x && mx <= startBtn.position.x + startBtn.width
+                && my >= startBtn.position.y && my <= startBtn.position.y + startBtn.height);
+        }
+
+        if (isStartBtnClick(e)) {
+            start();
         }
 
         return false;
@@ -351,15 +369,18 @@ function keyboardExampleApp() {
         isStart = false;
     }
 
-    function init() {
+    this.init = function() {
+        prepareData();
+
         canvasObject.clearCanvas(canvasColor);
 
-        var startBtn = createStartBtn();
-        startBtn.render(canvasObject.ctx);
-    }
+        createStartBtn(canvasObject.ctx);
+    };
 
     this.start = function() {
         prepareData();
+
+        isStart = true;
 
         player = new Player();
         player.position.set(canvasObject.canvas.width / 2, canvasObject.canvas.height - player.height);
@@ -387,7 +408,7 @@ function keyboardExampleApp() {
         // writeLog('stop timers', 1);
     };
 
-    init();
+    this.init();
 
     return this;
 }
@@ -402,6 +423,7 @@ function windowLoadHandlerNew() {
     $('#stop').click(function() {
         if (application != null) {
             application.destroy();
+            application.init();
         }
     });
 }
