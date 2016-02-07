@@ -17,6 +17,7 @@ function keyboardExampleApp() {
     var startBtn = null;
     var endBtn = null;
     var scoreBtn = null;
+    var scoreFailBtn = null;
 
     var W = 640;  // window.innerWidth,
     var H = 480;  // window.innerHeight,
@@ -33,6 +34,7 @@ function keyboardExampleApp() {
     var timeSpend = 0;
     var defaultMinBarrierWidth = 10;
     var defaultMaxBarrierWidth = 50;
+    var defaultFailScore = 3;
     var defaultScoreMultiple = 10;
     var defaultTimeBarrierAppear = 1000; // 500 ms
     var timeBarrierAppear = defaultTimeBarrierAppear;
@@ -41,7 +43,8 @@ function keyboardExampleApp() {
     var barrierTimer = null;
     var isStart = false;
     var playerScore = 0;
-    var barierScore = 0;
+    var barrierScore = 0;
+    var playerFailScore = 0;
 
     // use <canvas id='example' tabindex='1'>
     // canvas.addEventListener('keydown', handleKeyDown, false);
@@ -210,7 +213,10 @@ function keyboardExampleApp() {
     Barrier.prototype.constructor = BaseObject;
 
     Barrier.prototype.isDeleted = function() {
-        return ((this.position.y > canvas.height + 20) || this.isRemove);
+        if ((this.position.y > canvas.height + this.height)) {
+            playerFailScore += 1;
+        }
+        return ((this.position.y > canvas.height + this.height) || this.isRemove);
     };
 
     function createBarier() {
@@ -279,8 +285,10 @@ function keyboardExampleApp() {
         ctx.fillStyle = this.color;
         if (this.textAlign == 'center') {
             ctx.fillText(this.text, this.position.x, this.position.y);
+        } else if (this.textAlign == 'left') {
+            ctx.fillText(this.text, this.position.x + 10, this.position.y + this.height / 2);
         } else {
-            ctx.fillText(this.text, this.position.x + 20, this.position.y + this.height / 2);
+            // todo: check situation
         }
         // ctx.fillText(ctx.measureText(this.text).width, this.position.x, this.position.y);
     };
@@ -311,6 +319,19 @@ function keyboardExampleApp() {
         scoreBtn.render(ctx);
         scoreBtn.update = function(time) {
             this.text = playerScore;
+        }
+    }
+
+    function createScoreFailBtn(ctx) {
+        scoreFailBtn = new Button();
+        scoreFailBtn.width = 50;
+        scoreFailBtn.setPosition(0 + 1 + W / 2 - scoreFailBtn.width / 2, 0 + 1);
+        scoreFailBtn.name = 'ScoreButton';
+        scoreFailBtn.text = playerFailScore;
+        scoreFailBtn.textAlign = 'left';
+        scoreFailBtn.render(ctx);
+        scoreFailBtn.update = function(time) {
+            this.text = playerFailScore;
         }
     }
 
@@ -441,6 +462,9 @@ function keyboardExampleApp() {
         // another way
         // playersList.forEach(function(e) { e.update(1/fps); });
 
+        if (playerFailScore >= defaultFailScore) {
+            stop();
+        }
         // writeLog('draw');
     }
 
@@ -460,7 +484,8 @@ function keyboardExampleApp() {
         barrierTimer = null;
         isStart = false;
         playerScore = 0;
-        barierScore = 0;
+        barrierScore = 0;
+        playerFailScore = 0;
     }
 
     this.init = function() {
@@ -483,6 +508,9 @@ function keyboardExampleApp() {
         createScoreBtn(canvasObject.ctx);
         playersList.push(scoreBtn);
 
+        createScoreFailBtn(canvasObject.ctx);
+        playersList.push(scoreFailBtn);
+
         player = new Player();
         player.position.set(canvasObject.canvas.width / 2, canvasObject.canvas.height - player.height);
         player.render(canvasObject.ctx);
@@ -492,12 +520,30 @@ function keyboardExampleApp() {
         initTimers();
     };
 
+    this.stop = function() {
+        this.stopTimers();
+
+        paintCanvas();
+
+        playersList.forEach(function(e) {
+            if (e instanceof Button) {
+                e.update();
+                e.render(canvasObject.ctx);
+            }
+        });
+
+        createStartBtn(canvasObject.ctx);
+    };
+
     this.destroy = function() {
 
         paintCanvas();
 
         player = null;
         playersList = [];
+        endBtn = null;
+        scoreBtn = null;
+        scoreFailBtn = null;
 
         this.stopTimers();
     };
