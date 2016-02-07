@@ -144,7 +144,8 @@ function keyboardExampleApp() {
 
         var local = this;
         for(var index in playersList) {
-            if (playersList[index] !== local && playersList[index].name != 'Player' && playersList[index].name != 'EndButton') {
+            if (playersList[index] !== local && (!(playersList[index] instanceof Player))
+                && (!(playersList[index] instanceof Button)) && (!(playersList[index] instanceof Bullet))) {
                 if (isIntersectionExist(local, playersList[index])) {
                     local.isRemove = true;
                     playersList[index].isRemove = true;
@@ -192,7 +193,7 @@ function keyboardExampleApp() {
         this.position = new Point(0, 0);
         this.width = 15;
         this.height = 15;
-        this.speed = 20;
+        this.speed = 10;
     };
 
     Barrier.prototype = Object.create(BaseObject.prototype);
