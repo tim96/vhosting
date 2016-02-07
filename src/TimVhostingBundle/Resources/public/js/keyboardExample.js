@@ -16,6 +16,7 @@ function keyboardExampleApp() {
     var canvas = canvasObject.canvas;
     var startBtn = null;
     var endBtn = null;
+    var scoreBtn = null;
 
     var W = 640;  // window.innerWidth,
     var H = 480;  // window.innerHeight,
@@ -30,12 +31,15 @@ function keyboardExampleApp() {
     var player = null;
     var playersList = [];
     var timeSpend = 0;
-    var timeBarrierAppear = 1000; // 500 ms
+    var defaultScoreMultiple = 10;
+    var defaultTimeBarrierAppear = 1000; // 500 ms
+    var timeBarrierAppear = defaultTimeBarrierAppear;
     var timeRender = 1/fps*100;
     var renderTimer = null;
     var barrierTimer = null;
     var isStart = false;
-
+    var playerScore = 0;
+    var barierScore = 0;
 
     // use <canvas id='example' tabindex='1'>
     // canvas.addEventListener('keydown', handleKeyDown, false);
@@ -147,8 +151,12 @@ function keyboardExampleApp() {
             if (playersList[index] !== local && (!(playersList[index] instanceof Player))
                 && (!(playersList[index] instanceof Button)) && (!(playersList[index] instanceof Bullet))) {
                 if (isIntersectionExist(local, playersList[index])) {
+
+                    playerScore += playersList[index].width * defaultScoreMultiple;
+
                     local.isRemove = true;
                     playersList[index].isRemove = true;
+
                     return;
                 }
             }
@@ -258,13 +266,20 @@ function keyboardExampleApp() {
         ctx.lineWidth = "2";
         ctx.beginPath();
         ctx.fillStyle = this.color;
-        ctx.strokeRect(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+        if (this.textAlign == 'center') {
+            ctx.strokeRect(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+        } else {
+            ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+        }
         ctx.fill();
         ctx.stroke();
 
         ctx.fillStyle = this.color;
-
-        ctx.fillText(this.text, this.position.x, this.position.y);
+        if (this.textAlign == 'center') {
+            ctx.fillText(this.text, this.position.x, this.position.y);
+        } else {
+            ctx.fillText(this.text, this.position.x + 20, this.position.y + this.height / 2);
+        }
         // ctx.fillText(ctx.measureText(this.text).width, this.position.x, this.position.y);
     };
 
@@ -282,6 +297,19 @@ function keyboardExampleApp() {
         endBtn.name = 'EndButton';
         endBtn.text = 'End';
         endBtn.render(ctx);
+    }
+
+    function createScoreBtn(ctx) {
+        scoreBtn = new Button();
+        scoreBtn.width = 150;
+        scoreBtn.setPosition(0 + 1, 0 + 1);
+        scoreBtn.name = 'ScoreButton';
+        scoreBtn.text = playerScore;
+        scoreBtn.textAlign = 'left';
+        scoreBtn.render(ctx);
+        scoreBtn.update = function(time) {
+            this.text = playerScore;
+        }
     }
 
     function handleKeyDown(e) {
@@ -425,10 +453,12 @@ function keyboardExampleApp() {
         player = null;
         playersList = [];
         timeSpend = 0;
-        timeBarrierAppear = 1000;
+        timeBarrierAppear = defaultTimeBarrierAppear;
         renderTimer = null;
         barrierTimer = null;
         isStart = false;
+        playerScore = 0;
+        barierScore = 0;
     }
 
     this.init = function() {
@@ -447,6 +477,9 @@ function keyboardExampleApp() {
 
         createEndBtn(canvasObject.ctx);
         playersList.push(endBtn);
+
+        createScoreBtn(canvasObject.ctx);
+        playersList.push(scoreBtn);
 
         player = new Player();
         player.position.set(canvasObject.canvas.width / 2, canvasObject.canvas.height - player.height);
