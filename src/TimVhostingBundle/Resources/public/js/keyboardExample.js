@@ -54,6 +54,7 @@ function keyboardExampleApp() {
         this.width = 15;
         this.height = 15;
         this.speed = 10;
+        this.isRemove = false;
     };
     BaseObject.prototype.update = function() {
         // move logic
@@ -90,7 +91,7 @@ function keyboardExampleApp() {
         this.speed = newSpeed;
     };
     BaseObject.prototype.isDeleted = function() {
-        return this.position.y < 0;
+        return this.position.y < 0 || this.isRemove;
     };
 
     var Player = function() {
@@ -131,7 +132,7 @@ function keyboardExampleApp() {
         this.position = new Point(0, 0);
         this.width = 15;
         this.height = 15;
-        this.delay = 2;
+        this.delay = 0.5;
         this.speed = 20;
     };
 
@@ -140,9 +141,20 @@ function keyboardExampleApp() {
 
     Bullet.prototype.update = function(time) {
         this.position.y += (-this.speed) * time;
+
+        var local = this;
+        for(var index in playersList) {
+            if (playersList[index] !== local && playersList[index].name != 'Player' && playersList[index].name != 'EndButton') {
+                if (isIntersectionExist(local, playersList[index])) {
+                    local.isRemove = true;
+                    playersList[index].isRemove = true;
+                    return;
+                }
+            }
+        }
     };
     Bullet.prototype.isDeleted = function() {
-        return this.position.y + this.height < 0;
+        return ((this.position.y + this.height < 0) || this.isRemove);
     };
 
     function fire(startPoint) {
@@ -153,6 +165,24 @@ function keyboardExampleApp() {
 
         playersList.push(bullet);
         // writeLog('Bullet', bullet);
+    }
+
+    function isIntersectionExist(bullet, object) {
+
+        var x1 = bullet.position.x;
+        var x2 = bullet.position.x + bullet.width;
+        var y1 = bullet.position.y;
+        var y2 = bullet.position.y + bullet.height;
+
+        var x1b = object.position.x;
+        var x2b = object.position.x + object.width;
+        var y1b = object.position.y;
+        var y2b = object.position.y + object.height;
+
+        var intersect = (x1 < x2b && x2 > x1b && y1 < y2b && y2 > y1b);
+
+        // writeLog('Intersect', intersect);
+        return intersect;
     }
 
     var Barrier = function() {
@@ -169,7 +199,7 @@ function keyboardExampleApp() {
     Barrier.prototype.constructor = BaseObject;
 
     Barrier.prototype.isDeleted = function() {
-        return (this.position.y > canvas.height + 20);
+        return ((this.position.y > canvas.height + 20) || this.isRemove);
     };
 
     function createBarier() {
@@ -240,7 +270,7 @@ function keyboardExampleApp() {
     function createStartBtn(ctx) {
         startBtn = new Button();
         startBtn.setPosition(W/2, H/2);
-        startBtn.name = 'Start';
+        startBtn.name = 'StartButton';
         startBtn.text = 'Start';
         startBtn.render(ctx);
     }
@@ -248,7 +278,7 @@ function keyboardExampleApp() {
     function createEndBtn(ctx) {
         endBtn = new Button();
         endBtn.setPosition(W - endBtn.width / 2 - 1, 0 + endBtn.height / 2 + 1);
-        endBtn.name = 'End';
+        endBtn.name = 'EndButton';
         endBtn.text = 'End';
         endBtn.render(ctx);
     }
