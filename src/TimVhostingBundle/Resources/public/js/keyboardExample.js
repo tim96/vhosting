@@ -31,6 +31,8 @@ function keyboardExampleApp() {
     var player = null;
     var playersList = [];
     var timeSpend = 0;
+    var defaultMinBarrierWidth = 10;
+    var defaultMaxBarrierWidth = 50;
     var defaultScoreMultiple = 10;
     var defaultTimeBarrierAppear = 1000; // 500 ms
     var timeBarrierAppear = defaultTimeBarrierAppear;
@@ -199,8 +201,8 @@ function keyboardExampleApp() {
         this.name = "Barrier";
         this.color = getRandomColor();
         this.position = new Point(0, 0);
-        this.width = 15;
-        this.height = 15;
+        this.width = getRandomInt(defaultMinBarrierWidth, defaultMaxBarrierWidth);
+        this.height = this.width; // only square
         this.speed = 10;
     };
 

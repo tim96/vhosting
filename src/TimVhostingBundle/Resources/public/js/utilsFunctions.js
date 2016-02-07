@@ -41,6 +41,10 @@ function getRandom() {
     return Math.random();
 }
 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
