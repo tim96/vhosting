@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener("load", windowLoadHandlerNew, false);
 
 function keyboardExampleApp() {
@@ -488,7 +490,7 @@ function keyboardExampleApp() {
         playerFailScore = 0;
     }
 
-    this.init = function() {
+    var init = function() {
         prepareData();
 
         canvasObject.clearCanvas(canvasColor);
@@ -497,7 +499,7 @@ function keyboardExampleApp() {
     };
 
     // todo: refactor this function
-    this.start = function() {
+    var start = function() {
         prepareData();
 
         isStart = true;
@@ -520,8 +522,10 @@ function keyboardExampleApp() {
         initTimers();
     };
 
-    this.stop = function() {
-        this.stopTimers();
+    var stop = function() {
+        stopTimers();
+
+        isStart = false;
 
         paintCanvas();
 
@@ -535,7 +539,7 @@ function keyboardExampleApp() {
         createStartBtn(canvasObject.ctx);
     };
 
-    this.destroy = function() {
+    var destroy = function() {
 
         paintCanvas();
 
@@ -545,17 +549,17 @@ function keyboardExampleApp() {
         scoreBtn = null;
         scoreFailBtn = null;
 
-        this.stopTimers();
+        stopTimers();
     };
 
-    this.stopTimers = function() {
+    var stopTimers = function() {
         clearInterval(renderTimer);
         clearInterval(barrierTimer);
 
         // writeLog('stop timers', 1);
     };
 
-    this.init();
+    init();
 
     return this;
 }
