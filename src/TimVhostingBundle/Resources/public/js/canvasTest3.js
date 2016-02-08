@@ -26,10 +26,12 @@ function constellationExampleApp() {
     var stars = [];
     var stats = null;
     var canvasId = 'example';
+    var renderTimer = null;
+    var lines = [];
 
     function init() {
         if (!isCanvasSupport()) {
-            console.log('Your browser does not support HTML5 canvas.')
+            console.log('Your browser does not support HTML5 canvas.');
             return;
         }
 
@@ -41,7 +43,7 @@ function constellationExampleApp() {
 
         initMouseEvents(handleMouseMove);
 
-        var renderTimer = setInterval(initMove, 1/fps*100);
+        renderTimer = setInterval(initMove, 1/fps*100);
     }
 
     function initMove() {
@@ -103,6 +105,7 @@ function constellationExampleApp() {
 
                     if (diffX < radius && diffY < radius &&
                         diffX > - radius && diffY > - radius) {
+
                         canvasObject.ctx.beginPath();
                         canvasObject.ctx.strokeStyle = selectColor;
                         // ctx.fillStyle = selectColor;
@@ -164,6 +167,16 @@ function constellationExampleApp() {
             tempStar.render();
         }
     }
+
+    var Point = function(x1, y1) {
+        this.x = x1;
+        this.y = y1;
+    };
+
+    Point.prototype.set = function(x1, y1) {
+        this.x = x1;
+        this.y = y1;
+    };
 
     init();
 }
