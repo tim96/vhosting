@@ -178,5 +178,15 @@ function constellationExampleApp() {
         this.y = y1;
     };
 
+    var Line = function(p1, p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    };
+
+    Line.prototype.set = function(p1, p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    };
+
     init();
 }
