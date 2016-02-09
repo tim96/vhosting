@@ -154,15 +154,15 @@ function keyboardExampleApp() {
         this.position.y += (-this.speed) * time;
 
         var local = this;
-        for(var index in playersList) {
-            if (playersList[index] !== local && (!(playersList[index] instanceof Player))
-                && (!(playersList[index] instanceof Button)) && (!(playersList[index] instanceof Bullet))) {
-                if (isIntersectionExist(local, playersList[index])) {
+        for(var i = 0, len = playersList.length; i < len; i++) {
+            if (playersList[i] !== local && (!(playersList[i] instanceof Player))
+                && (!(playersList[i] instanceof Button)) && (!(playersList[i] instanceof Bullet))) {
+                if (isIntersectionExist(local, playersList[i])) {
 
-                    playerScore += playersList[index].width * defaultScoreMultiple;
+                    playerScore += playersList[i].width * defaultScoreMultiple;
 
                     local.isRemove = true;
-                    playersList[index].isRemove = true;
+                    playersList[i].isRemove = true;
 
                     return;
                 }
@@ -427,8 +427,8 @@ function keyboardExampleApp() {
 
     function paintPlayers(ctx)
     {
-        for(var index in playersList) {
-            playersList[index].render(ctx);
+        for(var i = 0, len = playersList.length; i < len; i++) {
+            playersList[i].render(ctx);
         }
     }
 
