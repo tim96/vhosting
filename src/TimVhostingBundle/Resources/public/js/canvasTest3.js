@@ -17,6 +17,7 @@ function constellationExampleApp() {
     var positionY = 0;
     var radius = 200;
     var selectColor = '#FF0000';
+    var canvasColor = '#111';
     var config = {
         star: {
             color: '#FFFFFF',
@@ -146,7 +147,7 @@ function constellationExampleApp() {
         var count = countStar;
         var tempStar = null;
 
-        canvasObject.clearCanvas();
+        canvasObject.clearCanvas(canvasColor);
 
         for(var index = 0; index < count; index++) {
             tempStar = new Star();
@@ -160,7 +161,7 @@ function constellationExampleApp() {
     }
 
     function paintStars() {
-        canvasObject.clearCanvas();
+        canvasObject.clearCanvas(canvasColor);
 
         for(var index in stars) {
             var tempStar = stars[index];
