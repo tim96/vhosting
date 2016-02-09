@@ -2,6 +2,10 @@
 
 function CanvasObject(canvasId) {
 
+    if (typeof canvasId === 'undefined') {
+        throw new Error('Canvas id cannot be undefined');
+    }
+
     this.canvas = null;
     this.ctx = null;
 
@@ -13,6 +17,9 @@ function CanvasObject(canvasId) {
     };
 
     this.clearCanvas = function(color) {
+        if (typeof color === 'undefined') {
+            throw new Error('Color cannot be undefined');
+        }
         this.ctx.fillStyle = color;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     };
