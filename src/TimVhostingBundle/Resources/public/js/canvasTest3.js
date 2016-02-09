@@ -13,8 +13,8 @@ function constellationExampleApp() {
     window.isDebug = false;
     // window.isDebug = true;
     var velocity = 0.2;
-    var distance = 100;
-    var countStar = 400;
+    var distance = 120;
+    var countStar = 500;
     var positionX = 0;
     var positionY = 0;
     var radius = 200;
@@ -111,18 +111,31 @@ function constellationExampleApp() {
                     if (diffX < radius && diffY < radius &&
                         diffX > - radius && diffY > - radius) {
 
-                        canvasObject.ctx.beginPath();
-                        canvasObject.ctx.strokeStyle = selectColor;
-                        // ctx.fillStyle = selectColor;
-                        canvasObject.ctx.moveTo(starOne.x, starOne.y);
-                        canvasObject.ctx.lineTo(starTwo.x, starTwo.y);
-                        canvasObject.ctx.stroke();
-                        canvasObject.ctx.closePath();
+                        var isIntersect = false;
+                        for(var index = 0, len = lines.length; index < len; index++ ) {
+                            var res = intersectFromPhp(
+                                lines[index].p1.x, lines[index].p1.y, lines[index].p2.x, lines[index].p2.y,
+                                starOne.x, starOne.y, starTwo.x, starTwo.y);
+                            if (res) {
+                                isIntersect = res;
+                                break;
+                            }
+                        }
 
-                        var line = new Line(new Point(starOne.x, starOne.y),
-                                            new Point(starTwo.x, starTwo.y));
+                        if (!isIntersect) {
+                            canvasObject.ctx.beginPath();
+                            canvasObject.ctx.strokeStyle = selectColor;
+                            // ctx.fillStyle = selectColor;
+                            canvasObject.ctx.moveTo(starOne.x, starOne.y);
+                            canvasObject.ctx.lineTo(starTwo.x, starTwo.y);
+                            canvasObject.ctx.stroke();
+                            canvasObject.ctx.closePath();
 
-                        lines.push(line);
+                            var line = new Line(new Point(starOne.x, starOne.y),
+                                new Point(starTwo.x, starTwo.y));
+
+                            lines.push(line);
+                        }
                     }
                 }
             }
