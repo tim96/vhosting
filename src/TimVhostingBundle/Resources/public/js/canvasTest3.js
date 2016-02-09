@@ -92,6 +92,8 @@ function constellationExampleApp() {
         var starOne = null;
         var starTwo = null;
 
+        lines = [];
+
         for(var i = 0; i < count; i++) {
             for(var j = 0; j < count; j++) {
                 starOne = stars[i];
@@ -116,6 +118,11 @@ function constellationExampleApp() {
                         canvasObject.ctx.lineTo(starTwo.x, starTwo.y);
                         canvasObject.ctx.stroke();
                         canvasObject.ctx.closePath();
+
+                        var line = new Line(new Point(starOne.x, starOne.y),
+                                            new Point(starTwo.x, starTwo.y));
+
+                        lines.push(line);
                     }
                 }
             }
