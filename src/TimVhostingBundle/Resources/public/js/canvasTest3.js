@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener("load", windowLoadHandlerNew, false);
 
 function windowLoadHandlerNew() {
