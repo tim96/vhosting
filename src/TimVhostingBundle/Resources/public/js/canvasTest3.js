@@ -31,6 +31,7 @@ function constellationExampleApp() {
     var canvasId = 'example';
     var renderTimer = null;
     var lines = [];
+    var endBtn = null;
 
     function init() {
         if (!isCanvasSupport()) {
@@ -45,6 +46,7 @@ function constellationExampleApp() {
         createStars();
 
         initMouseEvents(handleMouseMove);
+        initMouseClick(handleClick);
 
         renderTimer = setInterval(initMove, 1/fps*100);
     }
@@ -56,6 +58,8 @@ function constellationExampleApp() {
         connect();
         move();
 
+        endBtn.render(canvasObject);
+
         stats.end();
     }
 
@@ -65,6 +69,27 @@ function constellationExampleApp() {
         var field = canvasObject.canvas.getBoundingClientRect();
         positionX = e.clientX - field.left;
         positionY = e.clientY - field.top;
+    }
+
+    function handleClick(e) {
+
+        if (isEndBtnClick(e)) {
+            stopTimers();
+            return false;
+        }
+
+        function isEndBtnClick(e) {
+            var mx = e.pageX;
+            var my = e.pageY;
+
+            // console.log('mx', mx);
+            // console.log('my', my);
+            // console.log('endBtn.position', endBtn.position);
+            // console.log('endBtn', endBtn);
+
+            return (mx >= endBtn.position.x && mx <= endBtn.position.x + endBtn.width
+            && my >= endBtn.position.y && my <= endBtn.position.y + endBtn.height);
+        }
     }
 
     var Star = function() {
@@ -178,6 +203,8 @@ function constellationExampleApp() {
             stars.push(tempStar);
         }
 
+        createEndBtn(canvasObject);
+
         connect();
         move();
     }
@@ -209,6 +236,67 @@ function constellationExampleApp() {
     Line.prototype.set = function(p1, p2) {
         this.p1 = p1;
         this.p2 = p2;
+    };
+
+    var Button = function() {
+        this.name = 'Button';
+        this.color = 'white';
+        this.position = new Point(0, 0);
+        this.width = 100;
+        this.height = 50;
+        this.text = 'Button';
+        this.textAlign = 'center';
+    };
+    Button.prototype.setPosition = function(newX, newY) {
+        this.position.x = newX;
+        this.position.y = newY;
+    };
+    Button.prototype.render = function(canvasObject) {
+        var ctx = canvasObject.ctx;
+        if (ctx.measureText(this.text).width > this.width) {
+            this.width = ctx.measureText(this.text).width;
+        }
+        if (ctx.measureText(this.text).height > this.height) {
+            this.height = ctx.measureText(this.text).height;
+        }
+
+        ctx.font = "18pt Arial, sans-serif";
+        ctx.textAlign = this.textAlign;
+        ctx.textBaseline = "middle";
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = "2";
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        if (this.textAlign == 'center') {
+            ctx.strokeRect(this.position.x - this.width / 2, this.position.y - this.height / 2, this.width, this.height);
+        } else {
+            ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+        }
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = this.color;
+        if (this.textAlign == 'center') {
+            ctx.fillText(this.text, this.position.x, this.position.y);
+        } else if (this.textAlign == 'left') {
+            ctx.fillText(this.text, this.position.x + 10, this.position.y + this.height / 2);
+        } else {
+            // todo: check situation
+        }
+        // ctx.fillText(ctx.measureText(this.text).width, this.position.x, this.position.y);
+    };
+
+    function createEndBtn(canvasObject) {
+        var ctx = canvasObject.ctx;
+        endBtn = new Button();
+        endBtn.setPosition(canvasObject.canvas.width - endBtn.width / 2 - 1, 0 + endBtn.height / 2 + 1);
+        endBtn.name = 'EndButton';
+        endBtn.text = 'End';
+        endBtn.render(canvasObject);
+    }
+
+    var stopTimers = function() {
+        clearInterval(renderTimer);
     };
 
     init();
