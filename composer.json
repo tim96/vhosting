@@ -35,7 +35,7 @@
         "antimattr/google-bundle": "2.*",
         "suncat/mobile-detect-bundle": "0.*",
         "tfox/mpdf-port-bundle": "1.*",
-        "hwi/oauth-bundle": "0.*",
+        "hwi/oauth-bundle": "0.4.*",
         "cboden/ratchet": "0.*",
         "gregwar/captcha-bundle": "1.*",
 
