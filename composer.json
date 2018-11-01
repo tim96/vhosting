@@ -5,56 +5,64 @@
     "autoload": {
         "psr-4": {
             "": "src/",
-            "SymfonyStandard\\": "app/"
-        }
+            "SymfonyStandard\\": "app/",
+            "App\\": "app"
+        },
+        "files": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
     },
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.8.*",
-        "symfony/swiftmailer-bundle": "2.*",
-        "symfony/monolog-bundle": "2.*",
+        "php": ">=7.0",
+        "symfony/symfony": "3.4.*",
+        "symfony/swiftmailer-bundle": "@stable",
+        "symfony/monolog-bundle": "@stable",
 
-        "twig/twig": "1.*||2.*",
+        "twig/twig": "@stable",
 
-        "doctrine/orm": "2.*",
-        "doctrine/dbal": "2.*",
-        "doctrine/doctrine-bundle": "1.*",
-        "doctrine/doctrine-fixtures-bundle": "2.*",
+        "doctrine/orm": "@stable",
+        "doctrine/dbal": "@stable",
+        "doctrine/doctrine-bundle": "@stable",
+        "doctrine/doctrine-fixtures-bundle": "@stable",
 
-        "sensio/distribution-bundle": "4.*",
-        "sensio/framework-extra-bundle": "3.*",
-        "sensio/generator-bundle": "2.*",
+        "sensio/distribution-bundle": "@stable",
+        "sensio/framework-extra-bundle": "@stable",
+        "sensio/generator-bundle": "@stable",
 
-        "jms/serializer-bundle": "1.*",
-        "friendsofsymfony/rest-bundle": "1.*",
-        "friendsofsymfony/user-bundle": "1.*",
-        "incenteev/composer-parameter-handler": "2.*",
-        "liip/functional-test-bundle": "1.*",
-        "escapestudios/wsse-authentication-bundle": "2.*",
-        "suncat/mobile-detect-bundle": "0.*",
-        "tfox/mpdf-port-bundle": "1.*",
-        "hwi/oauth-bundle": "0.4.*",
-        "cboden/ratchet": "0.*",
-        "gregwar/captcha-bundle": "1.*",
+        "jms/serializer-bundle": "@stable",
+        "friendsofsymfony/rest-bundle": "@stable",
+        "friendsofsymfony/user-bundle": "@stable",
+        "incenteev/composer-parameter-handler": "@stable",
+        "liip/functional-test-bundle": "@stable",
+        "escapestudios/wsse-authentication-bundle": "@stable",
+        "suncat/mobile-detect-bundle": "@stable",
+        "tfox/mpdf-port-bundle": "@stable",
+        "hwi/oauth-bundle": "@stable",
+        "cboden/ratchet": "@stable",
+        "gregwar/captcha-bundle": "@stable",
 
         "sonata-project/admin-bundle": "@stable",
-        "sonata-project/block-bundle": "2.*",
+        "sonata-project/block-bundle": "@stable",
         "sonata-project/user-bundle": "@stable",
-        "sonata-project/core-bundle": "2.*",
-        "sonata-project/datagrid-bundle": "2.2.*",
-        "sonata-project/formatter-bundle": "2.3.*",
-        "sonata-project/doctrine-orm-admin-bundle": "2.*",
+        "sonata-project/core-bundle": "@stable",
+        "sonata-project/datagrid-bundle": "@stable",
+        "sonata-project/formatter-bundle": "@stable",
+        "sonata-project/doctrine-orm-admin-bundle": "@stable",
 
-        "stof/doctrine-extensions-bundle": "1.*",
+        "stof/doctrine-extensions-bundle": "@stable",
 
-        "dropbox/dropbox-sdk": "1.*",
-        "google/apiclient": "1.*",
-        "dizda/cloud-backup-bundle": "3.*",
+        "dropbox/dropbox-sdk": "@stable",
+        "google/apiclient": "@stable",
+        "dizda/cloud-backup-bundle": "@stable",
 
-        "knplabs/knp-menu-bundle": "*",
-        "knplabs/knp-paginator-bundle": "^2.5",
-        "nelmio/api-doc-bundle": "^2.11",
-        "beberlei/DoctrineExtensions": "^1.0"
+        "knplabs/knp-menu-bundle": "@stable",
+        "knplabs/knp-paginator-bundle": "@stable",
+        "nelmio/api-doc-bundle": "@stable",
+        "beberlei/DoctrineExtensions": "@stable",
+        "php-http/httplug-bundle": "^1.12",
+        "php-http/curl-client": "^1.7",
+        "guzzlehttp/psr7": "^1.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
@@ -94,6 +102,9 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-var-dir": "var",
+        "symfony-bin-dir": "bin",
+        "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"

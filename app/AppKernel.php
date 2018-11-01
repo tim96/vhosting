@@ -45,6 +45,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
             new TimVhostingBundle\TimVhostingBundle(),
             new TimConfigBundle\TimConfigBundle(),
             new SymfonyBestPracticesTestBundle\SymfonyBestPracticesTestBundle(),
@@ -63,5 +64,20 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+
+    public function getCacheDir()
+    {
+        return dirname(__DIR__).'/var/cache/'.$this->environment;
+    }
+
+    public function getLogDir()
+    {
+        return dirname(__DIR__).'/var/logs';
     }
 }

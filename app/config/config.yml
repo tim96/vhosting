@@ -59,7 +59,7 @@ swiftmailer:
     encryption: "%mailer_encryption%"
 
 sensio_framework_extra:
-    view: { annotations: false }
+    view: { annotations: true }
     router: { annotations: true }
     request: { converters: true }
 
@@ -70,3 +70,13 @@ monolog:
     #        level: debug
     #        id: logger_database
     # channels: ["info", "warning", "error", "crit", "alert", "users"]
+
+httplug:
+    plugins:
+        logger: ~
+    clients:
+        acme:
+            factory: 'httplug.factory.guzzle6'
+            plugins: ['httplug.plugin.logger']
+            config:
+                timeout: 2

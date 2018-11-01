@@ -4,19 +4,19 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
     tim_vhosting.admin.tags:
         class: TimVhostingBundle\Admin\TagsAdmin
-        arguments: [~, TimVhostingBundle\Entity\Tags, TimVhostingBundle:TagsAdmin, @service_container]
+        arguments: [~, TimVhostingBundle\Entity\Tags, TimVhostingBundle:TagsAdmin, '@service_container']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Tags, icon: '<i class="fa fa-database"></i>' }
 
     tim_vhosting.admin.video_rate:
         class: TimVhostingBundle\Admin\VideoRateAdmin
-        arguments: [~, TimVhostingBundle\Entity\VideoRate, TimVhostingBundle:VideoRateAdmin, @service_container]
+        arguments: [~, TimVhostingBundle\Entity\VideoRate, TimVhostingBundle:VideoRateAdmin, '@service_container']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: VideoRate }
 
     tim_vhosting.admin.feedback:
         class: TimVhostingBundle\Admin\FeedbackAdmin
-        arguments: [~, TimVhostingBundle\Entity\Feedback, TimVhostingBundle:FeedbackAdmin, @service_container]
+        arguments: [~, TimVhostingBundle\Entity\Feedback, TimVhostingBundle:FeedbackAdmin, '@service_container']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Feedback }
         calls:
@@ -24,7 +24,7 @@ services:
 
     tim_vhosting.admin.video_suggest:
         class: TimVhostingBundle\Admin\VideoSuggestAdmin
-        arguments: [~, TimVhostingBundle\Entity\VideoSuggest, TimVhostingBundle:VideoSuggestAdmin, @service_container]
+        arguments: [~, TimVhostingBundle\Entity\VideoSuggest, TimVhostingBundle:VideoSuggestAdmin, '@service_container']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: VideoSuggest }
         calls:
@@ -32,7 +32,7 @@ services:
 
     tim_vhosting.admin.video:
         class: TimVhostingBundle\Admin\VideoAdmin
-        arguments: [~, TimVhostingBundle\Entity\Video, TimVhostingBundle:VideoAdmin, @service_container]
+        arguments: [~, TimVhostingBundle\Entity\Video, TimVhostingBundle:VideoAdmin, '@service_container']
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Video }
         calls:
@@ -40,20 +40,20 @@ services:
 
 #handler
     tim_vhosting.feedback.handler:
-        class: %tim_vhosting.feedback.handler.class%
-        arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.feedback.class%]
+        class: '%tim_vhosting.feedback.handler.class%'
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', '%tim_vhosting.feedback.class%']
     tim_vhosting.video_suggest.handler:
-        class: %tim_vhosting.video_suggest.handler.class%
-        arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.video_suggest.class%]
+        class: '%tim_vhosting.video_suggest.handler.class%'
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', '%tim_vhosting.video_suggest.class%']
     tim_vhosting.tags.handler:
-        class: %tim_vhosting.tags.handler.class%
-        arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.tags.class%]
+        class: '%tim_vhosting.tags.handler.class%'
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', '%tim_vhosting.tags.class%']
     tim_vhosting.video.handler:
-        class: %tim_vhosting.video.handler.class%
-        arguments: [@service_container, @doctrine.orm.entity_manager, %tim_vhosting.video.class%]
+        class: '%tim_vhosting.video.handler.class%'
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', '%tim_vhosting.video.class%']
     tim_vhosting.google_api.handler:
-        class: %tim_vhosting.google_api.handler.class%
-        arguments: [@service_container, @doctrine.orm.entity_manager]
+        class: '%tim_vhosting.google_api.handler.class%'
+        arguments: ['@service_container', '@doctrine.orm.entity_manager']
 
 parameters:
     google_api_key: '%google_api_key%'
@@ -67,4 +67,3 @@ parameters:
     tim_vhosting.video_suggest.class: TimVhostingBundle\Entity\VideoSuggest
     tim_vhosting.tags.class: TimVhostingBundle\Entity\Tags
     tim_vhosting.video.class: TimVhostingBundle\Entity\Video
-

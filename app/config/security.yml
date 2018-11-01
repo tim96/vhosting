@@ -65,7 +65,7 @@ security:
                     google: "/user/login/check-google"
                     github: "/user/login/check-github"
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider.fosub_bridge
+                    service: my_user_provider
 
         #wsse_secured:
         #    pattern:   ^/api/.*

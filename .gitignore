@@ -21,3 +21,8 @@ web/Resources/
 web/images/
 web/partials/
 web/public/
+/var/
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+/phpunit.xml
+.env
