@@ -21,10 +21,8 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {% stylesheets '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
-        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
     {% endblock stylesheets %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -45,9 +43,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
 
-    {% javascripts '@TimVhostingBundle/Resources/public/js/appTime.js' output='js/appTest2.min.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="/js/appTime.js"></script>
 {% endblock %}
 
 </body>

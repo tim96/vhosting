@@ -21,10 +21,8 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {% stylesheets '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
-        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/font-awesome.min.css" />
     {% endblock stylesheets %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -43,13 +41,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
 
-    {% javascripts '@TimVhostingBundle/Resources/public/js/bootstrap.min.js'
-        '@TimVhostingBundle/Resources/public/js/modernizr-canvas.js'
-        '@TimVhostingBundle/Resources/public/js/utilsFunctions.js'
-        '@TimVhostingBundle/Resources/public/js/keyboardExample.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/modernizr-canvas.js"></script>
+    <script src="/js/utilsFunctions.js"></script>
+    <script src="/js/keyboardExample.js"></script>
 {% endblock %}
 
 </body>

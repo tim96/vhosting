@@ -21,12 +21,9 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {% stylesheets  '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
-        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css'
-        '@TimVhostingBundle/Resources/public/css/12MinWorkout/index.css' output="css/index1.css"
-                filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="/css/12MinWorkout/index.css" />
     {% endblock stylesheets %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -77,19 +74,17 @@
     {# <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script> #}
 
-    {% javascripts
-        '@TimVhostingBundle/Resources/public/js/jquery.min.js'
-        '@TimVhostingBundle/Resources/public/js/bootstrap.min.js'
-        '@TimVhostingBundle/Resources/public/js/angular.min.js'
-        '@TimVhostingBundle/Resources/public/js/angular-route.min.js'
-        '@TimVhostingBundle/Resources/public/js/angular-sanitize.min.js'
-        '@TimVhostingBundle/Resources/public/js/angular-media-player.min.js'
-        '@TimVhostingBundle/Resources/public/js/videogular.js'
-        '@TimVhostingBundle/Resources/public/js/app.js'
-        '@TimVhostingBundle/Resources/public/js/12MinWorkout/appWorkout.js'
-        '@TimVhostingBundle/Resources/public/js/12MinWorkout/workout.js' output='js/appWorkoutTest.min.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-route.min.js"></script>
+    <script src="/js/angular-sanitize.min.js"></script>
+    <script src="/js/angular-media-player.min.js"></script>
+    <script src="/js/videogular.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/12MinWorkout/appWorkout.js"></script>
+    <script src="/js/12MinWorkout/workout.js"></script>
 {% endblock %}
 
 </body>

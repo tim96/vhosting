@@ -21,11 +21,9 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {% stylesheets '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
-        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css'
-        '@TimVhostingBundle/Resources/public/css/canvasTest1.css' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="/css/canvasTest1.css" />
     {% endblock stylesheets %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -181,14 +179,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    {% javascripts '@TimVhostingBundle/Resources/public/js/appTime.js'
-        '@TimVhostingBundle/Resources/public/js/modernizr-canvas.js'
-        '@TimVhostingBundle/Resources/public/js/underscore-min.js'
-        '@TimVhostingBundle/Resources/public/js/canvasTest2.js'
-        '@TimVhostingBundle/Resources/public/js/canvasTest1.js' output='js/canvasTest1.min.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
+    <script src="/js/appTime.js"></script>
+    <script src="/js/modernizr-canvas.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/canvasTest2.js"></script>
+    <script src="/js/canvasTest1.js"></script>
 {% endblock %}
 
 </body>

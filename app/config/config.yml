@@ -4,7 +4,6 @@ imports:
     - { resource: services.yml }
 #    - { resource: sonata_fos_core.yml }
     - { resource: twig.yml }
-    - { resource: assetic.yml }
 #    - { resource: fos_rest.yml }
     - { resource: '@TimVhostingBundle/Resources/config/fos_rest.yml' }
     - { resource: doctrine.yml }

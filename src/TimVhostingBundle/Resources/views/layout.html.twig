@@ -26,10 +26,7 @@
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-        {# {% stylesheets '@TimVhostingBundle/Resources/public/css/index.min.css' filter='cssrewrite' %} #}
-        {% stylesheets '@TimVhostingBundle/Resources/public/css/index.css' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="/css/index.css">
     {% endblock stylesheets %}
 
     <title>{% block title %}{{ 'main_page.title'|trans({}, 'TimVhostingBundle') }}{% endblock %}</title>
@@ -112,11 +109,8 @@
     {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>#}
 
-    {# {% javascripts '@TimVhostingBundle/Resources/public/js/app.min.js' #}
-    {% javascripts '@TimVhostingBundle/Resources/public/js/app.js'
-                   '@TimVhostingBundle/Resources/public/js/retina.min.js' output='js/app.min.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="/js/app.js"></script>
+    <script src="/js/retina.min.js"></script>
 {% endblock %}
 
 </body>

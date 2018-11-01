@@ -21,10 +21,8 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {% stylesheets '@TimVhostingBundle/Resources/public/css/bootstrap.min.css'
-        '@TimVhostingBundle/Resources/public/css/font-awesome.min.css' filter='cssrewrite' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/font-awesome.min.css" />
     {% endblock stylesheets %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -48,11 +46,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    {% javascripts '@TimVhostingBundle/Resources/public/js/three.min.js'
-        '@TimVhostingBundle/Resources/public/js/utilsFunctions.js'
-        '@TimVhostingBundle/Resources/public/js/webglTest1.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script src="/js/three.min.js"></script>
+    <script src="/js/utilsFunctions.js"></script>
+    <script src="/js/webglTest1.js"></script>
 {% endblock %}
 
 </body>
