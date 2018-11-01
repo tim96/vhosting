@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new Escape\WSSEAuthenticationBundle\EscapeWSSEAuthenticationBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new AntiMattr\GoogleBundle\GoogleBundle(),
+            // new AntiMattr\GoogleBundle\GoogleBundle(),
 
             new Sonata\CoreBundle\SonataCoreBundle(),
             new \Sonata\BlockBundle\SonataBlockBundle(),

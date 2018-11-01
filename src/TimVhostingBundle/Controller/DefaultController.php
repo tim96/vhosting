@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use TimVhostingBundle\Entity\Feedback;
 use TimVhostingBundle\Entity\VideoSuggest;
 use TimVhostingBundle\Form\FeedbackType;
@@ -108,11 +109,11 @@ class DefaultController extends Controller
 
     /**
      * @Route("/contribute", name="Contribute")
-     * @Template()
+     *
      * @param Request $request
-     * @return array
+     * @return Response
      */
-    public function contributeAction(Request $request)
+    public function contributeAction(Request $request): Response
     {
         $videoSuggest = new VideoSuggest();
         $form = $this->createForm(new VideoSuggestType(), $videoSuggest);
@@ -135,18 +136,18 @@ class DefaultController extends Controller
             return $this->redirectToRoute('Contribute');
         }
 
-        return array(
-            'form' => $form->createView()
-        );
+        return $this->render('TimVhostingBundle:Default:contribute.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
      * @Route("/contact", name="Contact")
-     * @Template()
+     *
      * @param Request $request
-     * @return array|RedirectResponse
+     * @return array|RedirectResponse|Response
      */
-    public function contactAction(Request $request)
+    public function contactAction(Request $request): Response
     {
         $feedback = new Feedback();
         $form = $this->createForm(new FeedbackType(), $feedback);
@@ -169,9 +170,9 @@ class DefaultController extends Controller
             return $this->redirectToRoute('Contact');
         }
 
-        return array(
+        return $this->render('TimVhostingBundle:Default:contact.html.twig', [
             'form' => $form->createView()
-        );
+        ]);
     }
 
     /**

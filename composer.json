@@ -32,7 +32,6 @@
         "incenteev/composer-parameter-handler": "2.*",
         "liip/functional-test-bundle": "1.*",
         "escapestudios/wsse-authentication-bundle": "2.*",
-        "antimattr/google-bundle": "2.*",
         "suncat/mobile-detect-bundle": "0.*",
         "tfox/mpdf-port-bundle": "1.*",
         "hwi/oauth-bundle": "0.4.*",
