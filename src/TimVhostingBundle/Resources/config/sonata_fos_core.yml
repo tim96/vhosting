@@ -1,6 +1,9 @@
 sonata_user:
     security_acl: false
     manager_type: orm
+    class:
+        user: Application\Sonata\UserBundle\Entity\User
+        group: Application\Sonata\UserBundle\Entity\Group
 
 sonata_block:
     default_contexts: [sonata_page_bundle]

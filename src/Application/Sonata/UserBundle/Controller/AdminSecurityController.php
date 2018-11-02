@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tim
- * Date: 8/30/2015
- * Time: 3:25 PM
- */
 
 namespace Application\Sonata\UserBundle\Controller;
 
@@ -12,7 +6,7 @@ use Sonata\UserBundle\Controller\AdminSecurityController as BaseAdminSecurityCon
 // use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 // use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Security;
 // use Symfony\Component\Form\AbstractType;
 // use Symfony\Component\Form\FormBuilderInterface;
 // use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,12 +22,15 @@ class AdminSecurityController extends BaseAdminSecurityController
 {
     /**
      * @Route("/login", name="login")
+     *
      * @param Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction(Request $request = null)
+    public function loginAction(Request $request)
     {
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        // todo: Refactoring all this!!
+
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         if ($user instanceof UserInterface) {
             $this->container->get('session')->getFlashBag()->set('sonata_user_error', 'sonata_user_already_authenticated');
@@ -42,17 +39,16 @@ class AdminSecurityController extends BaseAdminSecurityController
             return new RedirectResponse($url);
         }
 
-        $request = $this->container->get('request');
         /* @var $request \Symfony\Component\HttpFoundation\Request */
         $session = $request->getSession();
         /* @var $session \Symfony\Component\HttpFoundation\Session */
 
         // get the error if any (works with forward and redirect -- see below)
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
+        } elseif (null !== $session && $session->has(Security::AUTHENTICATION_ERROR)) {
+            $error = $session->get(Security::AUTHENTICATION_ERROR);
+            $session->remove(Security::AUTHENTICATION_ERROR);
         } else {
             $error = '';
         }
@@ -62,13 +58,13 @@ class AdminSecurityController extends BaseAdminSecurityController
             $error = $error->getMessage();
         }
         // last username entered by the user
-        $lastUsername = (null === $session) ? '' : $session->get(SecurityContext::LAST_USERNAME);
+        $lastUsername = (null === $session) ? '' : $session->get(Security::LAST_USERNAME);
 
         $csrfToken = $this->container->has('form.csrf_provider')
             ? $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate')
             : null;
 
-        if ($this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $refererUri = $request->server->get('HTTP_REFERER');
 
             return new RedirectResponse($refererUri && $refererUri != $request->getUri() ? $refererUri : $this->container->get('router')->generate('sonata_admin_dashboard'));
@@ -84,7 +80,7 @@ class AdminSecurityController extends BaseAdminSecurityController
         }
 
         // todo: add PR for sonata user bundle
-        return $this->container->get('templating')->renderResponse('SonataUserBundle:Admin:Security/login.html.'.$this->container->getParameter('fos_user.template.engine'), array(
+        return $this->container->get('templating')->renderResponse('SonataUserBundle:Admin:Security/login.html.twig', array(
             'captcha'       => isset($captcha) ? $captcha->createView() : null,
             'last_username' => $lastUsername,
             'error'         => $error,
@@ -93,5 +89,4 @@ class AdminSecurityController extends BaseAdminSecurityController
             'admin_pool'    => $this->container->get('sonata.admin.pool')
         ));
     }
-
 }
