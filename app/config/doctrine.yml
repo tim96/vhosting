@@ -46,3 +46,16 @@ doctrine:
                         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                         alias: GedmoTree # (optional) it will default to the name set for the mapping
                         is_bundle: false
+
+# config/packages/doctrine_migrations.yaml
+doctrine_migrations:
+    dir_name: '%kernel.project_dir%/Migrations'
+    # namespace is arbitrary but should be different from App\Migrations
+    # as migrations classes should NOT be autoloaded
+    namespace: DoctrineMigrations
+    table_name: 'migration_versions'
+    name: 'Application Migrations'
+    # available in version >= 1.2. Possible values: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+    organize_migrations: false
+    # available in version >= 1.2. Path to your custom migrations template
+    custom_template: ~

@@ -62,7 +62,8 @@
         "beberlei/DoctrineExtensions": "@stable",
         "php-http/httplug-bundle": "^1.12",
         "php-http/curl-client": "^1.7",
-        "guzzlehttp/psr7": "^1.4"
+        "guzzlehttp/psr7": "^1.4",
+        "doctrine/doctrine-migrations-bundle": "@stable"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
