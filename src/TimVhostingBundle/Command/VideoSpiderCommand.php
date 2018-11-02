@@ -29,6 +29,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
     protected $isDebug;
     /** @var  string */
     protected $language;
+    /** @var  string */
+    protected $maxResults;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -37,11 +39,12 @@ class VideoSpiderCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        // call: php app/console video:spider isDebug
+        // call: php bin/console video:spider isDebug
         $this
             ->setName('video:spider')
             ->setDescription('Start update video information')
             ->addOption('searchWords', null, InputOption::VALUE_OPTIONAL, 'The search words')
+            ->addOption('maxResults', null, InputOption::VALUE_OPTIONAL, 'Count max results', 20)
             ->addOption('language', null, InputOption::VALUE_OPTIONAL, 'The language code.
                 The parameter value is typically an ISO 639-1 two-letter language code')
             ->addArgument('isDebug', InputArgument::OPTIONAL, 'Turn on debug mode: true, false. Default - false', false)
@@ -69,6 +72,7 @@ class VideoSpiderCommand extends ContainerAwareCommand
 
         $searchWords = $input->getOption('searchWords');
         $this->language = $input->getOption('language') ? $input->getOption('language') : 'en';
+        $this->maxResults = $input->getOption('maxResults');
 
         $countRepeat = 5;
         $this->executeCommand($searchWords, $countRepeat, null);
@@ -82,7 +86,7 @@ class VideoSpiderCommand extends ContainerAwareCommand
 
         $part = 'id,snippet';
         $parameters = array(
-            'maxResults' => 20, /* from 0 to 50, default: 5 */
+            'maxResults' => $this->maxResults, /* from 0 to 50, default: 5 */
             'order' => 'rating', /* date, rating, relevance, title, videoCount, viewCount */
             'q' => $searchWords,
             'type' => 'video', /* channel, playlist, video */

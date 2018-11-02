@@ -33,7 +33,7 @@ class VideoUpdaterCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-        // call: php app/console video:update isDebug
+        // call: php bin/console video:update isDebug
         $this
             ->setName('video:update')
             ->setDescription('Start update video information')
@@ -93,7 +93,7 @@ class VideoUpdaterCommand extends ContainerAwareCommand
     public function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
         $this->myErrorHandler($errno, $errstr, $errfile, $errline);
-        $this->logMessage("Error handler.");
+        $this->logMessage("Error handler. Reason: " . $errno);
     }
 
     protected function logMessage($message)
