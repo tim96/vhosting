@@ -12,13 +12,9 @@
 /.idea/*
 .idea/
 web/web.config
-web/.ttf
 web/_glyphicons-halflings-regular_1.ttf
-web/css/
-web/js/
 web/Resources/
 *.php~
-web/images/
 web/partials/
 web/public/
 /var/

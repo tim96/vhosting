@@ -116,7 +116,7 @@ class DefaultController extends Controller
     public function contributeAction(Request $request): Response
     {
         $videoSuggest = new VideoSuggest();
-        $form = $this->createForm(new VideoSuggestType(), $videoSuggest);
+        $form = $this->createForm(VideoSuggestType::class, $videoSuggest);
         $form->add('save', 'submit', array('label' => 'save.button.label'));
 
         $form->handleRequest($request);
@@ -150,7 +150,7 @@ class DefaultController extends Controller
     public function contactAction(Request $request): Response
     {
         $feedback = new Feedback();
-        $form = $this->createForm(new FeedbackType(), $feedback);
+        $form = $this->createForm(FeedbackType::class, $feedback);
         $form->add('save', 'submit', array('label' => 'submit.button.label'));
 
         $form->handleRequest($request);
@@ -186,111 +186,5 @@ class DefaultController extends Controller
 
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
-    }
-
-
-    /**
-     * @Route("/angular", name="angular")
-     * @Template("TimVhostingBundle:Default:angular.html.twig")
-     */
-    public function angularAction(Request $request)
-    {
-        // todo: rewrite frontend using angularjs
-
-        return array();
-    }
-
-    /**
-     * @Route("/angularTest", name="angular_test")
-     * @Template("TimVhostingBundle:Default:angularTest.html.twig")
-     */
-    public function angularTestAction(Request $request)
-    {
-        // guess the number
-        return array();
-    }
-
-    /**
-     * @Route("/angularTest1", name="angular_test1")
-     * @Template("TimVhostingBundle:Default:angularTest1.html.twig")
-     */
-    public function angularTest1Action(Request $request)
-    {
-        // 12 minutes workout
-        return array();
-    }
-
-    /**
-     * @Route("/angularTest2", name="angular_test2")
-     * @Template("TimVhostingBundle:Default:angularTest2.html.twig")
-     */
-    public function angularTest2Action(Request $request)
-    {
-        // zero/time game
-        return array();
-    }
-
-    /**
-     * @Route("/angular2Test", name="angular2_test")
-     * @Template("TimVhostingBundle:Default:angular2Test.html.twig")
-     */
-    public function angular2TestAction(Request $request)
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/angular2Test1", name="angular2_test1")
-     * @Template("TimVhostingBundle:Default:angular2Test1.html.twig")
-     */
-    public function angular2Test1Action(Request $request)
-    {
-        // example of todo application
-        return array();
-    }
-
-    /**
-     * @Route("/canvasTest1", name="acanvas_test1")
-     * @Template("TimVhostingBundle:Default:canvasTest1.html.twig")
-     */
-    public function canvasTest1Action(Request $request)
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/canvasTest2", name="acanvas_test2")
-     * @Template("TimVhostingBundle:Default:canvasTest2.html.twig")
-     */
-    public function canvasTest2Action(Request $request)
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/canvasTest3", name="acanvas_test3")
-     * @Template("TimVhostingBundle:Default:canvasTest3.html.twig")
-     */
-    public function canvasTest3Action(Request $request)
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/canvasTest4", name="acanvas_test4")
-     * @Template("TimVhostingBundle:Default:canvasTest4.html.twig")
-     */
-    public function canvasTest4Action(Request $request)
-    {
-        return array();
-    }
-
-    /**
-     * @Route("/webglTest1", name="webgl_test1")
-     * @Template("TimVhostingBundle:Default:webglTest1.html.twig")
-     */
-    public function webglTest1Action(Request $request)
-    {
-        return array();
     }
 }

@@ -5,7 +5,7 @@ namespace TimVhostingBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-//use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class VideoSuggestType extends AbstractType
 {
@@ -29,22 +29,11 @@ class VideoSuggestType extends AbstractType
             ->add('tags', null, array('label' => 'tags.label'
                 // 'placeholder' => 'No tag selected'
             ))
-            ->add('captcha', 'captcha', array('label' => 'captcha.label', 'charset' => '0123456789'))
+            ->add('captcha', CaptchaType::class, array('label' => 'captcha.label', 'charset' => '0123456789'))
             // ->add('save', 'submit', array('label' => 'save.button.label'))
         ;
     }
     
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    /*public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'TimVhostingBundle\Entity\VideoSuggest',
-            'translation_domain' => 'TimVhostingBundle'
-        ));
-    }*/
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -52,12 +41,4 @@ class VideoSuggestType extends AbstractType
             'translation_domain' => 'TimVhostingBundle'
         ));
     }
-
-    /**
-     * @return string
-     */
-    /*public function getName()
-    {
-        return 'timvhostingbundle_videosuggest';
-    }*/
 }
