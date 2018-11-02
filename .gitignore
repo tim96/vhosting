@@ -25,4 +25,4 @@ web/public/
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 /phpunit.xml
-.env
+/.env
