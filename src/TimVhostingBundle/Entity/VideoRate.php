@@ -142,7 +142,7 @@ class VideoRate
     /**
      * Get rating
      *
-     * @return \byte
+     * @return int
      */
     public function getRating()
     {
