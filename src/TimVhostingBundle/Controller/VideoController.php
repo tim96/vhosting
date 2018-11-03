@@ -13,14 +13,14 @@ use TimVhostingBundle\Entity\Video;
 class VideoController extends Controller
 {
     /**
-     * @Route("/{name}", name="show_video_name")
+     * @Route("/{slug}", name="show_video_slug")
      */
-    public function videoShowAction($name)
+    public function videoShowAction($slug)
     {
         $serviceVideo = $this->container->get('tim_vhosting.video.handler');
         /** @var Video $video */
-        $video = $serviceVideo->getVideoByName($name);
-        if (is_null($video)) {
+        $video = $serviceVideo->getVideoBySlug($slug);
+        if (null === $video) {
             $url = $this->generateUrl('Home');
             return new RedirectResponse($url);
         }

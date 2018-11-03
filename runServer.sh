@@ -1,2 +1,2 @@
 
-php app/console server:run localhost:9002
+php bin/console server:run localhost:9002

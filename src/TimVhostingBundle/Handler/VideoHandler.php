@@ -32,6 +32,11 @@ class VideoHandler extends BaseEntityHandler
         return $this->getRepository()->findOneBy(array('name' => $name, 'isDeleted' => false, 'isPublic' => true));
     }
 
+    public function getVideoBySlug($slug): ?Video
+    {
+        return $this->getRepository()->findOneBy(['slug' => $slug, 'isDeleted' => false, 'isPublic' => true]);
+    }
+
     public function updateYoutubeVideoInfo(YoutubeVideoInterface $serviceYoutube)
     {
         $count = 0;

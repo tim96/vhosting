@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "088a2dc3e7bda777a8557329ebbef5ed",
+    "content-hash": "b27e2ad1cce968e3b3248a7f8ec67e1e",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -10574,6 +10574,7 @@
         "nelmio/api-doc-bundle": 0,
         "beberlei/doctrineextensions": 0,
         "doctrine/doctrine-migrations-bundle": 0,
+        "gedmo/doctrine-extensions": 0,
         "phpstan/phpstan": 0
     },
     "prefer-stable": false,

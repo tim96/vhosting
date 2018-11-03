@@ -1,2 +1,2 @@
 
-php app/console doctrine:schema:update --force --dump-sql > migration.log
+php bin/console doctrine:schema:update --force --dump-sql > migration.log

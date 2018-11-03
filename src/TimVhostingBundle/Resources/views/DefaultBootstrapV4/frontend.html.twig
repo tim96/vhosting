@@ -8,12 +8,12 @@
                     {% for video in pagination %}
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
-                                <img class="card-img-top" src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg" alt="Card image cap">
+                                <a href="{{ path('show_video_slug', {'slug' : video.slug}) }}"><img class="card-img-top" src="http://img.youtube.com/vi/{{ video.youtubeVideoId }}/0.jpg" alt="Video thumbnail"></a>
                                 <div class="card-body">
                                     <p class="card-text">{{ video }}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <a href="{{ path('show_video_name', {'name' : video}) }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                                            <a href="{{ path('show_video_slug', {'slug' : video.slug}) }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                                         </div>
                                         <small class="text-muted">{{ video.durationVideoAsString }}</small>
                                     </div>

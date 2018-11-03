@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Video
@@ -40,6 +41,12 @@ class Video extends BaseEntity
      * @ORM\Column(name="link", type="string", length=255, nullable=true)
      */
     protected $link;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(name="slug", type="string", length=512, nullable=false, unique=true)
+     */
+    private $slug;
 
     /**
      * @var string
@@ -316,6 +323,18 @@ class Video extends BaseEntity
     public function getLink()
     {
         return $this->link;
+    }
+
+    public function setSlug($slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
