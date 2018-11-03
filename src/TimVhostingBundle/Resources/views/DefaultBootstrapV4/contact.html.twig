@@ -1,0 +1,46 @@
+{% extends '@TimVhosting/layoutV4.html.twig' %}
+{% form_theme form '@TimVhosting/Form/video_suggest_form_theme.html.twig' %}
+
+{% block title %}
+    {{ 'contact.title.label'|trans({}, 'TimVhostingBundle') }}
+{% endblock %}
+
+{% block body %}
+<main role="main">
+    <div class="album py-5">
+        <div class="container">
+            <div class="row">
+                <h2 class="header-page">{{ 'contact.header.label'|trans({}, 'TimVhostingBundle') }}</h2>
+                <div class="form-group">
+                    <div class="">
+                        <div class="flash-notice">
+                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                <p class="bg-success" style="padding: 15px;">
+                                    {{ flashMessage }}
+                                </p>
+                            {% endfor %}
+                        </div>
+
+                        <div class="flash-error">
+                            {% for flashMessage in app.session.flashbag.get('error') %}
+                                 <p class="bg-error" style="padding: 15px;">
+                                    {{ flashMessage }}
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="">
+                        <h6>{{ 'contact.message.label'|trans({}, 'TimVhostingBundle') }}</h6>
+                    </div>
+                </div>
+            </div>
+
+            {{ form(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
+        </div>
+    </div>
+</main>
+{% endblock %}

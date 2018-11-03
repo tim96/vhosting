@@ -28,7 +28,9 @@ class DefaultController extends Controller
     {
         $serach = $request->query->get('search');
 
-        $maxVideoOnPage = 10;
+        // todo: Testing new layout
+        // $maxVideoOnPage = 10;
+        $maxVideoOnPage = 9;
         $paginator = $this->get('knp_paginator');
 
         $serviceTags = $this->container->get('tim_vhosting.tags.handler');
@@ -53,50 +55,11 @@ class DefaultController extends Controller
             $maxVideoOnPage /*limit per page*/
         );
 
-        return $this->render('TimVhostingBundle:Default:frontend.html.twig',
-            array('tags' => $tags, 'videos' => $videos, 'pagination' => $pagination, 'carousel' => $carousel));
-    }
-
-    /**
-     * @Route("frontend1/{page}/{tag}", requirements={"page" = "\d+"}, name="Home1", defaults={"page" = 1, "tag" = null})
-     *
-     * @param int $page
-     * @param null $tag
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function frontend1Action($page = 1, $tag = null, Request $request)
-    {
-        $serach = $request->query->get('search');
-
-        $maxVideoOnPage = 10;
-        $paginator = $this->get('knp_paginator');
-
-        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
-        if (is_null($tag)) {
-            $tags = $serviceTags->getList(array('isDeleted' => false));
-        } else {
-            $tags = $serviceTags->getList(array('isDeleted' => false, 'name' => $tag));
-        }
-
-        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
-        $carousel = $serviceVideo->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
-
-        $videos = array();
-        // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
-
-        // $query = $serviceVideo->getRepository()->getList()->getQuery();
-        $query = $serviceVideo->getRepository()->getTagsQuery($tag);
-        $query = $serviceVideo->getRepository()->getSearch($serach, $query)->getQuery();
-        $pagination = $paginator->paginate(
-            $query,
-            $page /*page number*/,
-            $maxVideoOnPage /*limit per page*/
-        );
-
-        return $this->render('TimVhostingBundle:Default:frontend1.html.twig',
-            array('tags' => $tags, 'videos' => $videos, 'pagination' => $pagination, 'carousel' => $carousel));
+        // todo: Testing new layout
+        // return $this->render('TimVhostingBundle:Default:frontend.html.twig',
+        //     array('tags' => $tags, 'videos' => $videos, 'pagination' => $pagination, 'carousel' => $carousel));
+        return $this->render('TimVhostingBundle:DefaultBootstrapV4:frontend.html.twig',
+            ['tags' => $tags, 'videos' => $videos, 'pagination' => $pagination]);
     }
 
     /**
@@ -104,7 +67,9 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        return $this->render('TimVhostingBundle:Default:about.html.twig', array());
+        // todo: Testing new layout
+        // return $this->render('TimVhostingBundle:Default:about.html.twig', array());
+        return $this->render('TimVhostingBundle:DefaultBootstrapV4:about.html.twig', array());
     }
 
     /**
@@ -136,7 +101,9 @@ class DefaultController extends Controller
             return $this->redirectToRoute('Contribute');
         }
 
-        return $this->render('TimVhostingBundle:Default:contribute.html.twig', [
+        // todo: Testing new layout
+        // return $this->render('TimVhostingBundle:Default:contribute.html.twig', [
+        return $this->render('TimVhostingBundle:DefaultBootstrapV4:contribute.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -170,7 +137,9 @@ class DefaultController extends Controller
             return $this->redirectToRoute('Contact');
         }
 
-        return $this->render('TimVhostingBundle:Default:contact.html.twig', [
+        // todo: Testing new layout
+        // return $this->render('TimVhostingBundle:Default:contact.html.twig', [
+        return $this->render('TimVhostingBundle:DefaultBootstrapV4:contact.html.twig', [
             'form' => $form->createView()
         ]);
     }

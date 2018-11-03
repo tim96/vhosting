@@ -4,11 +4,11 @@
         <body>
             <trans-unit id="main_page.title">
                 <source>main_page.title</source>
-                <target>Video hosting</target>
+                <target>DevTalks</target>
             </trans-unit>
             <trans-unit id="main_page.logo_name">
                 <source>main_page.logo_name</source>
-                <target>Video hosting</target>
+                <target>DevTalks</target>
             </trans-unit>
             <trans-unit id="header.home">
                 <source>header.home</source>
@@ -68,7 +68,11 @@
             </trans-unit>
             <trans-unit id="about.message.label">
                 <source>about.message.label</source>
-                <target>Vhosting aims to be a community resource and, as such, we will depend on you to contribute content. Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we'll do the rest.</target>
+                <target>DevTalks aims to be a community resource and, as such, we will depend on you to contribute content. Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we'll do the rest.</target>
+            </trans-unit>
+            <trans-unit id="about.header.label">
+                <source>about.header.label</source>
+                <target>About</target>
             </trans-unit>
             <trans-unit id="make_a_choice">
                 <source>make_a_choice</source>

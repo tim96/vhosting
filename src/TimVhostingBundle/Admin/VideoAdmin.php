@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace TimVhostingBundle\Admin;
 
@@ -199,5 +199,23 @@ class VideoAdmin extends BaseAdmin
         $object->setLikeCount($statistics->getLikeCount());
         $object->setDislikeCount($statistics->getDislikeCount());
         $object->setFavoriteCount($statistics->getFavoriteCount());
+    }
+
+    protected function configureBatchActions($actions)
+    {
+        $actions = parent::configureBatchActions($actions);
+
+        if ($this->hasRoute('edit') && $this->hasAccess('edit')) {
+            $actions['publish'] = [
+                'label' => 'action_publish',
+                'ask_confirmation' => true,
+            ];
+            $actions['unpublish'] = [
+                'label' => 'action_unpublish',
+                'ask_confirmation' => true,
+            ];
+        }
+
+        return $actions;
     }
 }

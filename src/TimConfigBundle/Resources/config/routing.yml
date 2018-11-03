@@ -1,3 +1,0 @@
-tim_config_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: TimConfigBundle:Default:index }

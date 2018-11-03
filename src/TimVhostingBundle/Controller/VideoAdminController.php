@@ -2,6 +2,7 @@
 
 namespace TimVhostingBundle\Controller;
 
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -88,5 +89,71 @@ class VideoAdminController extends CRUDController
         $url = $this->admin->generateUrl('list');
         return new RedirectResponse($url);
         // return $this->redirectTo($object, $request);
+    }
+
+    public function batchActionPublish(ProxyQueryInterface $selectedModelQuery, Request $request = null)
+    {
+        $this->admin->checkAccess('edit');
+
+        $modelManager = $this->admin->getModelManager();
+
+        /** @var Video[] $selectedModels */
+        $selectedModels = $selectedModelQuery->execute();
+
+        try {
+            foreach ($selectedModels as $selectedModel) {
+                $selectedModel->setIsPublic(true);
+                $modelManager->update($selectedModel);
+            }
+        } catch (\Exception $e) {
+            $this->addFlash('sonata_flash_error', 'flash_batch_merge_error');
+
+            return new RedirectResponse(
+                $this->admin->generateUrl('list', [
+                    'filter' => $this->admin->getFilterParameters()
+                ])
+            );
+        }
+
+        $this->addFlash('sonata_flash_success', 'flash_batch_merge_success');
+
+        return new RedirectResponse(
+            $this->admin->generateUrl('list', [
+                'filter' => $this->admin->getFilterParameters()
+            ])
+        );
+    }
+
+    public function batchActionUnpublish(ProxyQueryInterface $selectedModelQuery, Request $request = null)
+    {
+        $this->admin->checkAccess('edit');
+
+        $modelManager = $this->admin->getModelManager();
+
+        /** @var Video[] $selectedModels */
+        $selectedModels = $selectedModelQuery->execute();
+
+        try {
+            foreach ($selectedModels as $selectedModel) {
+                $selectedModel->setIsPublic(false);
+                $modelManager->update($selectedModel);
+            }
+        } catch (\Exception $e) {
+            $this->addFlash('sonata_flash_error', 'flash_batch_merge_error');
+
+            return new RedirectResponse(
+                $this->admin->generateUrl('list', [
+                    'filter' => $this->admin->getFilterParameters()
+                ])
+            );
+        }
+
+        $this->addFlash('sonata_flash_success', 'flash_batch_merge_success');
+
+        return new RedirectResponse(
+            $this->admin->generateUrl('list', [
+                'filter' => $this->admin->getFilterParameters()
+            ])
+        );
     }
 }

@@ -1,15 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tim
- * Date: 12/15/2015
- * Time: 8:58 PM
- */
+<?php declare(strict_types = 1);
 
 namespace TimVhostingBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use TimVhostingBundle\Entity\Video;
@@ -33,9 +26,11 @@ class VideoController extends Controller
         }
 
         $tags = $video->getTags();
-        $carousel = $serviceVideo->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
+        // $carousel = $serviceVideo->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
 
-        return $this->render('TimVhostingBundle:Video:index.html.twig',
-            array('tags' => $tags, 'video' => $video, 'carousel' => $carousel));
+        // todo: Testing new layout
+        // return $this->render('TimVhostingBundle:Video:index.html.twig',
+        return $this->render('TimVhostingBundle:DefaultBootstrapV4:video.html.twig',
+            array('tags' => $tags, 'video' => $video));
     }
 }

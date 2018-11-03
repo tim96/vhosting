@@ -1,0 +1,70 @@
+{% extends '@TimVhosting/layoutV4.html.twig' %}
+{% form_theme form '@TimVhosting/Form/video_suggest_form_theme.html.twig' %}
+
+{% block title %}
+    {{ 'contribute.title.label'|trans({}, 'TimVhostingBundle') }}
+{% endblock %}
+
+{% block body %}
+<main role="main">
+    <div class="album py-5">
+        <div class="container">
+            <div class="row">
+                <h2 class="header-page">{{ 'contribute.header.label'|trans({}, 'TimVhostingBundle') }}</h2>
+                <div class="form-group">
+                    <div class="flash-notice">
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <p class="bg-success" style="padding: 15px;">
+                                {{ flashMessage }}
+                            </p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="flash-error">
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <p class="bg-error" style="padding: 15px;">
+                                {{ flashMessage }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="">
+                        <h6>{{ 'contribute.message.label'|trans({}, 'TimVhostingBundle') }}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+
+            {{ form(form, {'class': 'form-horizontal', 'attr': {'class': 'form-horizontal'} }) }}
+
+            <script type="text/javascript">
+                /*
+                * Jquery solution
+                $(document).ready(function() {
+                });*/
+                var id = '{{ form.tags.vars.id }}';
+                document.addEventListener("DOMContentLoaded", function(event) {
+                    $('#' + id).select2({
+                        maximumSelectionLength: 5
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+{% endblock stylesheets %}
