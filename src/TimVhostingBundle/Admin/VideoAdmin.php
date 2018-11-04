@@ -97,6 +97,7 @@ class VideoAdmin extends BaseAdmin
             ->add('link')
             ->add('youtubeVideoId')
             ->add('description')
+            ->add('language')
             ->add('meta')
             ->add('isPublic')
         ;

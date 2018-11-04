@@ -161,6 +161,12 @@ class Video extends BaseEntity
      */
     protected $commentCount;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Language", inversedBy="videos")
+     * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
+     */
+    private $language;
+
     public function __construct()
     {
         parent::__construct();
@@ -715,5 +721,17 @@ class Video extends BaseEntity
     public function getCommentCount()
     {
         return $this->commentCount;
+    }
+
+    public function getLanguage(): ?Language
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(Language $language): self
+    {
+        $this->language = $language;
+
+        return $this;
     }
 }

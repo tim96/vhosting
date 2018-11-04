@@ -85,13 +85,15 @@ class VideoSpiderCommand extends ContainerAwareCommand
         $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
 
         $part = 'id,snippet';
-        $parameters = array(
+        $parameters = [
             'maxResults' => $this->maxResults, /* from 0 to 50, default: 5 */
-            'order' => 'rating', /* date, rating, relevance, title, videoCount, viewCount */
+            'order' => 'viewCount', /* date, rating, relevance, title, videoCount, viewCount */
             'q' => $searchWords,
             'type' => 'video', /* channel, playlist, video */
-            'relevanceLanguage' => $this->language
-        );
+            // 'relevanceLanguage' => $this->language
+            'regionCode' => $this->language,
+            // 'hl' => 'em_US' The hl parameter specifies the language that should be used for text values in the API response. The default value is en_US.
+        ];
 
         if (!empty($token)) {
             $parameters['pageToken'] = $token;

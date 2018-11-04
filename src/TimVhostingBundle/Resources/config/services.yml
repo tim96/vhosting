@@ -1,3 +1,16 @@
+parameters:
+    google_api_key: '%google_api_key%'
+    tim_vhosting.feedback.handler.class: TimVhostingBundle\Handler\FeedbackHandler
+    tim_vhosting.video_suggest.handler.class: TimVhostingBundle\Handler\VideoSuggestHandler
+    tim_vhosting.tags.handler.class: TimVhostingBundle\Handler\TagsHandler
+    tim_vhosting.video.handler.class: TimVhostingBundle\Handler\VideoHandler
+    tim_vhosting.google_api.handler.class: TimVhostingBundle\Handler\GoogleApiHandler
+
+    tim_vhosting.feedback.class: TimVhostingBundle\Entity\Feedback
+    tim_vhosting.video_suggest.class: TimVhostingBundle\Entity\VideoSuggest
+    tim_vhosting.tags.class: TimVhostingBundle\Entity\Tags
+    tim_vhosting.video.class: TimVhostingBundle\Entity\Video
+
 services:
 #    tim_vhosting.example:
 #        class: TimVhostingBundle\Example
@@ -38,6 +51,15 @@ services:
         calls:
             - [ setTranslationDomain, [ TimVhostingBundle ] ]
 
+    tim_vhosting.admin.language:
+        class: TimVhostingBundle\Admin\LanguageAdmin
+        arguments: [~, TimVhostingBundle\Entity\Language, TimVhostingBundle:LanguageAdmin, '@service_container']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Language }
+        public: true
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
 #handler
     tim_vhosting.feedback.handler:
         class: '%tim_vhosting.feedback.handler.class%'
@@ -55,15 +77,3 @@ services:
         class: '%tim_vhosting.google_api.handler.class%'
         arguments: ['@service_container', '@doctrine.orm.entity_manager']
 
-parameters:
-    google_api_key: '%google_api_key%'
-    tim_vhosting.feedback.handler.class: TimVhostingBundle\Handler\FeedbackHandler
-    tim_vhosting.video_suggest.handler.class: TimVhostingBundle\Handler\VideoSuggestHandler
-    tim_vhosting.tags.handler.class: TimVhostingBundle\Handler\TagsHandler
-    tim_vhosting.video.handler.class: TimVhostingBundle\Handler\VideoHandler
-    tim_vhosting.google_api.handler.class: TimVhostingBundle\Handler\GoogleApiHandler
-
-    tim_vhosting.feedback.class: TimVhostingBundle\Entity\Feedback
-    tim_vhosting.video_suggest.class: TimVhostingBundle\Entity\VideoSuggest
-    tim_vhosting.tags.class: TimVhostingBundle\Entity\Tags
-    tim_vhosting.video.class: TimVhostingBundle\Entity\Video
