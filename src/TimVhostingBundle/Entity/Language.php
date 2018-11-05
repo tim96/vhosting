@@ -45,13 +45,13 @@ class Language extends BaseEntity
     /**
      * @ORM\OneToMany(targetEntity="Video", mappedBy="language")
      */
-    private $video;
+    private $videos;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->video = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     public function getId()
@@ -88,22 +88,22 @@ class Language extends BaseEntity
         return $this;
     }
 
-    public function addVideo(Video $video): self
+    public function addVideos(Video $video): self
     {
-        if (!$this->video->contains($video)) {
-            $this->video->add($video);
+        if (!$this->videos->contains($video)) {
+            $this->videos->add($video);
         }
 
         return $this;
     }
 
-    public function removeVideo(Video $video): bool
+    public function removeVideos(Video $video): bool
     {
-        return $this->video->removeElement($video);
+        return $this->videos->removeElement($video);
     }
 
-    public function getVideo(): ArrayCollection
+    public function getVideos(): ArrayCollection
     {
-        return $this->video;
+        return $this->videos;
     }
 }
