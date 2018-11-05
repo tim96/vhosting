@@ -28,6 +28,10 @@
     {% endblock %}
 
     <title>{% block title %}{{ 'main_page.title'|trans({}, 'TimVhostingBundle') }}{% endblock %}</title>
+
+    {% block analytics %}
+        {% include '@TimVhosting/analytics.html.twig' %}
+    {% endblock %}
 </head>
 <body class="bg-light">
 
