@@ -7,6 +7,7 @@ git pull --force
 php composer.phar self-update
 php composer.phar update
 php composer.phar dump-autoload --optimize
+# composer dump-autoload --optimize
 
 # php app/console doctrine:database:create
 php bin/console doctrine:database:create
@@ -36,8 +37,10 @@ php bin/console assets:install web --symlink
 # php app/console assetic:dump --env=prod --no-debug
 # php bin/console assetic:dump --env=prod --no-debug
 
-chmod 777 -R app/cache
-chmod 777 -R app/logs
+# chmod 777 -R app/cache
+chmod 777 -R var/cache
+# chmod 777 -R app/logs
+chmod 777 -R var/logs
 
 # php app/console doctrine:schema:update --force --dump-sql
 php bin/console doctrine:schema:update --force --dump-sql

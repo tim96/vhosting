@@ -35,7 +35,7 @@
 
                             <div class="video-block" style="text-align: center;">
                                 {% if video.youtubeVideoId is not null %}
-                                    <iframe width="640px" height="360px" src="http://www.youtube.com/embed/{{ video.youtubeVideoId }}" frameborder="0" allowfullscreen></iframe>
+                                    <iframe width="640px" height="360px" src="https://www.youtube.com/embed/{{ video.youtubeVideoId }}" frameborder="0" allowfullscreen></iframe>
                                 {% else %}
                                     <iframe width="640px" height="360px" src="{{ video.link }}" frameborder="0" allowfullscreen></iframe>
                                 {% endif %}

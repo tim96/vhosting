@@ -30,6 +30,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
     /** @var  string */
     protected $language;
     /** @var  string */
+    protected $regionCode;
+    /** @var  string */
     protected $maxResults;
 
     public function setContainer(ContainerInterface $container = null)
@@ -45,7 +47,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
             ->setDescription('Start update video information')
             ->addOption('searchWords', null, InputOption::VALUE_OPTIONAL, 'The search words')
             ->addOption('maxResults', null, InputOption::VALUE_OPTIONAL, 'Count max results', 20)
-            ->addOption('language', null, InputOption::VALUE_OPTIONAL, 'The language code.
+            ->addOption('language', null, InputOption::VALUE_OPTIONAL, 'The language code.')
+            ->addOption('regionCode', null, InputOption::VALUE_OPTIONAL, 'The language code.
                 The parameter value is typically an ISO 639-1 two-letter language code')
             ->addArgument('isDebug', InputArgument::OPTIONAL, 'Turn on debug mode: true, false. Default - false', false)
         ;
@@ -72,6 +75,7 @@ class VideoSpiderCommand extends ContainerAwareCommand
 
         $searchWords = $input->getOption('searchWords');
         $this->language = $input->getOption('language') ? $input->getOption('language') : 'en';
+        $this->regionCode = $input->getOption('regionCode');
         $this->maxResults = $input->getOption('maxResults');
 
         $countRepeat = 5;
@@ -90,10 +94,13 @@ class VideoSpiderCommand extends ContainerAwareCommand
             'order' => 'viewCount', /* date, rating, relevance, title, videoCount, viewCount */
             'q' => $searchWords,
             'type' => 'video', /* channel, playlist, video */
-            // 'relevanceLanguage' => $this->language
-            'regionCode' => $this->language,
+            'relevanceLanguage' => $this->language,
             // 'hl' => 'em_US' The hl parameter specifies the language that should be used for text values in the API response. The default value is en_US.
         ];
+
+        if ($this->regionCode) {
+            $parameters['regionCode'] = $this->regionCode;
+        }
 
         if (!empty($token)) {
             $parameters['pageToken'] = $token;
@@ -128,10 +135,20 @@ class VideoSpiderCommand extends ContainerAwareCommand
 
                 $objectSnippet = $item->getSnippet();
 
+                $name = $objectSnippet['title'];
+                // Remove 4-byte UTF-8, two variants. todo: Find the best
+                $name = preg_replace('/[\xF0-\xF7].../s', '', $name);
+                $name = preg_replace('/[\x{10000}-\x{10FFFF}]/u', '', $name);
+
+                $description = $objectSnippet['description'];
+                // Remove 4-byte UTF-8, two variants. todo: Find the best
+                $description = preg_replace('/[\xF0-\xF7].../s', '', $description);
+                $description = preg_replace('/[\x{10000}-\x{10FFFF}]/u', '', $description);
+
                 $video = new Video();
                 $video->setYoutubeVideoId($objectId['videoId']);
-                $video->setDescription($objectSnippet['description']);
-                $video->setName($objectSnippet['title']);
+                $video->setDescription($description);
+                $video->setName($name);
                 $video->setChannelId($objectSnippet['channelId']);
                 $video->setPublishedAt(new \DateTime($objectSnippet['publishedAt']));
                 $video->setIsPublic(false);
