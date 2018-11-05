@@ -37,10 +37,7 @@
         "incenteev/composer-parameter-handler": "@stable",
         "liip/functional-test-bundle": "@stable",
         "escapestudios/wsse-authentication-bundle": "@stable",
-        "suncat/mobile-detect-bundle": "@stable",
-        "tfox/mpdf-port-bundle": "@stable",
         "hwi/oauth-bundle": "@stable",
-        "cboden/ratchet": "@stable",
         "gregwar/captcha-bundle": "@stable",
 
         "sonata-project/admin-bundle": "@stable",
@@ -65,7 +62,8 @@
         "php-http/curl-client": "^1.7",
         "guzzlehttp/psr7": "^1.4",
         "doctrine/doctrine-migrations-bundle": "@stable",
-        "gedmo/doctrine-extensions": "@stable"
+        "gedmo/doctrine-extensions": "@stable",
+        "longman/telegram-bot": "@stable"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
