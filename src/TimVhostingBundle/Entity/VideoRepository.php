@@ -24,6 +24,11 @@ class VideoRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('isPublic', $isPublic);
         }
 
+
+        // At this moment start order by from createdAt.
+        // After need to change it to
+        $qb->orderBy('v.createdAt', 'DESC');
+
         return $qb;
     }
 
