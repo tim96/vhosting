@@ -14,7 +14,7 @@
         ]
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.3",
         "ext-pcntl": "*",
         "symfony/symfony": "3.4.*",
         "symfony/swiftmailer-bundle": "@stable",
@@ -63,7 +63,8 @@
         "guzzlehttp/psr7": "^1.4",
         "doctrine/doctrine-migrations-bundle": "@stable",
         "gedmo/doctrine-extensions": "@stable",
-        "longman/telegram-bot": "@stable"
+        "longman/telegram-bot": "@stable",
+        "symfony/console": "@stable"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.*",
