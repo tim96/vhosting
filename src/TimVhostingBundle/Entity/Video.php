@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\VideoRepository")
+ * @ORM\Entity()
  */
 class Video extends BaseEntity
 {

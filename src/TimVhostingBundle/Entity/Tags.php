@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\TagsRepository")
+ * @ORM\Entity()
  */
 class Tags extends BaseEntity
 {

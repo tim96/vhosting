@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Controller;
 
+use App\TimVhostingBundle\Entity\VideoRepository;
 use App\TimVhostingBundle\Handler\FeedbackHandler;
 use App\TimVhostingBundle\Handler\TagsHandler;
-use App\TimVhostingBundle\Handler\VideoHandler;
 use App\TimVhostingBundle\Handler\VideoSuggestHandler;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,8 +26,8 @@ class DefaultController extends AbstractController
     /** @var TagsHandler */
     private $tagsHandler;
 
-    /** @var VideoHandler */
-    private $videoHandler;
+    /** @var VideoRepository */
+    private $videoRepository;
 
     /** @var VideoSuggestHandler */
     private $videoSuggestHandler;
@@ -38,13 +38,13 @@ class DefaultController extends AbstractController
     public function __construct(
         PaginatorInterface $paginator,
         TagsHandler $tagsHandler,
-        VideoHandler $videoHandler,
+        VideoRepository $videoRepository,
         VideoSuggestHandler $videoSuggestHandler,
         FeedbackHandler $feedbackHandler
     ) {
         $this->paginator = $paginator;
         $this->tagsHandler = $tagsHandler;
-        $this->videoHandler = $videoHandler;
+        $this->videoRepository = $videoRepository;
         $this->videoSuggestHandler = $videoSuggestHandler;
         $this->feedbackHandler = $feedbackHandler;
     }
@@ -72,14 +72,13 @@ class DefaultController extends AbstractController
             $tags = $this->tagsHandler->getList(array('isDeleted' => false, 'name' => $tag));
         }
 
-        $carousel = $this->videoHandler->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
+        $carousel = $this->videoRepository->getTopVideos($maxVideos = 4)->getQuery()->getResult();
 
         $videos = array();
-        // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
+        // $videos = $this->videoRepository->getList(array('isPublic' => true, 'isDeleted' => false));
+        $query = $this->videoRepository->getTagsQuery($tag);
+        $query = $this->videoRepository->getSearch($serach, $query)->getQuery();
 
-        // $query = $serviceVideo->getRepository()->getList()->getQuery();
-        $query = $this->videoHandler->getRepository()->getTagsQuery($tag);
-        $query = $this->videoHandler->getRepository()->getSearch($serach, $query)->getQuery();
         $pagination = $this->paginator->paginate(
             $query,
             $page /*page number*/,
@@ -143,7 +142,7 @@ class DefaultController extends AbstractController
      *
      * @return RedirectResponse|Response
      */
-    public function contactAction(Request $request): Response
+    public function contactAction(Request $request)
     {
         $feedback = new Feedback();
         $form = $this->createForm(FeedbackType::class, $feedback);

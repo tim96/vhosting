@@ -1,37 +1,36 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Handler;
 
-use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
 use App\TimVhostingBundle\Entity\TagsRepository;
 
-class TagsHandler extends BaseEntityHandler
+class TagsHandler
 {
+    /** @var TagsRepository */
+    private $tagsRepository;
+
+    public function __construct(TagsRepository $tagsRepository)
+    {
+        $this->tagsRepository = $tagsRepository;
+    }
+
     public function get($id)
     {
-        return $this->getRepository()->find($id);
+        return $this->tagsRepository->find($id);
     }
 
     public function getList($options = array())
     {
-        return $this->getRepository()->findBy($options);
+        return $this->tagsRepository->findBy($options);
     }
 
     public function getOneByName($name, $isDeleted = false)
     {
-        return $this->getRepository()->findOneBy(array('name' => $name, 'isDeleted' => $isDeleted));
+        return $this->tagsRepository->findOneBy(array('name' => $name, 'isDeleted' => $isDeleted));
     }
 
     public function getTagsNotDeleted()
     {
-        return $this->getRepository()->getTagsQuery()->getQuery()->getResult();
-    }
-
-    /**
-     * @return TagsRepository
-     */
-    public function getRepository()
-    {
-        return parent::getRepository();
+        return $this->tagsRepository->getTagsQuery()->getQuery()->getResult();
     }
 }

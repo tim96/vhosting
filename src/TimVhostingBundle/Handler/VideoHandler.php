@@ -2,60 +2,69 @@
 
 namespace App\TimVhostingBundle\Handler;
 
-use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
 use App\TimVhostingBundle\Entity\TagsRepository;
 use App\TimVhostingBundle\Entity\Video;
 use App\TimVhostingBundle\Entity\VideoRepository;
 use App\TimVhostingBundle\Interfaces\YoutubeVideoInterface;
 use Doctrine\Common\Annotations\Annotation\Required;
+use Doctrine\ORM\EntityManagerInterface;
 
-class VideoHandler extends BaseEntityHandler
+class VideoHandler
 {
+    /** @var EntityManagerInterface */
+    private $em;
+
+    /** @var VideoRepository */
+    private $repository;
+
     /** @var TagsRepository */
     private $tagsRepository;
 
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * @Required
-     *
-     * @param TagsRepository $tagsRepository
      */
-    public function setTagsRepository(TagsRepository $tagsRepository)
+    public function setTagsRepository(TagsRepository $tagsRepository): void
     {
         $this->tagsRepository = $tagsRepository;
     }
 
     /**
-     * @return VideoRepository
+     * @Required
      */
-    public function getRepository(): VideoRepository
+    public function setVideoRepository(VideoRepository $videoRepository): void
     {
-        return $this->repository;
+        $this->repository = $videoRepository;
     }
 
     public function get($id)
     {
-        return $this->getRepository()->find($id);
+        return $this->repository->find($id);
     }
 
     public function getList($options = array())
     {
-        return $this->getRepository()->findBy($options);
+        return $this->repository->findBy($options);
     }
 
     public function getVideoByName($name)
     {
-        return $this->getRepository()->findOneBy(array('name' => $name, 'isDeleted' => false, 'isPublic' => true));
+        return $this->repository->findOneBy(array('name' => $name, 'isDeleted' => false, 'isPublic' => true));
     }
 
-    public function getVideoBySlug($slug): ?Video
+    public function getVideoBySlug($slug)
     {
-        return $this->getRepository()->findOneBy(['slug' => $slug, 'isDeleted' => false, 'isPublic' => true]);
+        return $this->repository->findOneBy(['slug' => $slug, 'isDeleted' => false, 'isPublic' => true]);
     }
 
     public function updateYoutubeVideoInfo(YoutubeVideoInterface $serviceYoutube)
     {
         $count = 0;
-        $videos = $this->getRepository()->getVideosQuery()->getQuery()->getResult();
+        $videos = $this->repository->getVideosQuery()->getQuery()->getResult();
         $resultsTags = $this->tagsRepository->getTagsQuery()->getQuery()->getResult();
 
         /** @var Video $object */
@@ -67,6 +76,7 @@ class VideoHandler extends BaseEntityHandler
             $duration = $serviceYoutube->getYoutubeVideoDurationFromData($data);
 
             $lang = $data->getLocalizations();
+
             /** @var \Google_Service_YouTube_VideoSnippet $snippet */
             $snippet = $data->getSnippet();
 
@@ -118,8 +128,8 @@ class VideoHandler extends BaseEntityHandler
             }
 
             if ($isUpdate) {
-                $this->om->persist($object);
-                $this->om->flush();
+                $this->em->persist($object);
+                $this->em->flush();
                 $count++;
             }
         }

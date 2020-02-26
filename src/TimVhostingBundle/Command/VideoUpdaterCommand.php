@@ -55,7 +55,7 @@ class VideoUpdaterCommand extends Command
 
         try {
             $this->executeCommand($input, $output);
-        } catch(\Throwable $ex) {
+        } catch(\Exception $ex) {
             $this->logError('Error: '.$ex->getMessage().'; Trace: '.$ex->getTraceAsString());
 
             return 1;
