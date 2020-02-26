@@ -6,6 +6,7 @@
 parameters:
     google_analytics: '%env(GOOGLE_ANALYTICS)%'
     database_name: '%env(DATABASE_NAME)%'
+    google_api_key: '%env(GOOGLE_API_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -41,3 +42,12 @@ services:
 
     App\TimVhostingBundle\Handler\VideoHandler:
         arguments: ['@service_container', '@doctrine.orm.entity_manager', 'App\TimVhostingBundle\Entity\Video']
+
+    App\TimVhostingBundle\Handler\VideoSuggestHandler:
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', 'App\TimVhostingBundle\Entity\VideoSuggest']
+
+    App\TimVhostingBundle\Handler\FeedbackHandler:
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', 'App\TimVhostingBundle\Entity\Feedback']
+
+    App\TimVhostingBundle\Handler\GoogleApiHandler:
+        arguments: ['@service_container', '@doctrine.orm.entity_manager']

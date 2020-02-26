@@ -1,12 +1,3 @@
-parameters:
-    google_api_key: '%env(GOOGLE_API_KEY)%'
-    tim_vhosting.feedback.handler.class: App\TimVhostingBundle\Handler\FeedbackHandler
-    tim_vhosting.video_suggest.handler.class: App\TimVhostingBundle\Handler\VideoSuggestHandler
-    tim_vhosting.google_api.handler.class: App\TimVhostingBundle\Handler\GoogleApiHandler
-
-    tim_vhosting.feedback.class: App\TimVhostingBundle\Entity\Feedback
-    tim_vhosting.video_suggest.class: App\TimVhostingBundle\Entity\VideoSuggest
-
 services:
 #    tim_vhosting.example:
 #        class: TimVhostingBundle\Example
@@ -55,15 +46,3 @@ services:
         public: true
         calls:
             - [ setTranslationDomain, [ TimVhostingBundle ] ]
-
-#handler
-    tim_vhosting.feedback.handler:
-        class: '%tim_vhosting.feedback.handler.class%'
-        arguments: ['@service_container', '@doctrine.orm.entity_manager', '%tim_vhosting.feedback.class%']
-    tim_vhosting.video_suggest.handler:
-        class: '%tim_vhosting.video_suggest.handler.class%'
-        arguments: ['@service_container', '@doctrine.orm.entity_manager', '%tim_vhosting.video_suggest.class%']
-
-    tim_vhosting.google_api.handler:
-        class: '%tim_vhosting.google_api.handler.class%'
-        arguments: ['@service_container', '@doctrine.orm.entity_manager']

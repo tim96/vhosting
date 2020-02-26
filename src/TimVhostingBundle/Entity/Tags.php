@@ -154,11 +154,11 @@ class Tags extends BaseEntity
     /**
      * Add videoSuggest
      *
-     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
      *
      * @return Tags
      */
-    public function addVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function addVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
     {
         $this->videoSuggests[] = $videoSuggest;
     
@@ -168,9 +168,9 @@ class Tags extends BaseEntity
     /**
      * Remove videoSuggest
      *
-     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
      */
-    public function removeVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function removeVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
     {
         $this->videoSuggests->removeElement($videoSuggest);
     }

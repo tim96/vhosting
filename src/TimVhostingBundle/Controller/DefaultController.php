@@ -2,10 +2,14 @@
 
 namespace App\TimVhostingBundle\Controller;
 
+use App\TimVhostingBundle\Handler\FeedbackHandler;
 use App\TimVhostingBundle\Handler\TagsHandler;
 use App\TimVhostingBundle\Handler\VideoHandler;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\TimVhostingBundle\Handler\VideoSuggestHandler;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,39 +18,55 @@ use App\TimVhostingBundle\Entity\VideoSuggest;
 use App\TimVhostingBundle\Form\FeedbackType;
 use App\TimVhostingBundle\Form\VideoSuggestType;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
+    /** @var PaginatorInterface */
+    private $paginator;
+
     /** @var TagsHandler */
     private $tagsHandler;
 
     /** @var VideoHandler */
     private $videoHandler;
 
-    public function __construct(TagsHandler $tagsHandler, VideoHandler $videoHandler)
-    {
+    /** @var VideoSuggestHandler */
+    private $videoSuggestHandler;
+
+    /** @var FeedbackHandler */
+    private $feedbackHandler;
+
+    public function __construct(
+        PaginatorInterface $paginator,
+        TagsHandler $tagsHandler,
+        VideoHandler $videoHandler,
+        VideoSuggestHandler $videoSuggestHandler,
+        FeedbackHandler $feedbackHandler
+    ) {
+        $this->paginator = $paginator;
         $this->tagsHandler = $tagsHandler;
         $this->videoHandler = $videoHandler;
+        $this->videoSuggestHandler = $videoSuggestHandler;
+        $this->feedbackHandler = $feedbackHandler;
     }
 
     /**
      * @Route("/{page}/{tag}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = 1, "tag" = null})
      *
+     * @param Request $request
      * @param int $page
      * @param null $tag
-     * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function frontendAction($page = 1, $tag = null, Request $request)
+    public function frontendAction(Request $request, $page = 1, $tag = null): Response
     {
         $serach = $request->query->get('search');
 
         // todo: Testing new layout
         // $maxVideoOnPage = 10;
         $maxVideoOnPage = 9;
-        $paginator = $this->get('knp_paginator');
 
-        if (is_null($tag)) {
+        if (null === $tag) {
             $tags = $this->tagsHandler->getList(array('isDeleted' => false));
         } else {
             $tags = $this->tagsHandler->getList(array('isDeleted' => false, 'name' => $tag));
@@ -60,7 +80,7 @@ class DefaultController extends Controller
         // $query = $serviceVideo->getRepository()->getList()->getQuery();
         $query = $this->videoHandler->getRepository()->getTagsQuery($tag);
         $query = $this->videoHandler->getRepository()->getSearch($serach, $query)->getQuery();
-        $pagination = $paginator->paginate(
+        $pagination = $this->paginator->paginate(
             $query,
             $page /*page number*/,
             $maxVideoOnPage /*limit per page*/
@@ -93,19 +113,16 @@ class DefaultController extends Controller
     {
         $videoSuggest = new VideoSuggest();
         $form = $this->createForm(VideoSuggestType::class, $videoSuggest);
-        $form->add('save', 'submit', array('label' => 'save.button.label'));
+        $form->add('save', SubmitType::class, array('label' => 'save.button.label'));
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $record = $this->container->get('tim_vhosting.video_suggest.handler')
-                    ->create($form->getData());
+                $record = $this->videoSuggestHandler->create($form->getData());
 
                 $this->addFlash('notice', 'Thank you, for your contribution!');
-            }
-            catch(\Exception $ex)
-            {
+            } catch(\Exception $ex) {
                 $this->addFlash('error', 'Sorry, something wrong');
             }
 
@@ -129,14 +146,13 @@ class DefaultController extends Controller
     {
         $feedback = new Feedback();
         $form = $this->createForm(FeedbackType::class, $feedback);
-        $form->add('save', 'submit', array('label' => 'submit.button.label'));
+        $form->add('save', SubmitType::class, array('label' => 'submit.button.label'));
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $record = $this->container->get('tim_vhosting.feedback.handler')
-                    ->create($form->getData());
+                $record = $this->feedbackHandler->create($form->getData());
 
                 $this->addFlash('notice', 'Thank you, for your feedback!');
             }
@@ -161,7 +177,13 @@ class DefaultController extends Controller
     public function changeLanguageAction($name, Request $request)
     {
         $locale = substr($name, 0, 2);
-        $request->getSession()->set('_locale', $locale);
+
+        $session = $request->getSession();
+
+        if ($session) {
+            $session->set('_locale', $locale);
+        }
+
         $request->setLocale($locale);
 
         $referer = $request->headers->get('referer');

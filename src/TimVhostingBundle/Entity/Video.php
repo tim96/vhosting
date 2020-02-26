@@ -380,11 +380,11 @@ class Video extends BaseEntity
     /**
      * Add videoSuggest
      *
-     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
      *
      * @return Video
      */
-    public function addVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function addVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
     {
         $this->videoSuggest[] = $videoSuggest;
     
@@ -394,11 +394,11 @@ class Video extends BaseEntity
     /**
      * Remove videoSuggest
      *
-     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function removeVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
     {
         return $this->videoSuggest->removeElement($videoSuggest);
     }
@@ -416,11 +416,11 @@ class Video extends BaseEntity
     /**
      * Set videoSuggest
      *
-     * @param \TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
      *
      * @return Video
      */
-    public function setVideoSuggest(\TimVhostingBundle\Entity\VideoSuggest $videoSuggest = null)
+    public function setVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest = null)
     {
         $this->videoSuggest = $videoSuggest;
     
