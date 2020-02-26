@@ -1,6 +1,6 @@
 <?php
 
-namespace TimConfigBundle\Handler\Auth;
+namespace App\TimConfigBundle\Handler\Auth;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler;

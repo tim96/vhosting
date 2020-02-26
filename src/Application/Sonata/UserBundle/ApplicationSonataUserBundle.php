@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\Sonata\UserBundle;
+namespace App\Application\Sonata\UserBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

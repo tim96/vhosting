@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Api\v1;
+namespace App\TimVhostingBundle\Api\v1;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

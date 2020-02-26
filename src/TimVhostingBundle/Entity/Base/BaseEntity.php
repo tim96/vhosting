@@ -6,7 +6,7 @@
  * Time: 9:16 PM
  */
 
-namespace TimVhostingBundle\Entity\Base;
+namespace App\TimVhostingBundle\Entity\Base;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class BaseEntity
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Application\Sonata\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      **/
     private $author;
@@ -133,11 +133,11 @@ abstract class BaseEntity
     /**
      * Set author
      *
-     * @param \Application\Sonata\UserBundle\Entity\User $author
+     * @param \App\Application\Sonata\UserBundle\Entity\User $author
      *
      * @return BaseEntity
      */
-    public function setAuthor(\Application\Sonata\UserBundle\Entity\User $author = null)
+    public function setAuthor(\App\Application\Sonata\UserBundle\Entity\User $author = null)
     {
         $this->author = $author;
     
@@ -147,7 +147,7 @@ abstract class BaseEntity
     /**
      * Get author
      *
-     * @return \Application\Sonata\UserBundle\Entity\User
+     * @return \App\Application\Sonata\UserBundle\Entity\User
      */
     public function getAuthor()
     {

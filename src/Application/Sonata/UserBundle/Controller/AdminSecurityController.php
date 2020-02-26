@@ -1,11 +1,12 @@
 <?php
 
-namespace Application\Sonata\UserBundle\Controller;
+namespace App\Application\Sonata\UserBundle\Controller;
 
 use Sonata\UserBundle\Controller\AdminSecurityController as BaseAdminSecurityController;
 // use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 // use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 // use Symfony\Component\Form\AbstractType;
 // use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +27,7 @@ class AdminSecurityController extends BaseAdminSecurityController
      * @param Request $request
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request): Response
     {
         // todo: Refactoring all this!!
 

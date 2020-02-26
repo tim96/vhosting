@@ -6,7 +6,7 @@
  * Time: 6:50 PM
  */
 
-namespace TimConfigBundle\EventListener;
+namespace App\TimConfigBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;

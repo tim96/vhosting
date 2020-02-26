@@ -1,6 +1,6 @@
 <?php
 
-namespace TimConfigBundle\Handler\Base;
+namespace App\TimConfigBundle\Handler\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;

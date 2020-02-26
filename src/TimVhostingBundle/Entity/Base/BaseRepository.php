@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Entity\Base;
+namespace App\TimVhostingBundle\Entity\Base;
 
 use Doctrine\ORM\EntityRepository;
 

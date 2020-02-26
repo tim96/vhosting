@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Feedback
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="TimVhostingBundle\Entity\FeedbackRepository")
+ * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\FeedbackRepository")
  */
 class Feedback
 {

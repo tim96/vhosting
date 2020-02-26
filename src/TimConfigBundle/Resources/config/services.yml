@@ -3,12 +3,12 @@ services:
 #        class: TimConfigBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
     tim_config.event_listener.locale_listener:
-        class: TimConfigBundle\EventListener\LocaleListener
+        class: App\TimConfigBundle\EventListener\LocaleListener
         arguments: ["%kernel.default_locale%"]
         tags:
             - { name: kernel.event_subscriber }
 
 parameters:
     # example to override authentication listeners
-    security.authentication.success_handler.class: TimConfigBundle\Handler\Auth\AuthenticationSuccessHandler
-    security.authentication.failure_handler.class: TimConfigBundle\Handler\Auth\AuthenticationFailureHandler
+    security.authentication.success_handler.class: App\TimConfigBundle\Handler\Auth\AuthenticationSuccessHandler
+    security.authentication.failure_handler.class: App\TimConfigBundle\Handler\Auth\AuthenticationFailureHandler

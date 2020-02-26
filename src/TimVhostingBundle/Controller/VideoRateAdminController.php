@@ -1,8 +1,8 @@
 <?php
 
-namespace TimVhostingBundle\Controller;
+namespace App\TimVhostingBundle\Controller;
 
-use TimConfigBundle\Controller\Base\BaseCrudController;
+use App\TimConfigBundle\Controller\Base\BaseCrudController;
 
 class VideoRateAdminController extends BaseCrudController
 {

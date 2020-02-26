@@ -1,7 +1,0 @@
-tim_vhosting:
-    resource: "@TimVhostingBundle/Resources/config/routing.yml"
-    prefix:   /
-
-tim_vhosting_admin:
-    resource: "@TimVhostingBundle/Resources/config/routing_admin.yml"
-    prefix:   /

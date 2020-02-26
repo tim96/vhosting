@@ -1,6 +1,6 @@
 <?php
 
-namespace TimConfigBundle\Handler\Base;
+namespace App\TimConfigBundle\Handler\Base;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Monolog\Logger;

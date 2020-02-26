@@ -6,10 +6,10 @@
  * Time: 23:21
  */
 
-namespace TimVhostingBundle\Handler;
+namespace App\TimVhostingBundle\Handler;
 
-use TimConfigBundle\Handler\Base\BaseEntityHandler;
-use TimVhostingBundle\EventListener\FeedbackEvent;
+use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
+use App\TimVhostingBundle\EventListener\FeedbackEvent;
 
 class FeedbackHandler extends BaseEntityHandler
 {

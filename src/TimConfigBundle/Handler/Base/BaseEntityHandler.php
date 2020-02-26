@@ -1,8 +1,8 @@
 <?php
 
-namespace TimConfigBundle\Handler\Base;
+namespace App\TimConfigBundle\Handler\Base;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -13,9 +13,9 @@ abstract class BaseEntityHandler extends BaseContainerEmHandler
     /** @var  EntityRepository */
     protected $repository;
 
-    public function __construct(ContainerInterface $container, ObjectManager $om, $entityClass)
+    public function __construct(ContainerInterface $container, EntityManagerInterface $em, string $entityClass)
     {
-        parent::__construct($container, $om);
+        parent::__construct($container, $em);
 
         $this->entityClass = $entityClass;
         $this->repository = $this->om->getRepository($this->entityClass);

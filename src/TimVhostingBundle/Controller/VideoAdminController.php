@@ -1,13 +1,13 @@
 <?php
 
-namespace TimVhostingBundle\Controller;
+namespace App\TimVhostingBundle\Controller;
 
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use TimVhostingBundle\Entity\Video;
+use App\TimVhostingBundle\Entity\Video;
 
 class VideoAdminController extends CRUDController
 {

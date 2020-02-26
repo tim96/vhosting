@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\DependencyInjection;
+namespace App\TimVhostingBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

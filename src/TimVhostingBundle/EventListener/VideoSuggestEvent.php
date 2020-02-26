@@ -6,7 +6,7 @@
  * Time: 10:41 PM
  */
 
-namespace TimVhostingBundle\EventListener;
+namespace App\TimVhostingBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\Event;
 

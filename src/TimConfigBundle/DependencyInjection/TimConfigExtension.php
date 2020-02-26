@@ -1,6 +1,6 @@
 <?php
 
-namespace TimConfigBundle\DependencyInjection;
+namespace App\TimConfigBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

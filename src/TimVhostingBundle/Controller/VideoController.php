@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace TimVhostingBundle\Controller;
+namespace App\TimVhostingBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use TimVhostingBundle\Entity\Video;
+use App\TimVhostingBundle\Entity\Video;
 
 /**
  * @Route("/video")

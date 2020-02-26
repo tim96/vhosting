@@ -1,6 +1,6 @@
 <?php
 
-namespace TimConfigBundle;
+namespace App\TimConfigBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

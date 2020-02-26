@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle;
+namespace App\TimVhostingBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

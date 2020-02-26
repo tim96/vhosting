@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use \Doctrine\ORM\EntityRepository;
 

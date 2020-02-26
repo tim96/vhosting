@@ -1,11 +1,11 @@
 <?php
 
-namespace TimVhostingBundle\Handler;
+namespace App\TimVhostingBundle\Handler;
 
-use TimConfigBundle\Handler\Base\BaseEntityHandler;
-use TimVhostingBundle\Entity\Video;
-use TimVhostingBundle\Entity\VideoRepository;
-use TimVhostingBundle\Interfaces\YoutubeVideoInterface;
+use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
+use App\TimVhostingBundle\Entity\Video;
+use App\TimVhostingBundle\Entity\VideoRepository;
+use App\TimVhostingBundle\Interfaces\YoutubeVideoInterface;
 
 class VideoHandler extends BaseEntityHandler
 {

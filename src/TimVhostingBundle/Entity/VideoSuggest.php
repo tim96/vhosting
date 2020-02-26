@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * VideoSuggest
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="TimVhostingBundle\Entity\VideoSuggestRepository")
+ * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\VideoSuggestRepository")
  */
 class VideoSuggest
 {

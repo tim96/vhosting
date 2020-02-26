@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Interfaces;
+namespace App\TimVhostingBundle\Interfaces;
 
 interface YoutubeVideoInterface
 {

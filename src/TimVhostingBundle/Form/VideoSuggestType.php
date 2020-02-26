@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Form;
+namespace App\TimVhostingBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

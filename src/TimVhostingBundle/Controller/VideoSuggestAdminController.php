@@ -1,12 +1,12 @@
 <?php
 
-namespace TimVhostingBundle\Controller;
+namespace App\TimVhostingBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use TimConfigBundle\Controller\Base\BaseCrudController;
-use TimVhostingBundle\Entity\Video;
-use TimVhostingBundle\Entity\VideoSuggest;
+use App\TimConfigBundle\Controller\Base\BaseCrudController;
+use App\TimVhostingBundle\Entity\Video;
+use App\TimVhostingBundle\Entity\VideoSuggest;
 
 class VideoSuggestAdminController extends BaseCrudController
 {

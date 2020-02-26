@@ -6,10 +6,10 @@
  * Time: 10:39 PM
  */
 
-namespace TimVhostingBundle\Handler;
+namespace App\TimVhostingBundle\Handler;
 
-use TimConfigBundle\Handler\Base\BaseEntityHandler;
-use TimVhostingBundle\EventListener\VideoSuggestEvent;
+use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
+use App\TimVhostingBundle\EventListener\VideoSuggestEvent;
 
 class VideoSuggestHandler extends BaseEntityHandler
 {

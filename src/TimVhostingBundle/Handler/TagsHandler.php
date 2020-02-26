@@ -1,9 +1,9 @@
 <?php
 
-namespace TimVhostingBundle\Handler;
+namespace App\TimVhostingBundle\Handler;
 
-use TimConfigBundle\Handler\Base\BaseEntityHandler;
-use TimVhostingBundle\Entity\TagsRepository;
+use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
+use App\TimVhostingBundle\Entity\TagsRepository;
 
 class TagsHandler extends BaseEntityHandler
 {

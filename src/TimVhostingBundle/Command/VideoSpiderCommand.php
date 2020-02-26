@@ -6,7 +6,7 @@
  * Time: 9:05 PM
  */
 
-namespace TimVhostingBundle\Command;
+namespace App\TimVhostingBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,8 +14,8 @@ use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use TimVhostingBundle\Entity\Tags;
-use TimVhostingBundle\Entity\Video;
+use App\TimVhostingBundle\Entity\Tags;
+use App\TimVhostingBundle\Entity\Video;
 
 class VideoSpiderCommand extends ContainerAwareCommand
 {

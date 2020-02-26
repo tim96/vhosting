@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use TimVhostingBundle\Entity\Base\BaseEntity;
+use App\TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="TimVhostingBundle\Entity\LanguageRepository")
+ * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\LanguageRepository")
  */
 class Language extends BaseEntity
 {

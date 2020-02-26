@@ -1,9 +1,9 @@
 <?php
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TimVhostingBundle\Entity\Base\BaseEntity;
+use App\TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Tags
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="TimVhostingBundle\Entity\TagsRepository")
+ * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\TagsRepository")
  */
 class Tags extends BaseEntity
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Tests\Controller;
+namespace App\TimVhostingBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

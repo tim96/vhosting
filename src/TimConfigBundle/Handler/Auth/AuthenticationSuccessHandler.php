@@ -1,6 +1,6 @@
 <?php
 
-namespace TimConfigBundle\Handler\Auth;
+namespace App\TimConfigBundle\Handler\Auth;
 
 use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

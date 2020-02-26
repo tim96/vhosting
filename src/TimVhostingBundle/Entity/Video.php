@@ -1,10 +1,10 @@
 <?php
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use TimVhostingBundle\Entity\Base\BaseEntity;
+use App\TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Video
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="TimVhostingBundle\Entity\VideoRepository")
+ * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\VideoRepository")
  */
 class Video extends BaseEntity
 {

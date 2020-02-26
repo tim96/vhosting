@@ -6,7 +6,7 @@
  * Time: 9:25 PM
  */
 
-namespace TimConfigBundle\Admin\Base;
+namespace App\TimConfigBundle\Admin\Base;
 
 use Sonata\AdminBundle\Admin\Admin as SonataAdmin;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,7 +26,6 @@ abstract class BaseAdmin extends SonataAdmin
         parent::__construct($code, $class, $baseControllerName);
 
         $this->container = $container;
-        $this->logger = $this->container->get('logger');
     }
 
     public function getLogger()

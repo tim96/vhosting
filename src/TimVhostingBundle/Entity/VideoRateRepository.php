@@ -1,6 +1,6 @@
 <?php
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 /**
  * VideoRateRepository

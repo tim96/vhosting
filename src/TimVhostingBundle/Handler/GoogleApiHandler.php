@@ -6,10 +6,10 @@
  * Time: 8:51 PM
  */
 
-namespace TimVhostingBundle\Handler;
+namespace App\TimVhostingBundle\Handler;
 
-use TimConfigBundle\Handler\Base\BaseContainerEmHandler;
-use TimVhostingBundle\Interfaces\YoutubeVideoInterface;
+use App\TimConfigBundle\Handler\Base\BaseContainerEmHandler;
+use App\TimVhostingBundle\Interfaces\YoutubeVideoInterface;
 
 class GoogleApiHandler extends BaseContainerEmHandler implements YoutubeVideoInterface
 {

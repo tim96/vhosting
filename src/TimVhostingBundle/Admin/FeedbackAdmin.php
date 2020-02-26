@@ -1,12 +1,12 @@
 <?php
 
-namespace TimVhostingBundle\Admin;
+namespace App\TimVhostingBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use TimConfigBundle\Admin\Base\BaseAdmin;
+use App\TimConfigBundle\Admin\Base\BaseAdmin;
 
 class FeedbackAdmin extends BaseAdmin
 {

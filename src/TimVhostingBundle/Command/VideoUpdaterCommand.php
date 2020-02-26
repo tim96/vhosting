@@ -6,7 +6,7 @@
  * Time: 9:05 PM
  */
 
-namespace TimVhostingBundle\Command;
+namespace App\TimVhostingBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;

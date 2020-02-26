@@ -1,20 +1,33 @@
 <?php
 
-namespace TimVhostingBundle\Controller;
+namespace App\TimVhostingBundle\Controller;
 
+use App\TimVhostingBundle\Handler\TagsHandler;
+use App\TimVhostingBundle\Handler\VideoHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use TimVhostingBundle\Entity\Feedback;
-use TimVhostingBundle\Entity\VideoSuggest;
-use TimVhostingBundle\Form\FeedbackType;
-use TimVhostingBundle\Form\VideoSuggestType;
+use App\TimVhostingBundle\Entity\Feedback;
+use App\TimVhostingBundle\Entity\VideoSuggest;
+use App\TimVhostingBundle\Form\FeedbackType;
+use App\TimVhostingBundle\Form\VideoSuggestType;
 
 class DefaultController extends Controller
 {
+    /** @var TagsHandler */
+    private $tagsHandler;
+
+    /** @var VideoHandler */
+    private $videoHandler;
+
+    public function __construct(TagsHandler $tagsHandler, VideoHandler $videoHandler)
+    {
+        $this->tagsHandler = $tagsHandler;
+        $this->videoHandler = $videoHandler;
+    }
+
     /**
      * @Route("/{page}/{tag}", requirements={"page" = "\d+"}, name="Home", defaults={"page" = 1, "tag" = null})
      *
@@ -33,22 +46,20 @@ class DefaultController extends Controller
         $maxVideoOnPage = 9;
         $paginator = $this->get('knp_paginator');
 
-        $serviceTags = $this->container->get('tim_vhosting.tags.handler');
         if (is_null($tag)) {
-            $tags = $serviceTags->getList(array('isDeleted' => false));
+            $tags = $this->tagsHandler->getList(array('isDeleted' => false));
         } else {
-            $tags = $serviceTags->getList(array('isDeleted' => false, 'name' => $tag));
+            $tags = $this->tagsHandler->getList(array('isDeleted' => false, 'name' => $tag));
         }
 
-        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
-        $carousel = $serviceVideo->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
+        $carousel = $this->videoHandler->getRepository()->getTopVideos($maxVideos = 4)->getQuery()->getResult();
 
         $videos = array();
         // $videos = $serviceVideo->getList(array('isPublic' => true, 'isDeleted' => false));
 
         // $query = $serviceVideo->getRepository()->getList()->getQuery();
-        $query = $serviceVideo->getRepository()->getTagsQuery($tag);
-        $query = $serviceVideo->getRepository()->getSearch($serach, $query)->getQuery();
+        $query = $this->videoHandler->getRepository()->getTagsQuery($tag);
+        $query = $this->videoHandler->getRepository()->getSearch($serach, $query)->getQuery();
         $pagination = $paginator->paginate(
             $query,
             $page /*page number*/,

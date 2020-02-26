@@ -1,16 +1,16 @@
 <?php
 
-namespace TimVhostingBundle\Entity;
+namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use TimVhostingBundle\Entity\Base\BaseEntity;
+use App\TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * VideoRate
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="TimVhostingBundle\Entity\VideoRateRepository")
+ * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\VideoRateRepository")
  */
 class VideoRate
 {
