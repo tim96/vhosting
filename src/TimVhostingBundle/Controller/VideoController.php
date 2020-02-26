@@ -2,26 +2,35 @@
 
 namespace App\TimVhostingBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\TimVhostingBundle\Handler\VideoHandler;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\TimVhostingBundle\Entity\Video;
 
 /**
  * @Route("/video")
  */
-class VideoController extends Controller
+class VideoController extends AbstractController
 {
+    /** @var VideoHandler */
+    private $videoHandler;
+
+    public function __construct(VideoHandler $videoHandler)
+    {
+        $this->videoHandler = $videoHandler;
+    }
+
     /**
      * @Route("/{slug}", name="show_video_slug")
      */
     public function videoShowAction($slug)
     {
-        $serviceVideo = $this->container->get('tim_vhosting.video.handler');
         /** @var Video $video */
-        $video = $serviceVideo->getVideoBySlug($slug);
+        $video = $this->videoHandler->getVideoBySlug($slug);
         if (null === $video) {
             $url = $this->generateUrl('Home');
+
             return new RedirectResponse($url);
         }
 
