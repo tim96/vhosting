@@ -140,7 +140,8 @@ class DefaultController extends AbstractController
      * @Route("/contact", name="Contact")
      *
      * @param Request $request
-     * @return array|RedirectResponse|Response
+     *
+     * @return RedirectResponse|Response
      */
     public function contactAction(Request $request): Response
     {

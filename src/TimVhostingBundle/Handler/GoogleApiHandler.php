@@ -74,31 +74,39 @@ class GoogleApiHandler extends BaseContainerEmHandler implements YoutubeVideoInt
     }
 
     /**
-     * @param $data \Google_Service_YouTube_Video
+     * @param \Google_Service_YouTube_Video $data
+     *
      * @return array
      */
     public function getYoutubeVideoDurationFromData($data)
     {
         /** @var \Google_Service_YouTube_VideoContentDetails $getContentDetails */
         $getContentDetails = $data->getContentDetails();
+
         return $this->convertYoutubeVideoDuration($getContentDetails->getDuration());
     }
 
     public function getYoutubeVideoStatistics($videoId)
     {
         $data = $this->getYoutubeVideoInfo($videoId);
+
         /** @var \Google_Service_YouTube_VideoStatistics $getStatistics */
-        return $this->getYoutubeVideoStatisticsFromData($data);
+        $getStatistics =  $this->getYoutubeVideoStatisticsFromData($data);
+
+        return $getStatistics;
     }
 
     /**
-     * @param $data \Google_Service_YouTube_Video
+     * @param \Google_Service_YouTube_Video $data
+     *
      * @return \Google_Service_YouTube_VideoStatistics
      */
     public function getYoutubeVideoStatisticsFromData($data)
     {
         /** @var \Google_Service_YouTube_VideoStatistics $getStatistics */
-        return $data->getStatistics();
+        $getStatistics = $data->getStatistics();
+
+        return $getStatistics;
     }
 
     public function convertYoutubeVideoDuration($youtubeTime)

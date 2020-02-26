@@ -1,18 +1,33 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Handler;
 
 use App\TimConfigBundle\Handler\Base\BaseEntityHandler;
+use App\TimVhostingBundle\Entity\TagsRepository;
 use App\TimVhostingBundle\Entity\Video;
 use App\TimVhostingBundle\Entity\VideoRepository;
 use App\TimVhostingBundle\Interfaces\YoutubeVideoInterface;
+use Doctrine\Common\Annotations\Annotation\Required;
 
 class VideoHandler extends BaseEntityHandler
 {
+    /** @var TagsRepository */
+    private $tagsRepository;
+
+    /**
+     * @Required
+     *
+     * @param TagsRepository $tagsRepository
+     */
+    public function setTagsRepository(TagsRepository $tagsRepository)
+    {
+        $this->tagsRepository = $tagsRepository;
+    }
+
     /**
      * @return VideoRepository
      */
-    public function getRepository()
+    public function getRepository(): VideoRepository
     {
         return $this->repository;
     }
@@ -41,8 +56,7 @@ class VideoHandler extends BaseEntityHandler
     {
         $count = 0;
         $videos = $this->getRepository()->getVideosQuery()->getQuery()->getResult();
-        $repositoryTags = $this->om->getRepository('TimVhostingBundle:Tags');
-        $resultsTags = $repositoryTags->getTagsQuery()->getQuery()->getResult();
+        $resultsTags = $this->tagsRepository->getTagsQuery()->getQuery()->getResult();
 
         /** @var Video $object */
         foreach($videos as $object) {

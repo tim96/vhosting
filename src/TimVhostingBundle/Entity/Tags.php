@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Entity;
 
@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Tags
- *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\TagsRepository")
  */
@@ -35,14 +33,14 @@ class Tags extends BaseEntity
     protected $name;
 
     /**
-     * @var Video
+     * @var ArrayCollection|Video[]
      *
      * @ORM\ManyToMany(targetEntity="Video", mappedBy="tags", cascade={"persist"})
      */
     protected $videos;
 
     /**
-     * @var VideoSuggest
+     * @var ArrayCollection|VideoSuggest[]
      *
      * @ORM\ManyToMany(targetEntity="VideoSuggest", mappedBy="tags", cascade={"persist"})
      */
@@ -90,61 +88,37 @@ class Tags extends BaseEntity
      */
     public function __toString()
     {
-        return $this->id ? (string)$this->name : "";
+        return $this->id ? (string)$this->name : '';
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Tags
-     */
-    public function setName($name)
+    public function setName($name): self
     {
         $this->name = $name;
     
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Add video
-     *
-     * @param \TimVhostingBundle\Entity\Video $video
-     *
-     * @return Tags
-     */
-    public function addVideo(\TimVhostingBundle\Entity\Video $video)
+    public function addVideo(Video $video): self
     {
         $this->videos[] = $video;
     
         return $this;
     }
 
-    /**
-     * Remove video
-     *
-     * @param \TimVhostingBundle\Entity\Video $video
-     */
-    public function removeVideo(\TimVhostingBundle\Entity\Video $video)
+    public function removeVideo(Video $video): bool
     {
-        $this->videos->removeElement($video);
+        return $this->videos->removeElement($video);
     }
 
     /**
      * Get videos
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getVideos()
     {
@@ -154,31 +128,26 @@ class Tags extends BaseEntity
     /**
      * Add videoSuggest
      *
-     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
+     * @param VideoSuggest $videoSuggest
      *
      * @return Tags
      */
-    public function addVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function addVideoSuggest(VideoSuggest $videoSuggest): self
     {
         $this->videoSuggests[] = $videoSuggest;
     
         return $this;
     }
 
-    /**
-     * Remove videoSuggest
-     *
-     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
-     */
-    public function removeVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function removeVideoSuggest(VideoSuggest $videoSuggest): bool
     {
-        $this->videoSuggests->removeElement($videoSuggest);
+        return $this->videoSuggests->removeElement($videoSuggest);
     }
 
     /**
      * Get videoSuggests
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getVideoSuggests()
     {
@@ -192,7 +161,7 @@ class Tags extends BaseEntity
      *
      * @return Tags
      */
-    public function setCountVideo($countVideo)
+    public function setCountVideo($countVideo): self
     {
         $this->countVideo = $countVideo;
 
@@ -216,7 +185,7 @@ class Tags extends BaseEntity
      *
      * @return Tags
      */
-    public function setClassificationNumber($classificationNumber)
+    public function setClassificationNumber($classificationNumber): self
     {
         $this->classificationNumber = $classificationNumber;
     
@@ -233,8 +202,9 @@ class Tags extends BaseEntity
         return $this->classificationNumber;
     }
 
-    public function calculateClassification($countVideo)
+    public function calculateClassification($countVideo): int
     {
+        // todo: Add cosntanst here and move to separate class
         // Depend on how much videos exists for this tag (<10 -> 1, <25 -> 2, <50 -> 3, <100 -> 4,  other -> 5
         if ($countVideo >= 100) {
             return 5;

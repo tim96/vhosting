@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Entity;
 
@@ -7,13 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * VideoSuggest
- *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\VideoSuggestRepository")
  */
 class VideoSuggest
 {
+    public const STATUS_HOLD = 0;
+    public const STATUS_REJECT = 1;
+    public const STATUS_APPROVE = 2;
+
     /**
      * @var int
      *
@@ -73,7 +75,7 @@ class VideoSuggest
     private $createdAt;
 
     /**
-     * @var Tags
+     * @var ArrayCollection|Tags[]
      *
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="videoSuggests", cascade={"persist"})
      * @ORM\JoinTable(name="video_suggest_tag")
@@ -92,10 +94,6 @@ class VideoSuggest
      */
     private $video;
 
-    const STATUS_HOLD = 0;
-    const STATUS_REJECT = 1;
-    const STATUS_APPROVE = 2;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -109,7 +107,7 @@ class VideoSuggest
      */
     public function __toString()
     {
-        return $this->id ? $this->title : "";
+        return $this->id ? $this->title : '';
     }
 
     /**
@@ -165,7 +163,7 @@ class VideoSuggest
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -201,7 +199,7 @@ class VideoSuggest
      *
      * @return VideoSuggest
      */
-    public function setDescription($description)
+    public function setDescription($description): self
     {
         $this->description = $description;
     
@@ -213,7 +211,7 @@ class VideoSuggest
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -225,7 +223,7 @@ class VideoSuggest
      *
      * @return VideoSuggest
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
     
@@ -237,7 +235,7 @@ class VideoSuggest
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -249,10 +247,10 @@ class VideoSuggest
      *
      * @return VideoSuggest
      */
-    public function setUserName($userName)
+    public function setUserName($userName): self
     {
         $this->userName = $userName;
-    
+
         return $this;
     }
 
@@ -261,7 +259,7 @@ class VideoSuggest
      *
      * @return string
      */
-    public function getUserName()
+    public function getUserName(): ?string
     {
         return $this->userName;
     }
@@ -269,24 +267,24 @@ class VideoSuggest
     /**
      * Add tag
      *
-     * @param \TimVhostingBundle\Entity\Tags $tag
+     * @param Tags $tag
      *
      * @return VideoSuggest
      */
-    public function addTag(\TimVhostingBundle\Entity\Tags $tag)
+    public function addTag(Tags $tag): self
     {
         // $tag->addVideoSuggest($this);
         $this->tags[] = $tag;
-    
+
         return $this;
     }
 
     /**
      * Remove tag
      *
-     * @param \TimVhostingBundle\Entity\Tags $tag
+     * @param Tags $tag
      */
-    public function removeTag(\TimVhostingBundle\Entity\Tags $tag)
+    public function removeTag(Tags $tag): void
     {
         $this->tags->removeElement($tag);
     }
@@ -294,7 +292,7 @@ class VideoSuggest
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getTags()
     {
@@ -308,7 +306,7 @@ class VideoSuggest
      *
      * @return VideoSuggest
      */
-    public function setStatus($status)
+    public function setStatus($status): self
     {
         $this->status = $status;
     
@@ -320,27 +318,27 @@ class VideoSuggest
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus(): ?int
     {
         return $this->status;
     }
 
-    public function isApproved()
+    public function isApproved(): bool
     {
-        return $this->status == self::STATUS_APPROVE;
+        return $this->status === self::STATUS_APPROVE;
     }
 
-    public function isRejected()
+    public function isRejected(): bool
     {
-        return $this->status == self::STATUS_REJECT;
+        return $this->status === self::STATUS_REJECT;
     }
 
-    public function isHold()
+    public function isHold(): bool
     {
-        return $this->status == self::STATUS_HOLD;
+        return $this->status === self::STATUS_HOLD;
     }
 
-    public function getStatusAsString()
+    public function getStatusAsString(): string
     {
         switch ($this->status)
         {
@@ -354,16 +352,18 @@ class VideoSuggest
                 return 'Rejected';
                 break;
         }
+
+        return '';
     }
 
     /**
      * Add video
      *
-     * @param \TimVhostingBundle\Entity\Video $video
+     * @param Video $video
      *
      * @return VideoSuggest
      */
-    public function addVideo(\TimVhostingBundle\Entity\Video $video)
+    public function addVideo(Video $video): self
     {
         $this->video[] = $video;
     
@@ -373,11 +373,11 @@ class VideoSuggest
     /**
      * Remove video
      *
-     * @param \TimVhostingBundle\Entity\Video $video
+     * @param Video $video
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeVideo(\TimVhostingBundle\Entity\Video $video)
+    public function removeVideo(Video $video): bool
     {
         return $this->video->removeElement($video);
     }
@@ -385,7 +385,7 @@ class VideoSuggest
     /**
      * Get video
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getVideo()
     {

@@ -1,27 +1,20 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tim
- * Date: 12/28/2015
- * Time: 9:05 PM
- */
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class VideoUpdaterCommand extends ContainerAwareCommand
+class VideoUpdaterCommand extends Command
 {
     /** @var ContainerInterface */
     private $container;
-    /** @var  \Symfony\Component\Console\Output\OutputInterface */
+    /** @var OutputInterface */
     private $output;
-    /** @var  \Symfony\Component\Console\Input\InputInterface */
+    /** @var InputInterface */
     private $input;
     /** @var  boolean */
     protected $isDebug;
@@ -52,7 +45,7 @@ class VideoUpdaterCommand extends ContainerAwareCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->input = $input;
         $this->output = $output;
@@ -62,13 +55,15 @@ class VideoUpdaterCommand extends ContainerAwareCommand
 
         try {
             $this->executeCommand($input, $output);
-        }
-        catch(\Exception $ex)
-        {
+        } catch(\Throwable $ex) {
             $this->logError('Error: '.$ex->getMessage().'; Trace: '.$ex->getTraceAsString());
+
+            return 1;
         }
 
         $this->logMessage("Finish execute command.");
+
+        return 0;
     }
 
     protected function executeCommand($input, $output)

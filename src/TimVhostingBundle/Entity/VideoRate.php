@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\TimVhostingBundle\Entity\Base\BaseEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -72,7 +71,7 @@ class VideoRate
      *
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -84,7 +83,7 @@ class VideoRate
      *
      * @return VideoRate
      */
-    public function setFeedback($feedback)
+    public function setFeedback($feedback): self
     {
         $this->feedback = $feedback;
     
@@ -96,7 +95,7 @@ class VideoRate
      *
      * @return string
      */
-    public function getFeedback()
+    public function getFeedback(): ?string
     {
         return $this->feedback;
     }
@@ -108,7 +107,7 @@ class VideoRate
      *
      * @return VideoRate
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
     
@@ -120,19 +119,12 @@ class VideoRate
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Set rating
-     *
-     * @param $rating
-     *
-     * @return VideoRate
-     */
-    public function setRating($rating)
+    public function setRating(int $rating): self
     {
         $this->rating = $rating;
     
@@ -144,7 +136,7 @@ class VideoRate
      *
      * @return int
      */
-    public function getRating()
+    public function getRating(): ?int
     {
         return $this->rating;
     }
@@ -152,23 +144,18 @@ class VideoRate
     /**
      * Set video
      *
-     * @param \TimVhostingBundle\Entity\Video $video
+     * @param Video $video
      *
      * @return VideoRate
      */
-    public function setVideo(\TimVhostingBundle\Entity\Video $video = null)
+    public function setVideo(Video $video = null): self
     {
         $this->video = $video;
     
         return $this;
     }
 
-    /**
-     * Get video
-     *
-     * @return \TimVhostingBundle\Entity\Video
-     */
-    public function getVideo()
+    public function getVideo(): ?Video
     {
         return $this->video;
     }

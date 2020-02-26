@@ -41,7 +41,9 @@ abstract class BaseAdmin extends SonataAdmin
     protected function getUser()
     {
         /** @var UserInterface $user */
-        return $this->container->get('security.token_storage')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+
+        return $user;
     }
 
     protected function configureListFields(ListMapper $listMapper)

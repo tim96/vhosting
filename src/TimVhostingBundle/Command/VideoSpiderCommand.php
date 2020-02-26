@@ -8,7 +8,7 @@
 
 namespace App\TimVhostingBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface as InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -17,13 +17,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use App\TimVhostingBundle\Entity\Tags;
 use App\TimVhostingBundle\Entity\Video;
 
-class VideoSpiderCommand extends ContainerAwareCommand
+class VideoSpiderCommand extends Command
 {
     /** @var ContainerInterface */
     private $container;
-    /** @var  \Symfony\Component\Console\Output\OutputInterface */
+    /** @var OutputInterface */
     private $output;
-    /** @var  \Symfony\Component\Console\Input\InputInterface */
+    /** @var InputInterface */
     private $input;
     /** @var  boolean */
     protected $isDebug;
@@ -65,7 +65,7 @@ class VideoSpiderCommand extends ContainerAwareCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->input = $input;
         $this->output = $output;
@@ -82,6 +82,8 @@ class VideoSpiderCommand extends ContainerAwareCommand
         $this->executeCommand($searchWords, $countRepeat, null);
 
         $this->logMessage("Finish execute command.");
+
+        return 0;
     }
 
     protected function executeCommand($searchWords, $countRepeat, $token)

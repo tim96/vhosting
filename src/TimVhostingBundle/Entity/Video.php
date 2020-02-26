@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\TimVhostingBundle\Entity;
 
@@ -9,8 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Video
- *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="App\TimVhostingBundle\Entity\VideoRepository")
  */
@@ -74,7 +72,7 @@ class Video extends BaseEntity
     private $videoSuggest;
 
     /**
-     * @var Tags
+     * @var ArrayCollection|Tags[]
      *
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="videos", cascade={"persist"})
      * @ORM\JoinTable(name="video_tag")
@@ -208,7 +206,7 @@ class Video extends BaseEntity
      *
      * @return Video
      */
-    public function setName($name)
+    public function setName($name): self
     {
         $this->name = $name;
     
@@ -220,7 +218,7 @@ class Video extends BaseEntity
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -232,7 +230,7 @@ class Video extends BaseEntity
      *
      * @return Video
      */
-    public function setDescription($description)
+    public function setDescription($description): self
     {
         $this->description = $description;
     
@@ -244,7 +242,7 @@ class Video extends BaseEntity
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -252,31 +250,26 @@ class Video extends BaseEntity
     /**
      * Add videoRate
      *
-     * @param \TimVhostingBundle\Entity\VideoRate $videoRate
+     * @param VideoRate $videoRate
      *
      * @return Video
      */
-    public function addVideoRate(\TimVhostingBundle\Entity\VideoRate $videoRate)
+    public function addVideoRate(VideoRate $videoRate): self
     {
         $this->videoRate[] = $videoRate;
     
         return $this;
     }
 
-    /**
-     * Remove videoRate
-     *
-     * @param \TimVhostingBundle\Entity\VideoRate $videoRate
-     */
-    public function removeVideoRate(\TimVhostingBundle\Entity\VideoRate $videoRate)
+    public function removeVideoRate(VideoRate $videoRate): bool
     {
-        $this->videoRate->removeElement($videoRate);
+        return $this->videoRate->removeElement($videoRate);
     }
 
     /**
      * Get videoRate
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getVideoRate()
     {
@@ -290,7 +283,7 @@ class Video extends BaseEntity
      *
      * @return Video
      */
-    public function setMeta($meta)
+    public function setMeta($meta): self
     {
         $this->meta = $meta;
     
@@ -302,7 +295,7 @@ class Video extends BaseEntity
      *
      * @return string
      */
-    public function getMeta()
+    public function getMeta(): ?string
     {
         return $this->meta;
     }
@@ -314,7 +307,7 @@ class Video extends BaseEntity
      *
      * @return Video
      */
-    public function setLink($link)
+    public function setLink($link): self
     {
         $this->link = $link;
     
@@ -326,7 +319,7 @@ class Video extends BaseEntity
      *
      * @return string
      */
-    public function getLink()
+    public function getLink(): ?string
     {
         return $this->link;
     }
@@ -338,7 +331,7 @@ class Video extends BaseEntity
         return $this;
     }
 
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -346,81 +339,53 @@ class Video extends BaseEntity
     /**
      * Add tag
      *
-     * @param \TimVhostingBundle\Entity\Tags $tag
+     * @param Tags $tag
      *
      * @return Video
      */
-    public function addTag(\TimVhostingBundle\Entity\Tags $tag)
+    public function addTag(Tags $tag): self
     {
         $this->tags[] = $tag;
     
         return $this;
     }
 
-    /**
-     * Remove tag
-     *
-     * @param \TimVhostingBundle\Entity\Tags $tag
-     */
-    public function removeTag(\TimVhostingBundle\Entity\Tags $tag)
+    public function removeTag(Tags $tag): bool
     {
-        $this->tags->removeElement($tag);
+        return $this->tags->removeElement($tag);
     }
 
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getTags()
     {
         return $this->tags;
     }
 
-    /**
-     * Add videoSuggest
-     *
-     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
-     *
-     * @return Video
-     */
-    public function addVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function addVideoSuggest(VideoSuggest $videoSuggest): self
     {
         $this->videoSuggest[] = $videoSuggest;
     
         return $this;
     }
 
-    /**
-     * Remove videoSuggest
-     *
-     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest)
+    public function removeVideoSuggest(VideoSuggest $videoSuggest): bool
     {
         return $this->videoSuggest->removeElement($videoSuggest);
     }
 
     /**
-     * Get videoSuggest
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getVideoSuggest()
     {
         return $this->videoSuggest;
     }
 
-    /**
-     * Set videoSuggest
-     *
-     * @param \App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest
-     *
-     * @return Video
-     */
-    public function setVideoSuggest(\App\TimVhostingBundle\Entity\VideoSuggest $videoSuggest = null)
+    public function setVideoSuggest(VideoSuggest $videoSuggest = null): self
     {
         $this->videoSuggest = $videoSuggest;
     
