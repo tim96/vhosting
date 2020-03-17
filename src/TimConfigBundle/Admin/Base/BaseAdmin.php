@@ -1,49 +1,26 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: tim
- * Date: 10/8/2015
- * Time: 9:25 PM
- */
+<?php declare(strict_types=1);
 
 namespace App\TimConfigBundle\Admin\Base;
 
-use Sonata\AdminBundle\Admin\Admin as SonataAdmin;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Log\LoggerInterface;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Monolog\Logger;
-use Symfony\Component\Security\Core\User\UserInterface;
 
-abstract class BaseAdmin extends SonataAdmin
+abstract class BaseAdmin extends AbstractAdmin
 {
     /** @var Logger $logger */
     private $logger;
-    /** @var ContainerInterface */
-    protected $container;
 
-    public function __construct($code, $class, $baseControllerName, ContainerInterface $container)
+    /**
+     * @Required
+     *
+     * @param LoggerInterface $logger
+     * @return Logger
+     */
+    public function setLogger(LoggerInterface $logger): void
     {
-        parent::__construct($code, $class, $baseControllerName);
-
-        $this->container = $container;
-    }
-
-    public function getLogger()
-    {
-        return $this->logger;
-    }
-
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    protected function getUser()
-    {
-        /** @var UserInterface $user */
-        $user = $this->container->get('security.token_storage')->getToken()->getUser();
-
-        return $user;
+        $this->logger = $logger;
     }
 
     protected function configureListFields(ListMapper $listMapper)

@@ -45,3 +45,48 @@ services:
 
     App\TimVhostingBundle\Handler\GoogleApiHandler:
         arguments: ['@service_container', '@doctrine.orm.entity_manager']
+
+    tim_vhosting.admin.tags:
+        class: App\TimVhostingBundle\Admin\TagsAdmin
+        arguments: [~, App\TimVhostingBundle\Entity\Tags, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Tags, icon: '<i class="fa fa-database"></i>' }
+
+    tim_vhosting.admin.video_rate:
+        class: App\TimVhostingBundle\Admin\VideoRateAdmin
+        arguments: [~, App\TimVhostingBundle\Entity\VideoRate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: VideoRate }
+
+    tim_vhosting.admin.feedback:
+        class: App\TimVhostingBundle\Admin\FeedbackAdmin
+        arguments: [~, App\TimVhostingBundle\Entity\Feedback, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Feedback }
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
+    tim_vhosting.admin.video_suggest:
+        class: App\TimVhostingBundle\Admin\VideoSuggestAdmin
+        arguments: [~, App\TimVhostingBundle\Entity\VideoSuggest, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: VideoSuggest }
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
+    tim_vhosting.admin.video:
+        class: App\TimVhostingBundle\Admin\VideoAdmin
+        arguments: [~, App\TimVhostingBundle\Entity\Video, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Video }
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]
+
+    tim_vhosting.admin.language:
+        class: App\TimVhostingBundle\Admin\LanguageAdmin
+        arguments: [~, App\TimVhostingBundle\Entity\Language, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Language }
+        public: true
+        calls:
+            - [ setTranslationDomain, [ TimVhostingBundle ] ]

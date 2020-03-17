@@ -7,9 +7,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use App\TimConfigBundle\Admin\Base\BaseAdmin;
 use App\TimVhostingBundle\Entity\Video;
+use Sonata\Form\Validator\ErrorElement;
 
 class VideoAdmin extends BaseAdmin
 {

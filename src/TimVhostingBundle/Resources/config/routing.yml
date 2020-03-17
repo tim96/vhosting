@@ -24,11 +24,6 @@ sonata_user_admin_resetting:
     resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
     prefix: /admin/resetting
 
-admin_login:
-    resource: '@ApplicationSonataUserBundle/Controller/AdminSecurityController.php'
-    type:     annotation
-    prefix:   /admin
-
 _sonata_admin:
     resource: .
     type:     sonata_admin
