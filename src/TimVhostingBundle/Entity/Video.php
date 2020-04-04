@@ -209,7 +209,7 @@ class Video extends BaseEntity
     public function setName($name): self
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -233,7 +233,7 @@ class Video extends BaseEntity
     public function setDescription($description): self
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -257,7 +257,7 @@ class Video extends BaseEntity
     public function addVideoRate(VideoRate $videoRate): self
     {
         $this->videoRate[] = $videoRate;
-    
+
         return $this;
     }
 
@@ -286,7 +286,7 @@ class Video extends BaseEntity
     public function setMeta($meta): self
     {
         $this->meta = $meta;
-    
+
         return $this;
     }
 
@@ -310,7 +310,7 @@ class Video extends BaseEntity
     public function setLink($link): self
     {
         $this->link = $link;
-    
+
         return $this;
     }
 
@@ -346,7 +346,7 @@ class Video extends BaseEntity
     public function addTag(Tags $tag): self
     {
         $this->tags[] = $tag;
-    
+
         return $this;
     }
 
@@ -368,7 +368,7 @@ class Video extends BaseEntity
     public function addVideoSuggest(VideoSuggest $videoSuggest): self
     {
         $this->videoSuggest[] = $videoSuggest;
-    
+
         return $this;
     }
 
@@ -388,7 +388,7 @@ class Video extends BaseEntity
     public function setVideoSuggest(VideoSuggest $videoSuggest = null): self
     {
         $this->videoSuggest = $videoSuggest;
-    
+
         return $this;
     }
 
@@ -402,7 +402,7 @@ class Video extends BaseEntity
     public function setIsPublic($isPublic)
     {
         $this->isPublic = $isPublic;
-    
+
         return $this;
     }
 
@@ -426,7 +426,7 @@ class Video extends BaseEntity
     public function setYoutubeVideoId($youtubeVideoId)
     {
         $this->youtubeVideoId = $youtubeVideoId;
-    
+
         return $this;
     }
 
@@ -443,14 +443,14 @@ class Video extends BaseEntity
     /**
      * Set durationVideo
      *
-     * @param string $durationVideo
+     * @param string|array $durationVideo
      *
      * @return Video
      */
     public function setDurationVideo($durationVideo)
     {
         $this->durationVideo = json_encode($durationVideo);
-    
+
         return $this;
     }
 
@@ -482,7 +482,7 @@ class Video extends BaseEntity
     public function setDescriptionVideo($descriptionVideo)
     {
         $this->descriptionVideo = $descriptionVideo;
-    
+
         return $this;
     }
 
@@ -506,7 +506,7 @@ class Video extends BaseEntity
     public function setViewCount($viewCount)
     {
         $this->viewCount = $viewCount;
-    
+
         return $this;
     }
 
@@ -530,7 +530,7 @@ class Video extends BaseEntity
     public function setLikeCount($likeCount)
     {
         $this->likeCount = $likeCount;
-    
+
         return $this;
     }
 
@@ -554,7 +554,7 @@ class Video extends BaseEntity
     public function setDislikeCount($dislikeCount)
     {
         $this->dislikeCount = $dislikeCount;
-    
+
         return $this;
     }
 
@@ -578,7 +578,7 @@ class Video extends BaseEntity
     public function setFavoriteCount($favoriteCount)
     {
         $this->favoriteCount = $favoriteCount;
-    
+
         return $this;
     }
 
@@ -602,7 +602,7 @@ class Video extends BaseEntity
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
-    
+
         return $this;
     }
 
@@ -626,7 +626,7 @@ class Video extends BaseEntity
     public function setChannelId($channelId)
     {
         $this->channelId = $channelId;
-    
+
         return $this;
     }
 
@@ -650,7 +650,7 @@ class Video extends BaseEntity
     public function setLanguageCode($languageCode)
     {
         $this->languageCode = $languageCode;
-    
+
         return $this;
     }
 
@@ -674,7 +674,7 @@ class Video extends BaseEntity
     public function setCommentCount($commentCount)
     {
         $this->commentCount = $commentCount;
-    
+
         return $this;
     }
 

@@ -72,7 +72,7 @@
             </trans-unit>
             <trans-unit id="about.message.label">
                 <source>about.message.label</source>
-                <target>DevTalks aims to be a community resource and, as such, we will depend on you to contribute content. Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we'll do the rest.</target>
+                <target><![CDATA[DevTalks aims to be a community resource and, as such, we will depend on you to contribute content. <br/> Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we'll do the rest.]]></target>
             </trans-unit>
             <trans-unit id="about.header.label">
                 <source>about.header.label</source>
@@ -266,6 +266,10 @@
             <trans-unit id="frontend.tag.time.verylong">
                 <source>frontend.tag.time.verylong</source>
                 <target>&#8805; 60 min</target>
+            </trans-unit>
+            <trans-unit id="frontend.no_videos">
+                <source>frontend.no_videos</source>
+                <target>No videos</target>
             </trans-unit>
             <trans-unit id="action_unpublish">
                 <source>action_unpublish</source>

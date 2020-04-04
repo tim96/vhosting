@@ -4,6 +4,11 @@
     <main role="main">
         <div class="album py-5 bg-light">
             <div class="container">
+                {% if pagination is empty %}
+                    <div class="row" style="justify-content:center;">
+                        <p>{{ 'frontend.no_videos'|trans({}, 'TimVhostingBundle') }}</p>
+                    </div>
+                {% endif %}
                 <div class="row">
                     {% for video in pagination %}
                         <div class="col-md-4">

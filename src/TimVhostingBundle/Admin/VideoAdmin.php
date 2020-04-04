@@ -2,6 +2,7 @@
 
 namespace App\TimVhostingBundle\Admin;
 
+use App\TimVhostingBundle\Handler\GoogleApiHandler;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -14,6 +15,19 @@ use Sonata\Form\Validator\ErrorElement;
 class VideoAdmin extends BaseAdmin
 {
     protected $baseRouteName = 'video';
+
+    /** @var GoogleApiHandler */
+    private $apiHandler;
+
+    /**
+     * @Required
+     *
+     * @param GoogleApiHandler $apiHandler
+     */
+    public function setApiHandler(GoogleApiHandler $apiHandler): void
+    {
+        $this->apiHandler = $apiHandler;
+    }
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -190,12 +204,11 @@ class VideoAdmin extends BaseAdmin
      */
     private function updateDataFromYoutubeService($object)
     {
-        $serviceYoutube = $this->container->get('tim_vhosting.google_api.handler');
-        $data = $serviceYoutube->getYoutubeVideoInfo($object->getYoutubeVideoId());
+        $data = $this->apiHandler->getYoutubeVideoInfo($object->getYoutubeVideoId());
 
-        $object->setDurationVideo($serviceYoutube->getYoutubeVideoDurationFromData($data));
+        $object->setDurationVideo($this->apiHandler->getYoutubeVideoDurationFromData($data));
 
-        $statistics = $serviceYoutube->getYoutubeVideoStatisticsFromData($data);
+        $statistics = $this->apiHandler->getYoutubeVideoStatisticsFromData($data);
         $object->setViewCount($statistics->getViewCount());
         $object->setLikeCount($statistics->getLikeCount());
         $object->setDislikeCount($statistics->getDislikeCount());

@@ -2,25 +2,41 @@
 
 namespace App\TimConfigBundle\Admin\Base;
 
+use Doctrine\Common\Annotations\Annotation\Required;
 use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Monolog\Logger;
+use Sonata\AdminBundle\Security\Handler\SecurityHandlerInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseAdmin extends AbstractAdmin
 {
-    /** @var Logger $logger */
+    /** @var Logger */
     private $logger;
+
+    /** @var Security */
+    private $security;
 
     /**
      * @Required
      *
      * @param LoggerInterface $logger
-     * @return Logger
      */
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * @Required
+     *
+     * @param Security $security
+     */
+    public function setSecurity(Security $security): void
+    {
+        $this->security = $security;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -90,5 +106,10 @@ abstract class BaseAdmin extends AbstractAdmin
             $object->setAuthor($user);
         }
         $this->logger->addCritical("{$this->getUser()} #{$this->getUser()->getId()}. Update {$this->getClass()} #{$object->getId()}.");
+    }
+
+    protected function getUser(): UserInterface
+    {
+        return $this->security->getUser();
     }
 }

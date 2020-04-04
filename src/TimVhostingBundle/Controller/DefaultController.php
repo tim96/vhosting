@@ -95,10 +95,8 @@ class DefaultController extends AbstractController
     /**
      * @Route("/about", name="About")
      */
-    public function aboutAction()
+    public function aboutAction(): Response
     {
-        // todo: Testing new layout
-        // return $this->render('TimVhostingBundle:Default:about.html.twig', array());
         return $this->render('TimVhostingBundle:DefaultBootstrapV4:about.html.twig', array());
     }
 

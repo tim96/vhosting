@@ -6,6 +6,7 @@
     "php": ">=7.3",
     "ext-ctype": "*",
     "ext-iconv": "*",
+    "ext-json": "*",
     "beberlei/doctrineextensions": "^1.2",
     "doctrine/dbal": "@stable",
     "doctrine/doctrine-bundle": "@stable",

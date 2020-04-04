@@ -63,7 +63,7 @@
                             {#</ul>#}
                         {#</li>#}
                     </ul>
-                    <form class="form-inline my-2 my-md-0">
+                    <form class="form-inline my-2 my-md-0" action="{{ path('Home') }}">
                         <input class="form-control" type="text" placeholder="{{ 'header.search'|trans({}, 'TimVhostingBundle') }}..." aria-label="Search" name="search" >
                     </form>
                 {% endblock header_navbar %}
