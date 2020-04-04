@@ -38,6 +38,10 @@
                 <source>footer.back_to_top</source>
                 <target>Back to top</target>
             </trans-unit>
+            <trans-unit id="footer.copyright">
+                <source>footer.copyright</source>
+                <target>Copyright © My Video Website For Developers 2015 - 2020</target>
+            </trans-unit>
             <trans-unit id="contact.title.label">
                 <source>contact.title.label</source>
                 <target>Contact page</target>
